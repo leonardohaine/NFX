@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />  
+</h:head>
+  
+  <ui:composition template="layout.xhtml">
+   <ui:define name="conteudo">
+  
+    <div align="center">
+        
+        <h:form id="formUsu" enctype="multipart/form-data">
+        <p:panelGrid  id="panelUsuario" style="margin-top:5px; background-color: #cccccc;" >
+            
+        <f:facet name="header">  
+            <p:row>
+		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+		            <p:spacer height="0" >CADASTRO DE USUÁRIOS</p:spacer>
+		        </p:column>
+		    </p:row>  
+        </f:facet>
+        
+        <p:row>
+            <p:column colspan="2">Login:<br/><p:inputText size="25" value="#{usuario.usuario.login}" onkeyup="value=value.toUpperCase()" /></p:column>
+            
+            <p:column colspan="2">Nome:<br/><p:inputText size="29" value="#{usuario.usuario.nome}" /></p:column>  
+        
+            <p:column colspan="2">Senha:<br/><p:password  id="senha" size="25" value="#{usuario.usuario.senha}" match="confirma" validatorMessage="Verifique se a senha está igual nos dois campos" redisplay="true" required="true" /></p:column>
+            
+            <p:column colspan="2">Confirma senha:<br/><p:password id="confirma" size="29" value="#{usuario.usuario.senha}" redisplay="true" required="true" /></p:column>
+        </p:row>
+        <p:row>  
+            <p:column colspan="4">E-mail:<br/><p:inputText size="64" value="#{usuario.usuario.email}" /></p:column>
+            
+            <p:column colspan="2">Ativo: <p:selectBooleanButton value="#{usuario.usuario.ativo}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+            
+            <p:column colspan="2">Administrador: <p:selectBooleanButton value="#{usuario.usuario.isadmin}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">Cadastros: <p:selectBooleanButton value=""  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+         
+            <p:column colspan="2">Gerenciamento: <p:selectBooleanButton value="" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+           
+            <p:column colspan="2">Requisição: <p:selectBooleanButton value="" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+              
+            <p:column colspan="2">Usuários: <p:selectBooleanButton value="#{usuario.usuario.checkusuarios}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+            
+        </p:row>
+        <p:row>
+            <p:column style="text-align: center;" colspan="8">
+                <p:button value="Cancelar" icon="icone-cancel" outcome="listaUsuario"/>
+                
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{usuario.save}" update="panelUsuario" global="true" />
+                
+                <p:focus context="panelUsuario"/>  
+                <p:messages id="messagesMaterial" showDetail="true" autoUpdate="true" closable="true" />
+            </p:column> 
+        </p:row>
+        
+        </p:panelGrid>
+        
+        <p:blockUI block="panelUsuario" trigger="saveBtn" /> 
+    </h:form>
+    
+    </div> 
+    
+    </ui:define>   
+    </ui:composition>
+    
+</html>

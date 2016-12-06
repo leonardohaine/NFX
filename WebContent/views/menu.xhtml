@@ -1,0 +1,92 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+	<ui:remove>
+	<h:form>
+	<nav class="aw-menu">
+		<ul>
+			<li>
+				<h:link outcome="/views/layout.jsf"><i class="fa  fa-fw  fa-home"></i>Dahsboard</h:link>
+			</li>
+		</ul>
+	</nav>
+	<p:panelMenu style="width:203px">
+		
+        <p:submenu label="Cadastros">
+            <p:menuitem value="Save" actionListener="#{menuView.save}" icon="ui-icon-disk" />
+            <p:menuitem value="Update" actionListener="#{menuView.update}"  icon="ui-icon-arrowrefresh-1-w" />
+        </p:submenu>
+        <p:submenu label="Gerenciamento">
+            <p:menuitem value="NF-e" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
+            <p:menuitem value="NFS-e" actionListener="#{menuView.delete}"  ajax="false" icon="ui-icon-close"/>
+        </p:submenu>
+        <p:separator />
+        <p:submenu label="Configuração" >
+            <p:submenu label="Links" icon="ui-icon-extlink">
+                <p:submenu label="PrimeFaces" icon="ui-icon-heart">
+                    <p:menuitem value="Home" url="http://www.primefaces.org" icon="ui-icon-home" />
+                    <p:menuitem value="Docs" url="http://www.primefaces.org/documentation" icon="ui-icon-document" />
+                    <p:menuitem value="Download" url="http://www.primefaces.org/downloads" icon="ui-icon-arrowthick-1-s" />
+                    <p:menuitem value="Support" url="http://www.primefaces.org/support" icon="ui-icon-wrench" />
+                </p:submenu>
+            </p:submenu>
+            <p:menuitem value="Usuários" outcome="/views/listaUsuario.jsf" icon="ui-icon-signal" />
+        </p:submenu>
+    </p:panelMenu>
+	</h:form>
+	
+	
+	<nav class="aw-menu">
+		<ul>
+			<li>
+				<h:link><i class="fa  fa-fw  fa-home"></i>Dashboard</h:link>
+			</li>
+			<li>
+				<h:link outcome="/views/setor.jsf"><i class="fa  fa-fw  fa-user"></i>Clientes</h:link>
+			</li>
+			<li class="is-selected">
+				<h:link outcome="/views/layout.jsf"><i class="fa  fa-fw  fa-file-text"></i>Orçamentos</h:link>
+			</li>
+			<li>
+				<h:link outcome="/views/usuario.jsf"><i class="fa  fa-fw  fa-cog"></i>Setor</h:link>
+			</li>
+		</ul>
+	</nav>
+	</ui:remove>
+	
+	<nav class="vertical">
+	  <ul>
+	    <li><a href="./layout.jsf">Home</a></li>
+	    <li><a href="#">Cadastro +</a>
+	      <ul>
+	        <li><a href="./listaUsuario.jsf">Usuários</a></li>
+	        <li><a href="#">Service 2</a></li>
+	        <li><a href="#">Service 3</a></li>
+	      </ul>
+	    </li>
+	    <li><a href="#">Gerenciamento +</a>
+	      <ul>
+	        <li><a href="#">Widgets</a></li>
+	        <li>
+	          <a href="#">Sites +</a>
+	          <ul>
+	            <li><a href="#">Site 1</a></li>
+	            <li><a href="#">Site 2</a></li>
+	          </ul>
+	        </li>
+	        <li><a href="#">Gadgets +</a>
+	          <ul>
+	            <li><a href="#">Gadget 1</a></li>
+	            <li><a href="#">Gadget 2</a></li>
+	          </ul>
+	        </li>
+	      </ul>
+	    </li>
+	    <li><a href="">Configuração</a></li>
+	  </ul>
+	</nav>
+	
+	
+	
+</ui:composition>

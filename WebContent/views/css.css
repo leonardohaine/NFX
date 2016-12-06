@@ -1,0 +1,173 @@
+/* 
+    Document   : css
+    Created on : 10/01/2015, 22:43:22
+    Author     : Leonardo
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+
+.ui-layout-unit-top .ui-layout-bd { border: 0; }
+.ui-layout-unit-left .ui-layout-bd { border: 0; }
+.ui-layout-unit-center .ui-layout-bd { border: 0; }
+
+.ui-layout-container {
+    overflow-x:visible !important; overflow-y:visible !important;
+}
+/*
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{
+	background: darkblue;
+	color: white;
+	border-color: darkblue;
+}*/
+
+.ui-button {
+	border-radius: 15px;
+   
+}
+
+.datatable-header{
+	background-color: none; 
+	color:white;
+}
+
+
+.ui-panelgrid {
+    border-width: 0px;
+    border-style: solid;
+    border-color: inherit;
+    padding: 4px 10px;
+    border-top-left-radius:9px;
+	border-top-right-radius:9px;
+	border:0;
+}
+
+
+.panel-heading{
+	padding:10px 15px;
+	border-bottom:1px solid transparent;
+	border-top-left-radius:9px;
+	border-top-right-radius:9px;
+	 border-radius: 15px;
+	 border:0;
+}
+
+
+.ui-layout-north .ui-layout-unit-content {   
+   background-color: darkblue;
+   color: white;
+   
+ }  
+
+.ui-layout-unit-content{
+   background: white;
+}
+
+.ui-widget {
+	font-size: 12px !important;
+}
+
+.ie8 .ui-selectonemenu-08{
+	width: 88% !important;
+	background-color: #000000;
+}
+
+.ui-selectonemenu{
+	width: 88% !important;
+}
+
+.colunaDireita{  
+    text-align: left;  
+}  
+.colunaEsquerda{  
+    text-align: right;    
+}  
+
+.icone-email{
+    background-image: url(../imagens/email.png) !important; background-repeat:no-repeat;
+    width: 16px;
+    height: 16px;
+    float:left;  
+    margin-right: 8px;
+    
+}
+
+.icone-cancel{
+    background-image: url(../imagens/cancel-16.png) !important; background-repeat:no-repeat;
+    width: 16px;
+    height: 16px;
+    float:left;  
+    margin-right: 8px;
+    
+}
+
+.icone-check{
+    background-image: url(../imagens/check-16.png) !important; background-repeat:no-repeat;
+    width: 16px;
+    height: 16px;
+    float:left;  
+    margin-right: 8px;
+    
+}
+
+.icone-refresh{
+    background-image: url(../imagens/btnRefreshDisplay.png) !important; background-repeat:no-repeat;
+    width: 16px;
+    height: 16px;
+    float:left;  
+    margin-right: 8px;
+    
+}
+
+.icone-clear{
+    background-image: url(../imagens/trash-16.png) !important; background-repeat:no-repeat;
+    width: 16px;
+    height: 16px;
+    float:left;  
+    margin-right: 8px;
+    
+}
+
+.icone-add{
+    background-image: url(../imagens/add-16.png) !important; background-repeat:no-repeat;
+    width: 16px;
+    height: 16px;
+    float:left;  
+    margin-right: 8px;
+    
+}
+
+.icone-search{
+    background-image: url(../imagens/search-16.png) !important; background-repeat:no-repeat;
+    width: 16px;
+    height: 16px;
+    float:left;  
+    margin-right: 8px;
+    
+}
+
+.icone-pdf{
+    background-image: url(../imagens/icon-pdf.png) !important; background-repeat:no-repeat;
+    width: 16px;
+    height: 16px;
+    float:left;  
+    margin-right: 8px;
+    
+}
+
+.icone-copy{
+    background-image: url(../imagens/save.png) !important; background-repeat:no-repeat;
+    width: 16px;
+    height: 16px;
+    float:left;  
+    margin-right: 8px;
+    
+}
+
+.ui-inputfield {
+    border-radius:9px;
+}
+
+
+

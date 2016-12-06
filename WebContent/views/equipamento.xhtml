@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />  
+</h:head>
+  
+  <ui:composition template="layout.xhtml">
+   <ui:define name="conteudo">
+  
+    <div align="center">
+        
+        <h:form id="formUsu" enctype="multipart/form-data">
+        <p:panelGrid  id="panelUsuario" style="margin-top:5px; background-color: #cccccc;" >
+            
+        <f:facet name="header">  
+            <p:row>
+                <p:column colspan="10">CADASTRO DE USUÁRIOS</p:column>  
+            </p:row>    
+        </f:facet>
+       
+       
+        <p:row>
+            <p:column colspan="2">Login:</p:column>
+            <p:column colspan="2"><p:inputText size="25" value="#{usuario.usuarios.login}" /></p:column>
+            <p:column colspan="2">Nome:</p:column>  
+            <p:column colspan="2"><p:inputText size="29" value="#{usuario.usuarios.nome}" /></p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">Senha:</p:column>
+            <p:column colspan="2"><p:password  id="senha" size="25" value="#{usuario.usuarios.senha}" match="confirma" validatorMessage="Verifique se a senha está igual nos dois campos" redisplay="true" required="true" /></p:column>
+            <p:column colspan="2">Confirma senha:</p:column>  
+            <p:column colspan="2"><p:password id="confirma" size="29" value="#{usuario.usuarios.senha}" redisplay="true" required="true" />
+            </p:column>
+        </p:row>
+        <p:row>  
+            <p:column colspan="2">E-mail:</p:column>  
+            <p:column colspan="6"><p:inputText size="83" value="#{usuario.usuarios.email}" /></p:column>
+        </p:row>
+        <p:row>
+            <p:column colspan="2">Ativo:</p:column>
+            <p:column colspan="6"> 
+                <p:selectBooleanButton value="#{usuario.usuarios.isativo}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+            </p:column>
+        </p:row>  
+        <p:row>  
+            <p:column colspan="2">Administrador:</p:column>
+            <p:column colspan="6"> 
+                <p:selectBooleanButton value="#{usuario.usuarios.isadmin}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+            </p:column>
+        </p:row> 
+        <p:row>
+            <p:column colspan="2">SAFX04</p:column>
+            <p:column colspan="6">
+                <p:selectBooleanButton value="#{usuario.usuarios.checksafx04}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+            </p:column>
+        </p:row>
+        
+        <p:row>    
+            <p:column colspan="2">SAFX07 / SAFX08</p:column>
+            <p:column colspan="6">
+                <p:selectBooleanButton value="#{usuario.usuarios.checksafx0708}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+            </p:column>
+        </p:row>
+        <p:row>    
+            <p:column colspan="2">SAFX2013</p:column>
+            <p:column colspan="6">
+                <p:selectBooleanButton value="#{usuario.usuarios.checksafx2013}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+            </p:column>
+        </p:row>
+        <p:row>    
+            <p:column colspan="2">Usuários</p:column>
+            <p:column colspan="6">
+                <p:selectBooleanButton value="#{usuario.usuarios.checkusuarios}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />
+            </p:column>
+        </p:row>
+        <p:row>
+            <p:column style="text-align: center;" colspan="8">
+                <p:commandButton icon="icone-add" id="novoBtn" update="panelUsuario" process="@this" value="Novo">
+                    <p:resetInput target="panelUsuario" />
+                </p:commandButton> 
+                <p:commandButton icon="icone-cancel" async="right" id="deleteBtn" action="#{usuario.delete}" value="Deletar" ajax="false" />
+                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelUsuario">
+                    <p:resetInput target="panelUsuario" />
+                </p:commandButton>
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{usuario.saveUpdate}" update="panelUsuario" global="true" />
+                
+                <p:focus context="panelUsuario"/>  
+                <p:messages /> 
+            </p:column> 
+        </p:row>
+        
+        </p:panelGrid>
+        
+        <p:blockUI block="panelUsuario" trigger="saveBtn, deleteBtn, clearBtn" /> 
+    </h:form>
+    
+    <ui:remove>
+    	<ui:include src="menu.xhtml"></ui:include>
+    </ui:remove>
+    
+        <p:ajaxStatus style="width:32px;height:32px;" id="ajaxStatusPanel2">  
+            <f:facet name="start">  
+                <h:graphicImage value="./imagens/loader1.gif" />  
+            </f:facet>  
+
+            <f:facet name="complete">  
+                <h:outputText value="" />  
+            </f:facet>  
+        </p:ajaxStatus>
+    </div> 
+    
+    </ui:define>   
+    </ui:composition>
+    
+</html>
