@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />  
+</h:head>
+  
+  <ui:composition template="layout.xhtml">
+   <ui:define name="conteudo">
+  
+    <div align="center">
+        
+        <h:form id="formEmp" enctype="multipart/form-data">
+        <p:panelGrid  id="panelEmp" style="margin-top:5px; background-color: #cccccc;" >
+            
+        <f:facet name="header">  
+            <p:row>
+		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+		            <p:spacer height="0" >CADASTRO DE EMPRESAS</p:spacer>
+		        </p:column>
+		    </p:row>  
+        </f:facet>
+        
+        <p:row>
+            <p:column colspan="2">Id:<br/><p:inputText size="25" value="#{empresa.empresa.empresa}" /></p:column>
+            
+            <p:column colspan="2">Razão Social:<br/><p:inputText size="29" value="#{empresa.empresa.razaoSocial}" /></p:column>  
+        
+            <p:column colspan="2">Fantasia:<br/><p:inputText  id="senha" size="25" value="#{empresa.empresa.fantasia}"/></p:column>
+            
+            <p:column colspan="2">Cnpj:<br/><p:inputText id="cnpj" size="29" value="#{empresa.empresa.cnpj}" /></p:column>
+        </p:row>
+        <p:row>  
+            <p:column colspan="2">IE:<br/><p:inputText size="25" value="#{empresa.empresa.ie}" /></p:column>
+            
+            <p:column colspan="2">Resposável:<br/><p:inputText size="25" value="#{empresa.empresa.responsavel}" /></p:column>
+            
+            <p:column colspan="2">Email:<br/><p:inputText size="25" value="#{empresa.empresa.email}" /></p:column>
+            
+            <p:column colspan="2">Telefone:<br/><p:inputText size="25" value="#{empresa.empresa.telefone}" /></p:column>
+        </p:row>
+        <p:row>
+            
+            <p:column colspan="2">CEP:<br/><p:inputText size="25" value="#{empresa.empresa.cep}" /></p:column>
+            
+            <p:column colspan="2">Endereco:<br/><p:inputText size="25" value="#{empresa.empresa.endereco}" /></p:column>
+            
+            <p:column colspan="2">Bairro:<br/><p:inputText size="25" value="#{empresa.empresa.bairro}" /></p:column>
+            
+            <p:column colspan="2">Cidade:<br/><p:inputText size="25" value="#{empresa.empresa.cidade}" /></p:column>
+        </p:row>
+        <p:row>    
+            
+            
+            <p:column colspan="2">Uf:<br/><p:inputText size="25" value="#{empresa.empresa.uf}" /></p:column>
+            
+            
+            
+            <p:column colspan="4">Ativo: <p:selectBooleanButton value="#{empresa.empresa.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+        </p:row>
+        <p:row>
+            <p:column style="text-align: center;" colspan="8">
+                <p:button value="Cancelar" outcome="listaEmpresa" />
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{empresa.save}" update="panelEmp" global="true" />
+                
+                <p:focus context="panelEmp"/>  
+                <p:messages id="messagesEmp" showDetail="true" autoUpdate="true" closable="true" /> 
+            </p:column> 
+        </p:row>
+        
+        </p:panelGrid>
+        
+        <p:blockUI block="panelEmp" trigger="saveBtn" /> 
+    </h:form>
+    
+    </div> 
+    
+    </ui:define>   
+    </ui:composition>
+    
+</html>

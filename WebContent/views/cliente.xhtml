@@ -11,13 +11,13 @@
 	<link rel="stylesheet" type="text/css" href="./css.css" />  
 </h:head>
   
-  <ui:composition template="inicial.xhtml">
+  <ui:composition template="layout.xhtml">
    <ui:define name="conteudo">
   
     <div align="center">
         
         <h:form id="formUsu" enctype="multipart/form-data">
-        <p:panelGrid  id="panelUsuario" style="margin-top:5px; background-color: #cccccc;" >
+        <p:panelGrid  id="panelCliente" style="margin-top:5px; background-color: #cccccc;" >
             
         <f:facet name="header">  
             <p:row>
@@ -37,30 +37,30 @@
 	            </p:selectOneMenu>
             </p:column>
             
-            <p:column colspan="2">CPF/CNPJ:<br/><p:inputText size="15" value="#{usuario.usuario.nome}" /></p:column>  
+            <p:column colspan="2">CPF/CNPJ:<br/><p:inputText size="15" maxlength="14" value="#{usuario.usuario.nome}" /></p:column>  
         </p:row>
         <p:row>
-            <p:column colspan="2">Inscrição Estadual:<br/><p:inputText id="ie" size="15" value="#{usuario.usuario.senha}" /></p:column>
+            <p:column colspan="2">Inscrição Estadual:<br/><p:inputText id="ie" size="15" value="#{cliente.cliente.inscricaoEstadual}" /></p:column>
         
-            <p:column colspan="2">SUFRAMA:<br/><p:inputText id="suframa" size="15" value="#{usuario.usuario.senha}"  /></p:column>
+            <p:column colspan="2">SUFRAMA:<br/><p:inputText id="suframa" size="15" value="#{cliente.cliente.suframa}"  /></p:column>
             
-            <p:column colspan="4">Isento: <p:selectBooleanButton value="#{usuario.usuario.isativo}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+            <p:column colspan="4">Isento: <p:selectBooleanButton value="#{cliente.cliente.isento}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
         </p:row>
         <p:row> 
-            <p:column colspan="4">E-mail:<br/><p:inputText size="45" value="#{usuario.usuario.nome}" /></p:column>
+            <p:column colspan="4">E-mail:<br/><p:inputText size="45" value="#{cliente.cliente.email}" /></p:column>
             
-            <p:column colspan="2">CEP:<br/><p:inputText size="15" value="#{usuario.usuario.nome}" /></p:column>
+            <p:column colspan="2">CEP:<br/><p:inputText size="15" maxlength="8" value="#{cliente.cliente.cep}" /></p:column>
               
-            <p:column colspan="2">Logradouro:<br/><p:inputText size="20" value="#{usuario.usuario.nome}" /></p:column>
+            <p:column colspan="2">Logradouro:<br/><p:inputText size="20" value="#{cliente.cliente.logradouro}" /></p:column>
         </p:row>
         <p:row>
-        	<p:column colspan="2">Número:<br/><p:inputText size="20" value="#{usuario.usuario.nome}" /></p:column>
+        	<p:column colspan="2">Número:<br/><p:inputText size="20" value="#{cliente.cliente.numero}" /></p:column>
         	
-            <p:column colspan="2">Complemento:<br/><p:inputText size="15" value="#{usuario.usuario.nome}" /></p:column>
+            <p:column colspan="2">Complemento:<br/><p:inputText size="15" value="#{cliente.cliente.complemento}" /></p:column>
             
-            <p:column colspan="2">Bairro:<br/><p:inputText size="15" value="#{usuario.usuario.nome}" /></p:column>
+            <p:column colspan="2">Bairro:<br/><p:inputText size="15" value="#{cliente.cliente.bairro}" /></p:column>
               
-            <p:column colspan="2">Pais:<br/><p:inputText size="20" value="#{usuario.usuario.nome}" /></p:column>
+            <p:column colspan="2">Pais:<br/><p:inputText size="20" value="#{cliente.cliente.pais}" /></p:column>
         </p:row>
         <p:row>     
             <p:column colspan="2">UF:<br/>
@@ -107,22 +107,22 @@
         </p:row>
         <p:row>
             <p:column style="text-align: center;" colspan="8">
-                <p:commandButton icon="icone-add" id="novoBtn" update="panelUsuario" process="@this" value="Novo" />
+                <p:commandButton icon="icone-add" id="novoBtn" update="panelCliente" process="@this" value="Novo" />
               
-                <p:commandButton icon="icone-cancel" async="right" id="deleteBtn" action="#{usuario.delete}" value="Deletar" ajax="false" />
-                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelUsuario">
-                    <p:resetInput target="panelUsuario" />
+                <p:commandButton icon="icone-cancel" async="right" id="deleteBtn" action="#{cliente.delete}" value="Deletar" ajax="false" />
+                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelCliente">
+                    <p:resetInput target="panelCliente" />
                 </p:commandButton>
-                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{usuario.save}" update="panelUsuario" global="true" />
+                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{cliente.save}" update="panelCliente" global="true" />
                 
-                <p:focus context="panelUsuario"/>  
+                <p:focus context="panelCliente"/>  
                 <p:messages /> 
             </p:column> 
         </p:row>
         
         </p:panelGrid>
         
-        <p:blockUI block="panelUsuario" trigger="saveBtn, deleteBtn, clearBtn" /> 
+        <p:blockUI block="panelCliente" trigger="saveBtn, deleteBtn, clearBtn" /> 
     </h:form>
     
     </div> 

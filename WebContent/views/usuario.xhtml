@@ -14,28 +14,41 @@
   <ui:composition template="layout.xhtml">
    <ui:define name="conteudo">
   
-    <div align="center">
+  	<h:form id="formUsu" enctype="multipart/form-data">
+    	<div align="center" class="ui-fluid">
         
-        <h:form id="formUsu" enctype="multipart/form-data">
-        <p:panelGrid  id="panelUsuario" style="margin-top:5px; background-color: #cccccc;" >
-            
-        <f:facet name="header">  
-            <p:row>
-		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
-		            <p:spacer height="0" >CADASTRO DE USUÁRIOS</p:spacer>
-		        </p:column>
-		    </p:row>  
-        </f:facet>
         
-        <p:row>
-            <p:column colspan="2">Login:<br/><p:inputText size="25" value="#{usuario.usuario.login}" onkeyup="value=value.toUpperCase()" /></p:column>
+        <p:panelGrid columns="4" id="panelUsuario" columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4" 
+        	layout="grid" style="margin-top:5px; background-color: #cccccc;" >
             
-            <p:column colspan="2">Nome:<br/><p:inputText size="29" value="#{usuario.usuario.nome}" /></p:column>  
+	        <f:facet name="header">  
+	            <p:row>
+			        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
+			            <p:spacer height="0" >CADASTRO DE USUÁRIOS</p:spacer>
+			        </p:column>
+			    </p:row>  
+	        </f:facet>
         
-            <p:column colspan="2">Senha:<br/><p:password  id="senha" size="25" value="#{usuario.usuario.senha}" match="confirma" validatorMessage="Verifique se a senha está igual nos dois campos" redisplay="true" required="true" /></p:column>
+        
+            <p:outputLabel value="Login:"/><p:inputText size="5" value="#{usuario.usuario.login}" onkeyup="value=value.toUpperCase()" />
             
-            <p:column colspan="2">Confirma senha:<br/><p:password id="confirma" size="29" value="#{usuario.usuario.senha}" redisplay="true" required="true" /></p:column>
-        </p:row>
+            Nome:<p:inputText size="29" value="#{usuario.usuario.nome}" />
+        
+            Senha:<p:password  id="senha" size="25" value="#{usuario.usuario.senha}" match="confirma" validatorMessage="Verifique se a senha está igual nos dois campos" redisplay="true" required="true" />
+            
+            Confirma senha:<p:password id="confirma" size="29" value="#{usuario.usuario.senha}" redisplay="true" required="true" />
+            
+            <p:toolbar >
+    	<f:facet name="right">
+	    	<p:button value="Cancelar" icon="icone-cancel" outcome="listaUsuario"/>
+	                
+	        <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{usuario.save}" update="panelUsuario" global="true" />
+	        
+	        <p:focus context="panelUsuario"/>  
+	        <p:messages id="messagesMaterial" showDetail="true" autoUpdate="true" closable="true" />
+	        </f:facet>
+    	</p:toolbar>
+        <ui:remove>
         <p:row>  
             <p:column colspan="4">E-mail:<br/><p:inputText size="64" value="#{usuario.usuario.email}" /></p:column>
             
@@ -55,22 +68,20 @@
         </p:row>
         <p:row>
             <p:column style="text-align: center;" colspan="8">
-                <p:button value="Cancelar" icon="icone-cancel" outcome="listaUsuario"/>
                 
-                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{usuario.save}" update="panelUsuario" global="true" />
-                
-                <p:focus context="panelUsuario"/>  
-                <p:messages id="messagesMaterial" showDetail="true" autoUpdate="true" closable="true" />
             </p:column> 
         </p:row>
+        </ui:remove>
         
+        		
         </p:panelGrid>
         
         <p:blockUI block="panelUsuario" trigger="saveBtn" /> 
+    
+    
+    	</div>
+    	
     </h:form>
-    
-    </div> 
-    
     </ui:define>   
     </ui:composition>
     

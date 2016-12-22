@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="stylesheet" type="text/css" href="./css.css" />  
+</h:head>
+<h:body >
+
+	<h:form>
+    	<div style="margin-top: 5px; margin-bottom: 20px">
+    		<p:inputText id="nome" size="40" value="#{selecaoClienteBean.nome}" placeholder="Nome do cliente" />
+    		
+    		<p:spacer width="10px"/>
+    		
+    		<p:commandButton value="Pesquisar" action="#{selecaoClienteBean.pesquisar}" update="@form" />
+    	</div>
+    	
+    	<p:dataTable value="#{selecaoClienteBean.clientesFiltrados}" var="cliente"
+    		emptyMessage="Nenhum cliente encontrado." rows="10"
+    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+    		
+    		<p:column headerText="Código" style="text-align: center; width: 40px">
+    			<h:outputText value="#{cliente.id}" />
+    		</p:column>
+    		<p:column headerText="Nome">
+    			<h:outputText value="#{cliente.nome}" />
+    		</p:column>
+    		<p:column style="width: 30px; text-align: center">
+    			<p:commandButton icon="ui-icon-check" title="Selecionar"
+    				action="#{selecaoClienteBean.selecionar(cliente)}"
+    				process="@this" />
+    		</p:column>
+    		
+    	</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>
