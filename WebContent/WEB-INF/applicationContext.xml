@@ -33,7 +33,7 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
         <property name="user" value="postgres" />
         <property name="password" value="leonardo" />
         
-      <!--  <property name="jdbcUrl" value="jdbc:postgresql://gaminfo.com.br:5432/gaminfo_jlab" />
+      <!--  <property name="jdbcUrl" value="jdbc:postgresql://gaminfo.com.br:5433/gaminfo_jlab" />
         <property name="user" value="gaminfo_postgres" />
         <property name="password" value="postgres" />  -->
         
@@ -49,6 +49,8 @@ http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
         <property name="annotatedClasses">
             <list>
                 <value>br.com.nfx.model.Usuario</value>
+                <value>br.com.nfx.model.Empresa</value>
+                <value>br.com.nfx.model.Cliente</value>
             </list>
         </property>
         <property name="hibernateProperties">
