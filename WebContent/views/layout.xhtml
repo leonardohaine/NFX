@@ -26,7 +26,17 @@
 	<header class="aw-topbar">
 		<a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"> MENU</i></a>
 		
+		<h:form id="formLink">
+		<i onclick="PF('empresa').show(); return false;" />
+			<p:link onclick="PF('empresa').show(); return false;" value="#{unidade.empresa.fantasia} - #{unidade.empresa.cnpj}" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;">
+				
+				<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.empresa.cnpj}"></p:inputText>
+				
+			</p:link>
+		</h:form>
+		
 		<h:graphicImage library="algaworks" width="145px" height="37px" name="images/logo_nfx.gif" />
+		
 	</header>
 	
 	<aside class="aw-sidebar  js-sidebar">
@@ -39,6 +49,31 @@
 	<div class="footer">
 		<FONT color="white">leonardo</FONT>
 	</div>
+	
+	<h:form>
+		<p:dialog header="ESCOLHA EMPRESA" widgetVar="empresa" visible="false" modal="true" closable="false" resizable="false" responsive="true" width="40%">
+		
+			<p:dataTable var="emp" value="#{unidade.listEmpresa}" >
+	                <f:facet name="header">
+	                	EMPRESAS
+	                </f:facet>
+	 
+	                <p:column headerText="Cnpj">
+	                    <h:outputText value="#{emp.cnpj}" />
+	                </p:column>
+	 
+	                <p:column headerText="Empresa">
+	                    <h:outputText value="#{emp.fantasia}" />
+	                </p:column>
+	 
+	                <p:column style="width:32px;text-align: center">
+	                    <p:commandButton icon="ui-icon-check" oncomplete="PF('empresa').hide()" 
+	                    		actionListener="#{unidade.selectEmpFromDialog(emp)}" update=":formLink" />
+	                </p:column>
+	            </p:dataTable>
+		
+		</p:dialog>
+	</h:form>
 	
 </h:body>
 
