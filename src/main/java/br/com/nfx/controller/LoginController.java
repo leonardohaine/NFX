@@ -21,6 +21,7 @@ import org.primefaces.context.RequestContext;
 
 import br.com.nfx.model.Usuario;
 import br.com.nfx.service.UsuarioService;
+import br.com.nfx.util.SessionUtils;
 import br.com.nfx.util.Util;
 
 /**
@@ -89,6 +90,29 @@ public class LoginController implements Serializable {
 		return listUsers;
 	}
 
+	public String validateUsernamePassword() {
+		Usuario usu = null;
+		try {
+			usu = getUsuarioService().getUsuarioDAO().getUsuario(user, Util.cript(senha));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (usu != null) {
+			HttpSession session = SessionUtils.getSession();
+			session.setAttribute("username", user);
+			return "/views/layout";
+		} else {
+			FacesContext.getCurrentInstance().addMessage(
+					null,
+					new FacesMessage(FacesMessage.SEVERITY_WARN,
+							"Incorrect Username and Passowrd",
+							"Please enter correct username and Password"));
+			return "index";
+		}
+	}
+	
 	public String login() {
 		RequestContext context = RequestContext.getCurrentInstance();
 		FacesMessage msg = null;
@@ -125,7 +149,7 @@ public class LoginController implements Serializable {
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Seja bem-vindo", usuario.getNome());
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 			context.addCallbackParam("loggedIn", loggedIn);
-			return "./views/inicial";
+			return "./views/layout";
 		} else {
 
 			loggedIn = false;

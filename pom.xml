@@ -6,7 +6,7 @@
   <packaging>war</packaging>
   <build>
     <sourceDirectory>src/main/source</sourceDirectory>
-    <finalName>${project.artifactId}</finalName>
+    <finalName>${project.artifactId}-${project.version}-r${buildNumber}</finalName>
     <pluginManagement>
     <plugins>
       <plugin>
@@ -25,6 +25,25 @@
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
+      
+      <plugin>
+	    <groupId>org.codehaus.mojo</groupId>
+	    <artifactId>buildnumber-maven-plugin</artifactId>
+	    <version>1.2</version>
+	    <executions>
+	      <execution>
+	        <phase>validate</phase>
+	        <goals>
+	          <goal>create</goal>
+	        </goals>
+	      </execution>
+	    </executions>
+	    <configuration>
+	      <doCheck>true</doCheck>
+	      <doUpdate>true</doUpdate>
+	    </configuration>
+	  </plugin>
+      
     </plugins>
     </pluginManagement>
   </build>
@@ -119,7 +138,7 @@
      <dependency>  
 	    <groupId>org.primefaces</groupId>  
 	    <artifactId>primefaces</artifactId>  
-	    <version>5.0</version>  
+	    <version>6.0</version>  
 	 </dependency>
 	 
 	 <dependency>

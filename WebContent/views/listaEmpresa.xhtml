@@ -9,7 +9,14 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<link rel="stylesheet" type="text/css" href="./css.css" />  
+	<link rel="stylesheet" type="text/css" href="./css.css" />
+	
+	<h:outputStylesheet library="algaworks" name="styles/custom.css" />
+	<h:outputStylesheet library="algaworks" name="styles/layout.css" />
+	<h:outputStylesheet library="algaworks" name="styles/components.css" />
+	
+	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
+	<h:outputScript target="body" library="algaworks" name="javascripts/app.js" />
 </h:head>
   
   <ui:composition template="layout.xhtml">
@@ -42,7 +49,7 @@
 				        <p:graphicImage value="#{emp.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
 				    </p:column>
 				    
-				    <p:column headerText="AÇÃO" width="15%">
+				    <p:column headerText="AÇÃO" width="20%">
 				        <p:column style="width:32px;text-align: center"> 
                             <p:button outcome="empresa" icon="ui-icon-pencil" title="Editar" >
                                 <f:param id="empresaEdit" name="empresaId" value="#{emp.empresa}" />

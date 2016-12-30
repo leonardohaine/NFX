@@ -37,7 +37,10 @@
     	<div align="center">
         
         <h:form id="formNf" >
-        	 <ui:remove>   	
+        
+        <p:growl id="growl" showDetail="true" life="3000" />
+        
+       	<ui:remove>   	
 			<h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show();" title="Clique para entrar"> 
             	<p:graphicImage value="./imagens/tubos_ensaio.png" width="450" height="150" />
            	</h:outputLink>
@@ -46,7 +49,7 @@
 			<p:outputLabel value="JLab" 
 					style="font: bold 100px Goudy Stout; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px white;" />
         </ui:remove>
-        <ui:remove>   	
+        
            	<h:panelGrid bgcolor="white" columns="2" cellpadding="5" border="0" cellspacing="0" style="border-radius: 15px; box-shadow: 10px 10px 5px blue;">  
 	             
 	            <f:facet name="header">  
@@ -64,14 +67,14 @@
 	            
 	            <f:facet name="footer">
 	                <div style="text-align: center;">        
-	                <p:commandButton id="loginButton1" value="Login" update="growl" oncomplete="handleLoginRequest(xhr, status, args)"
-	                                 style="border-radius: 15px;" actionListener="#{auth.login}" />  
-	                </div> 
+	                <p:commandButton id="loginButton1" value="Entrar" update="growl"
+	                                 style="border-radius: 15px;" action="#{auth.validateUsernamePassword}" />  
+	                </div>
 	            </f:facet>
 	               
 	        </h:panelGrid>
-        </ui:remove>  	
-           	<p:growl id="growl" showDetail="true" life="3000" />
+        <ui:remove>  	
+           	
    
         <p:dialog id="dialog" header="Login"  widgetVar="dlg" resizable="false" visible="true" closable="false"
        			style="border-radius: 15px; box-shadow: 7px 7px 5px black;">
@@ -103,7 +106,7 @@
 	        </h:panelGrid>  
 	          
 	    </p:dialog>
-        	
+        </ui:remove> 	
 	    </h:form>
 	    
         <p:ajaxStatus style="width:32px;height:32px;" id="ajaxStatusPanel">  

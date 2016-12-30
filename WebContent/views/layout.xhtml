@@ -24,22 +24,27 @@
 <h:body>
 
 	<header class="aw-topbar">
-		<a href="#" class="aw-toggle  js-toggle"><i class="fa  fa-bars"> MENU</i></a>
-		
-		<h:form id="formLink">
-		<i onclick="PF('empresa').show(); return false;" />
-			<p:link onclick="PF('empresa').show(); return false;" value="#{unidade.empresa.fantasia} - #{unidade.empresa.cnpj}" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;">
-				
-				<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.empresa.cnpj}"></p:inputText>
-				
-			</p:link>
-		</h:form>
-		
-		<h:graphicImage library="algaworks" width="145px" height="37px" name="images/logo_nfx.gif" />
-		
+		<div>
+			<div align="left">
+				<a href="#" class="aw-toggle  js-toggle" style="color: white;"><i class="fa  fa-bars">MENU</i></a>
+			</div>
+			
+			<div align="right">
+				<h:form id="formLink">
+				<i onclick="PF('empresa').show(); return false;" />
+					<p:link onclick="PF('empresa').show(); return false;" value="#{unidade.empresa.cnpj} - #{unidade.empresa.fantasia}" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;">
+						
+						<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.empresa.cnpj}"></p:inputText>
+						
+					</p:link>
+				</h:form>
+			</div>
+			
+		</div>
 	</header>
 	
 	<aside class="aw-sidebar  js-sidebar">
+	<br/><br/>
 		<ui:include src="/views/menu.xhtml" />
 	</aside>
 	
