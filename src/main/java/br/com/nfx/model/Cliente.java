@@ -19,6 +19,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+
 /**
  *
  * @author Leonardo
@@ -32,11 +34,12 @@ public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQ_CLI")
-	@SequenceGenerator(name = "SEQ_CLI", sequenceName = "seq_cliente")
-    @Basic(optional = false)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_cliente")
+    @SequenceGenerator(name = "seq_cliente", sequenceName = "seq_cliente",  allocationSize = 0)
     @Column(name = "cliente_id")
     private Long clienteId;
+    @Column(name = "tipo_cadastro")
+    private String tipoCadastro;
     @Column(name = "razao_social")
     private String razaoSocial;
     @Column(name = "cnpj")
@@ -45,6 +48,14 @@ public class Cliente implements Serializable {
     private Long cpf;
     @Column(name = "inscricao_estadual")
     private Long inscricaoEstadual;
+    @Column(name = "inscricao_estadual_st")
+    private Long inscricaoEstadualST;
+    @Column(name = "regime_tributario")
+    private Long regimeTributario;
+    @Column(name = "cnae_fiscal")
+    private Long cnaeFiscal;
+    @Column(name = "inscricao_municipal")
+    private Long inscricaoMunicipal;
     @Column(name = "suframa")
     private BigInteger suframa;
     @Column(name = "isento")
@@ -73,6 +84,9 @@ public class Cliente implements Serializable {
     private String uf;
     @Column(name = "telefone")
     private Long telefone;
+    @Type(type= "org.hibernate.type.NumericBooleanType")
+    @Column(name = "ativo")
+    private Boolean ativo;
 
     public Cliente() {
     }
@@ -89,7 +103,15 @@ public class Cliente implements Serializable {
         this.clienteId = clienteId;
     }
 
-    public String getRazaoSocial() {
+    public String getTipoCadastro() {
+		return tipoCadastro;
+	}
+
+	public void setTipoCadastro(String tipoCadastro) {
+		this.tipoCadastro = tipoCadastro;
+	}
+
+	public String getRazaoSocial() {
         return razaoSocial;
     }
 
@@ -121,7 +143,39 @@ public class Cliente implements Serializable {
         this.inscricaoEstadual = inscricaoEstadual;
     }
 
-    public BigInteger getSuframa() {
+    public Long getInscricaoEstadualST() {
+		return inscricaoEstadualST;
+	}
+
+	public void setInscricaoEstadualST(Long inscricaoEstadualST) {
+		this.inscricaoEstadualST = inscricaoEstadualST;
+	}
+
+	public Long getRegimeTributario() {
+		return regimeTributario;
+	}
+
+	public void setRegimeTributario(Long regimeTributario) {
+		this.regimeTributario = regimeTributario;
+	}
+
+	public Long getCnaeFiscal() {
+		return cnaeFiscal;
+	}
+
+	public void setCnaeFiscal(Long cnaeFiscal) {
+		this.cnaeFiscal = cnaeFiscal;
+	}
+
+	public Long getInscricaoMunicipal() {
+		return inscricaoMunicipal;
+	}
+
+	public void setInscricaoMunicipal(Long inscricaoMunicipal) {
+		this.inscricaoMunicipal = inscricaoMunicipal;
+	}
+
+	public BigInteger getSuframa() {
         return suframa;
     }
 
@@ -257,5 +311,13 @@ public class Cliente implements Serializable {
     public String toString() {
         return "dbtojava.Cliente[ clienteId=" + clienteId + " ]";
     }
+
+	public Boolean getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(Boolean ativo) {
+		this.ativo = ativo;
+	}
     
 }

@@ -1,87 +1,188 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
 
-<h:head>
-	<link rel="stylesheet" type="text/css" href="./css.css" />  
-</h:head>
-  
-  <ui:composition template="layout.xhtml">
-   <ui:define name="conteudo">
-  
-    <div align="center">
-        
-        <h:form id="formEmp" enctype="multipart/form-data">
-        <p:panelGrid  id="panelEmp" style="margin-top:5px; background-color: #cccccc;" >
-            
-        <f:facet name="header">  
-            <p:row>
-		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
-		            <p:spacer height="0" >CADASTRO DE EMPRESAS</p:spacer>
-		        </p:column>
-		    </p:row>  
-        </f:facet>
-        
-        <p:row>
-            <p:column colspan="2">Id:<br/><p:inputText size="25" value="#{empresa.empresa.empresa}" /></p:column>
-            
-            <p:column colspan="2">Razão Social:<br/><p:inputText size="29" value="#{empresa.empresa.razaoSocial}" /></p:column>  
-        
-            <p:column colspan="2">Fantasia:<br/><p:inputText  id="senha" size="25" value="#{empresa.empresa.fantasia}"/></p:column>
-            
-            <p:column colspan="2">Cnpj:<br/><p:inputText id="cnpj" size="29" value="#{empresa.empresa.cnpj}" /></p:column>
-        </p:row>
-        <p:row>  
-            <p:column colspan="2">IE:<br/><p:inputText size="25" value="#{empresa.empresa.ie}" /></p:column>
-            
-            <p:column colspan="2">Resposável:<br/><p:inputText size="25" value="#{empresa.empresa.responsavel}" /></p:column>
-            
-            <p:column colspan="2">Email:<br/><p:inputText size="25" value="#{empresa.empresa.email}" /></p:column>
-            
-            <p:column colspan="2">Telefone:<br/><p:inputText size="25" value="#{empresa.empresa.telefone}" /></p:column>
-        </p:row>
-        <p:row>
-            
-            <p:column colspan="2">CEP:<br/><p:inputText size="25" value="#{empresa.empresa.cep}" /></p:column>
-            
-            <p:column colspan="2">Endereco:<br/><p:inputText size="25" value="#{empresa.empresa.endereco}" /></p:column>
-            
-            <p:column colspan="2">Bairro:<br/><p:inputText size="25" value="#{empresa.empresa.bairro}" /></p:column>
-            
-            <p:column colspan="2">Cidade:<br/><p:inputText size="25" value="#{empresa.empresa.cidade}" /></p:column>
-        </p:row>
-        <p:row>    
-            
-            
-            <p:column colspan="2">Uf:<br/><p:inputText size="25" value="#{empresa.empresa.uf}" /></p:column>
-            
-            
-            
-            <p:column colspan="4">Ativo: <p:selectBooleanButton value="#{empresa.empresa.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
-        </p:row>
-        <p:row>
-            <p:column style="text-align: center;" colspan="8">
-                <p:button value="Cancelar" outcome="listaEmpresa" />
-                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{empresa.save}" update="panelEmp" global="true" />
-                
-                <p:focus context="panelEmp"/>  
-                <p:messages id="messagesEmp" showDetail="true" autoUpdate="true" closable="true" /> 
-            </p:column> 
-        </p:row>
-        
-        </p:panelGrid>
-        
-        <p:blockUI block="panelEmp" trigger="saveBtn" /> 
-    </h:form>
-    
-    </div> 
-    
-    </ui:define>   
-    </ui:composition>
-    
+<ui:composition template="layout.xhtml">
+
+	<ui:define name="conteudo">
+	
+		<f:metadata>
+    		<o:viewParam name="empresa" value="#{empresaBean.empresa}" />
+    		<f:event listener="#{empresaBean.editar}" type="preRenderView" />
+    	</f:metadata>
+	
+		<h:form id="formCli">
+			<div class="ui-fluid">
+
+				<p:panel header="Cadastro" rendered="false">
+					
+					<h:inputHidden id="idEmpresa" value="#{empresaBean.empresa.idEmpresa}" />
+					
+					<p:outputLabel for="cadastro" value="Tipo Cadastro:" />
+					<p:selectOneMenu id="cadastro"
+						value="#{empresaBean.empresa.tipoCadastro}" style="width:225px">
+						<f:selectItem itemLabel="Selecione o tipo de cadastro"
+							noSelectionOption="false" />
+						<f:selectItem itemLabel="Cliente" itemValue="C" />
+						<f:selectItem itemLabel="Transportadora" itemValue="T" />
+						<f:selectItem itemLabel="Emitente" itemValue="E" />
+						<!--             <f:selectItem itemLabel="Wii U" itemValue="Wii U" /> -->
+					</p:selectOneMenu>
+					
+				</p:panel>
+				
+				<p:panel header="Dados" style="margin-botton:10px">
+					<f:facet name="header" >
+						<p:outputLabel value="Dados" rendered="#{!empresaBean.empresa.ativo || empresaBean.empresa.ativo == null}" />
+						<p:outputLabel value="Dados - Id: " rendered="#{empresaBean.empresa.ativo}" />
+						<p:outputLabel dir="rtl" style="width: 1000px;" value="#{empresaBean.empresa.idEmpresa == null ? '' :  empresaBean.empresa.idEmpresa}"   />
+					</f:facet>
+					
+					<p:panelGrid columns="6" layout="grid" style="width:100%" columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
+						
+						<p:outputLabel value="Nome/Razão Social" for="razaoSocial" />
+						<p:inputText id="razaoSocial"
+							value="#{empresaBean.empresa.razaoSocial}" />
+
+						<p:outputLabel value="RG/CNPJ" for="cnpj" />
+						<p:inputText id="cnpj" value="#{empresaBean.empresa.cnpj}" />
+
+						<p:outputLabel value="Inscrição Estadual" for="insEstadual" />
+						<p:inputText id="insEstadual"
+							value="#{empresaBean.empresa.inscricaoEstadual}" />
+							
+						<p:outputLabel value="CNAE Fiscal" for="cnaeFiscal" />
+						<p:inputText id="cnaeFiscal"
+							value="#{empresaBean.empresa.cnaeFiscal}" />
+
+						<p:outputLabel value="Inscrição Municipal" for="insMunicipal" />
+						<p:inputText id="insMunicipal"
+							value="#{empresaBean.empresa.inscricaoMunicipal}" />
+							
+						<p:outputLabel value="Inscrição Estadual ST" for="inscricaoEstadualST" />
+						<p:inputText id="inscricaoEstadualST"
+							value="#{empresaBean.empresa.inscricaoEstadualST}" />
+							
+						<p:outputLabel value="Regime Tributário" for="regimeTributario" />
+						<p:selectOneMenu id="regimeTributario" style="width:25px" 
+							value="#{empresaBean.empresa.regimeTributario}">
+							<f:selectItem itemLabel="Selecione" noSelectionOption="false" />
+							<f:selectItem itemLabel="Simples Nacional" itemValue="teste" />
+							<f:selectItem itemLabel="Simples Nacional - excesso de sublimite" itemValue="Xbox One" />
+							<f:selectItem itemLabel="Regime Normal" itemValue="PS4" />
+						</p:selectOneMenu>		
+
+						<p:outputLabel value="Inscrição Suframa" for="insSuframa" />
+						<p:inputText id="insSuframa"
+							value="#{empresaBean.empresa.suframa}" />
+
+						<p:outputLabel value="Email" for="email" />
+						<p:inputText id="email" value="#{empresaBean.empresa.email}" />
+
+						<p:outputLabel value="Telefone" for="telefone" />
+						<p:inputText id="telefone" value="#{empresaBean.empresa.telefone}" />
+
+						<p:outputLabel value="Isento ICMS" for="isento" />
+						<p:selectBooleanCheckbox id="isento"
+							value="#{empresaBean.empresa.isento}" />
+							
+						<p:outputLabel value=""  />
+						<p:outputLabel value=""  />	
+						
+					</p:panelGrid>
+
+				</p:panel>
+
+				<p:panel header="Endereço">
+					<p:panelGrid  columns="6" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
+
+						<p:outputLabel value="Logradouro" for="logradouro" />
+						<p:inputText id="logradouro"
+							value="#{empresaBean.empresa.logradouro}" />
+
+						<p:outputLabel value="Número" for="numero" />
+						<p:inputText id="numero" value="#{empresaBean.empresa.numero}" />
+
+						<p:outputLabel value="Complemento" for="complemento" />
+						<p:inputText id="complemento"
+							value="#{empresaBean.empresa.complemento}" />
+
+						<p:outputLabel value="Bairro" for="bairro" />
+						<p:inputText id="bairro" value="#{empresaBean.empresa.bairro}" />
+
+						<p:outputLabel value="Cep" for="cep" />
+						<p:inputText id="cep" value="#{empresaBean.empresa.cep}" />
+
+						<p:outputLabel value="País" for="pais" />
+						<p:inputText id="pais" value="#{empresaBean.empresa.pais}" />
+
+						<p:outputLabel value="UF" for="uf" />
+						<p:selectOneMenu id="uf" filter="true" value="#{empresaBean.empresa.uf}" style="width: 20px">  
+		                    <p:ajax listener="#{empresaBean.selectionChanged}" update="formCli:municipio" partialSubmit="true" />
+		                    <f:selectItem itemLabel="Selecione UF" itemValue="" noSelectionOption="true" />  
+		                    <f:selectItem itemLabel="AC" itemValue="AC" />  
+		                    <f:selectItem itemLabel="AL" itemValue="AL" />  
+		                    <f:selectItem itemLabel="AP" itemValue="AP" />
+		                    <f:selectItem itemLabel="AM" itemValue="AM" />  
+		                    <f:selectItem itemLabel="BA" itemValue="BA" />  
+		                    <f:selectItem itemLabel="CE" itemValue="CE" />  
+		                    <f:selectItem itemLabel="DF" itemValue="DF" />
+		                    <f:selectItem itemLabel="ES" itemValue="ES" />  
+		                    <f:selectItem itemLabel="GO" itemValue="GO" />  
+		                    <f:selectItem itemLabel="MA" itemValue="MA" />  
+		                    <f:selectItem itemLabel="MT" itemValue="MT" />
+		                    <f:selectItem itemLabel="MS" itemValue="MS" />  
+		                    <f:selectItem itemLabel="MG" itemValue="MG" />  
+		                    <f:selectItem itemLabel="PA" itemValue="PA" />  
+		                    <f:selectItem itemLabel="PB" itemValue="PB" />
+		                    <f:selectItem itemLabel="PR" itemValue="PR" />  
+		                    <f:selectItem itemLabel="PE" itemValue="PE" />  
+		                    <f:selectItem itemLabel="PI" itemValue="PI" />  
+		                    <f:selectItem itemLabel="RJ" itemValue="RJ" />
+		                    <f:selectItem itemLabel="RN" itemValue="RN" />  
+		                    <f:selectItem itemLabel="RS" itemValue="RS" />  
+		                    <f:selectItem itemLabel="RO" itemValue="RO" />  
+		                    <f:selectItem itemLabel="RR" itemValue="RR" />
+		                    <f:selectItem itemLabel="SC" itemValue="SC" />  
+		                    <f:selectItem itemLabel="SP" itemValue="SP" />  
+		                    <f:selectItem itemLabel="SE" itemValue="SE" />  
+		                    <f:selectItem itemLabel="TO" itemValue="TO" />
+		                </p:selectOneMenu>
+
+						<p:outputLabel value="Município" for="municipio" />
+						<p:selectOneMenu id="municipio" filter="true" value="#{empresaBean.empresa.municipio}" style="width: 20px">
+							<f:selectItem itemLabel="Selecione a cidade" itemValue="" />
+							<f:selectItem itemLabel="#{empresaBean.empresa.municipio}" itemValue="#{empresaBean.empresa.municipio}" />
+		            		<f:selectItems value="#{empresaBean.listCidade}"  />
+		            	</p:selectOneMenu>
+
+						<p:outputLabel value=""  />
+						<p:outputLabel value=""  />
+			
+					</p:panelGrid>
+
+			</p:panel>
+		</div>
+				<p:toolbar style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+					<f:facet name="right" style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+						<p:button value="Cancelar" outcome="listaEmpresa" />
+						<p:commandButton value="Salvar"	action="#{empresaBean.salvar}" />
+					</f:facet>
+					
+					<f:facet name="left" style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+						Ativo: <p:selectBooleanButton value="#{empresaBean.empresa.ativo}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />	
+					</f:facet>
+				</p:toolbar>
+
+			</h:form>
+	</ui:define>
+
+</ui:composition>
+
+
+
 </html>

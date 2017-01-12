@@ -35,9 +35,9 @@ public class ClienteDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	public void saveCliente(Cliente cliente) {
+	public void salvar(Cliente cliente) {
 		
-		getSessionFactory().getCurrentSession().saveOrUpdate(cliente);
+		getSessionFactory().getCurrentSession().merge(cliente);
 	}
 
 	public void deleteCliente(Cliente cliente) {
@@ -56,7 +56,7 @@ public class ClienteDAO {
 	}
 
 	public List<Cliente> getCliente() {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Cliente").list();
+		List list = getSessionFactory().getCurrentSession().createQuery("from Cliente order by cliente_id").list();
 		return list;
 	}
 
@@ -76,7 +76,7 @@ public class ClienteDAO {
 		}
 	}
 	
-	public List<String> getCidades(String uf){
+	public List<String> getCidade(String uf){
 		List list = getSessionFactory().getCurrentSession().createSQLQuery("select descricao_municipio from cidade where sigla_uf = '" + uf + "'").list();
 		return list;
 	}

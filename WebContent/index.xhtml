@@ -7,17 +7,16 @@
       xmlns:p="http://primefaces.org/ui">
     <h:head>
         <title>Sistema de gerenciamento de NF-e / NFS-e</title>
-        <link rel="stylesheet" type="text/css" href="./css.css" />  
+        <link rel="stylesheet" type="text/css" href="./views/css.css" />  
         <link rel="stylesheet" type="image/ico" href="./favicon.ico" />
         
         <script type="text/javascript">  
-			function handleLoginRequest(xhr, status, args) {  
-				if(args.validationFailed || !args.loggedIn) {  
+			function handleLoginRequest(xhr, status, args) {
+				
+				if(!args.loggedIn) {  
 					PF('dlg').jq.effect("explode", { times:5 }, 100);
 				}
 				else {  
-					PF('dlg').hide();  
-					$('#loginLink').fadeOut();
 					window.location.assign("./views/layout.jsf");
 				}  
 			}  
@@ -29,6 +28,12 @@
 			  -moz-background-size: cover;
 			  -o-background-size: cover;
 			  background-size: cover;
+			}
+			
+			input:-webkit-autofill {
+			    -webkit-box-shadow: 0 0 0 1000px darkblue inset !important;
+			    -webkit-text-fill-color: white !important;
+			    -webkit-background:transparent;
 			}
         </style>
     </h:head>
@@ -48,31 +53,49 @@
         	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 			<p:outputLabel value="JLab" 
 					style="font: bold 100px Goudy Stout; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px white;" />
+					
+					
+			<h:panelGrid bgcolor="white"  columns="2" style="border-radius: 15px; box-shadow: 10px 10px 5px blue;">
+			</h:panelGrid>		
         </ui:remove>
         
-           	<h:panelGrid bgcolor="white" columns="2" cellpadding="5" border="0" cellspacing="0" style="border-radius: 15px; box-shadow: 10px 10px 5px blue;">  
-	             
-	            <f:facet name="header">  
-            		<p:outputLabel value="FAÇA SEU LOGIN" style="text-shadow: 2px 2px 4px darkblue;"/>   
-            		<p:graphicImage value="./imagens/lock.png" width="45" height="35" />
-            	</f:facet>	
+        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+        
+        
+		<div class="ui-g ui-fluid" style="width: 300px; background: transparent; border-radius:15px; cellspadding: 5px">
+			<div align="center">
+				<h3 style="color: white;">                 ACESSO AO SISTEMA <p:graphicImage value="./imagens/lock.png" width="45" height="35" /></h3>
+			</div>
+		    <div align="left" class="ui-g-12 ui-md-2 ui-lg-12">
+		    	<p:outputLabel for="username1" value="Usuário:" rendered="false" /> 
+	            <p:inputText value="#{auth.user}" autocomplete="off"
+	                    id="username1" required="true" label="username1" style="-webkit-box-shadow: 0 0 0px 1000px white inset; color: white; align-text:center; border: 0; outline: 0; background: transparent; box-shadow: none; border-bottom: 2px solid white; line-height: 28px;" />
+	            <p:watermark value="Login" for="username1"></p:watermark>
 	            
-	            <p:outputLabel for="username1" value="Usuário:" />  
-	            <p:inputText value="#{auth.user}" 
-	                    id="username1" required="true" label="username1" />  
-	              
-	            <p:outputLabel for="password1" value="Senha:" />  
+            </div>
+		    <div align="left" class="ui-g-12 ui-md-2 ui-lg-12">
+				<p:outputLabel for="password1" value="Senha:" rendered="false"/> 
 	            <p:password value="#{auth.senha}"
-	                    id="password1" required="true" label="password1" />  
-	            
-	            <f:facet name="footer">
-	                <div style="text-align: center;">        
-	                <p:commandButton id="loginButton1" value="Entrar" update="growl"
-	                                 style="border-radius: 15px;" action="#{auth.validateUsernamePassword}" />  
-	                </div>
-	            </f:facet>
-	               
-	        </h:panelGrid>
+	                    id="password1" required="true" label="password1" style="color: white; border: 0; outline: 0; background: transparent; box-shadow: none; border-bottom: 2px solid white; line-height: 28px;" />
+	                    <p:watermark value="Senha" for="password1"></p:watermark>
+	              
+			</div>
+		    <div class="ui-g-12 ui-md-2 ui-lg-12">
+				<p:commandButton id="loginButton1" value="ENTRAR" update="growl"  style="background: darkblue; color: white; font-size: 50em; border: 1px solid darkblue; padding: 0px !important; box-shadow: none; height: 48px;"
+	                           oncomplete="handleLoginRequest(xhr, status, args)" actionListener="#{auth.validateUsernamePassword}" />
+                      
+                  <br/><br/>
+                  
+                  <p:link style="color: white;">Esqueci minha senha</p:link>
+			</div>
+		    
+		</div>
+		 
+        <div class="ui-fluid">
+        
+        	
+        
+	    </div>    
         <ui:remove>  	
            	
    

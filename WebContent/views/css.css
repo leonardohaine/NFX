@@ -6,7 +6,9 @@
         Purpose of the stylesheet follows.
 */
 
-
+body {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+}
 
 .ui-layout-unit-top .ui-layout-bd { border: 0; }
 .ui-layout-unit-left .ui-layout-bd { border: 0; }

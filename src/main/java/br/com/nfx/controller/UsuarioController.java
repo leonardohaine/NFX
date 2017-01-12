@@ -23,7 +23,7 @@ import br.com.nfx.service.UsuarioService;
  *
  * @author Leonardo
  */
-@ManagedBean(name = "usuario")
+@ManagedBean(name = "usuarioBean")
 @ViewScoped
 public class UsuarioController {
 
@@ -70,7 +70,7 @@ public class UsuarioController {
 		this.listUsuario = listUsuario;
 	}
 
-	public String save() {
+	public String salvar() {
 		try {
 			getUsuarioService().saveUsuario(usuario);
 
@@ -94,7 +94,7 @@ public class UsuarioController {
 		}
 	}
 	
-	public String delete() {
+	public String deletar() {
 
 		try {
 			getUsuarioService().deleteUsuario(selectedUsuario);

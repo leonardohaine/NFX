@@ -17,18 +17,18 @@ public class EmpresaService {
 	EmpresaDAO empresaDAO;
 
 	@Transactional(readOnly = false)
-	public void saveEmpresa(Empresa empresa) {
-		getEmpresaDAO().saveEmpresa(empresa);
+	public void salvar(Empresa empresa) {
+		getEmpresaDAO().salvar(empresa);
 	}
 
 	@Transactional(readOnly = false)
-	public void deleteEmpresa(Empresa empresa) {
-		getEmpresaDAO().deleteEmpresa(empresa);
+	public void deletar(Empresa empresa) {
+		getEmpresaDAO().deletar(empresa);
 	}
 
 	@Transactional(readOnly = false)
-	public void updateEmpresa(Empresa empresa) {
-		getEmpresaDAO().updateEmpresa(empresa);
+	public void atualizar(Empresa empresa) {
+		getEmpresaDAO().atualizar(empresa);
 	}
 
 	public Empresa getEmpresaById(Long id) {
@@ -42,16 +42,16 @@ public class EmpresaService {
 		return empresaDAO;
 	}
 
-	/**
-	 * @param safx04DAO
-	 *            the empresaDAO to set
-	 */
 	public void setEmpresaDAO(EmpresaDAO empresaDAO) {
 		this.empresaDAO = empresaDAO;	
 	}
 
 	public List<Empresa> getEmpresa() {
 		return getEmpresaDAO().getEmpresa();
+	}
+	
+	public List<String> getCidade(String uf) {
+		return getEmpresaDAO().getCidade(uf);
 	}
 
 }

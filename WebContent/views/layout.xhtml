@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 	</f:facet>
 
-	<title>Sistema de gerenciamento de NF-e / NFS-e</title>
+	<title>Sistema de NF-e / NFS-e</title>
 
 	<h:outputStylesheet library="algaworks" name="styles/custom.css" />
 	<h:outputStylesheet library="algaworks" name="styles/layout.css" />
@@ -22,38 +22,47 @@
 </h:head>
 
 <h:body>
-
-	<header class="aw-topbar">
-		<div>
-			<div align="left">
-				<a href="#" class="aw-toggle  js-toggle" style="color: white;"><i class="fa  fa-bars">MENU</i></a>
-			</div>
-			
-			<div align="right">
-				<h:form id="formLink">
-				<i onclick="PF('empresa').show(); return false;" />
-					<p:link onclick="PF('empresa').show(); return false;" value="#{unidade.empresa.cnpj} - #{unidade.empresa.fantasia}" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;">
+	<p:layout fullPage="true" gutter="0" styleClass="backLayout" >
+		<p:layoutUnit position="north" size="50" resizable="false" gutter="0" style="background: darkblue;"
+			closable="false" collapsible="true">
+				<header class="aw-topbar">
+					<div>
+						<div align="left">
+							<a href="#" class="aw-toggle  js-toggle" style="color: white;font-size: 30px;"><i class="fa  fa-bars"> </i></a>
+						</div>
 						
-						<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.empresa.cnpj}"></p:inputText>
+						<div align="right">
+							<h:form id="formLink">
+							<i onclick="PF('empresa').show(); return false;" />
+								<p:link onclick="PF('empresa').show(); return false;" value="#{unidade.empresa.cnpj} - #{unidade.empresa.razaoSocial}" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;">
+									<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.empresa.cnpj}"></p:inputText>
+								</p:link>
+							</h:form>
+						</div>
 						
-					</p:link>
-				</h:form>
-			</div>
-			
-		</div>
-	</header>
+					</div>
+				</header>
+		</p:layoutUnit>
+		<p:layoutUnit position="south" size="38" resizable="false" gutter="0" maxSize="67" style="background-color: darkblue; overflow: hidden;"
+			closable="false" collapsible="true">
+				<footer >
+					<ui:include src="/views/footer.xhtml" />
+				</footer>
+		</p:layoutUnit>
+		
+		<p:layoutUnit  position="center" gutter="0">
+			<aside class="aw-sidebar  js-sidebar">
+			<br/><br/>
+				<ui:include src="/views/menu.xhtml" />
+			</aside>
+			<section >
+				<ui:insert name="conteudo" />
+			</section>
+		</p:layoutUnit>
+	</p:layout>		
 	
-	<aside class="aw-sidebar  js-sidebar">
-	<br/><br/>
-		<ui:include src="/views/menu.xhtml" />
-	</aside>
 	
-	<section class="aw-content  js-content">
-		<ui:insert name="conteudo" />
-	</section>
-	<div class="footer">
-		<FONT color="white">leonardo</FONT>
-	</div>
+	
 	
 	<h:form>
 		<p:dialog header="ESCOLHA EMPRESA" widgetVar="empresa" visible="false" modal="true" closable="false" resizable="false" responsive="true" width="40%">
@@ -68,7 +77,7 @@
 	                </p:column>
 	 
 	                <p:column headerText="Empresa">
-	                    <h:outputText value="#{emp.fantasia}" />
+	                    <h:outputText value="#{emp.razaoSocial}" />
 	                </p:column>
 	 
 	                <p:column style="width:32px;text-align: center">

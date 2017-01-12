@@ -13,7 +13,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 
 import org.primefaces.context.RequestContext;
 import org.primefaces.event.SelectEvent;
@@ -25,7 +24,7 @@ import br.com.nfx.service.ClienteService;
  *
  * @author Leonardo
  */
-@ManagedBean(name = "cliente")
+@ManagedBean(name = "clienteBean")
 @ViewScoped
 public class ClienteController {
 
@@ -73,17 +72,16 @@ public class ClienteController {
 		this.listCliente = listCliente;
 	}
 
-	public String save() {
+	public String salvar() {
 		try {
-			getClienteService().getClienteDAO().saveCliente(cliente);
+			getClienteService().salvar(cliente);
 
 			cliente = new Cliente();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Cliente cadastrado"));
-			return "cliente";
+			return "listaCliente";
 		} catch (Exception e) {
 			e.printStackTrace();
-			cliente = new Cliente();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao tentar cadastrar cliente: " +e));
 			return "cliente";
@@ -91,27 +89,44 @@ public class ClienteController {
 	}
 	
 	@PostConstruct
-	public String Edit(){
+	public void editar(){
 		FacesContext.getCurrentInstance().getExternalContext().getFlash().put("selectedCliente", selectedCliente);
 		
 		setCliente((Cliente)FacesContext.getCurrentInstance().getExternalContext().getFlash().get("selectedCliente"));
 		
-		return "cliente";
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("clienteId");
+		System.out.println("ID editar: " + id);
+		if(id != null){
+			System.out.println("ID editar: " + id);
+			cliente = getClienteService().getClienteById(Long.valueOf(id));
+		}
+		
+		//return "cliente";
 	}
+	/*
+	public void inicializar() {
+		if (FacesUtil.isNotPostback()) {
+			categoriasRaizes = categorias.raizes();
+			
+			if (this.categoriaPai != null) {
+				carregarSubcategorias();
+			}
+		}
+	}*/
 	
-	public String delete() {
+	public String delatar() {
 
 		try {
-			getClienteService().getClienteDAO().deleteCliente(cliente);
+			getClienteService().deleteCliente(selectedCliente);
 			cliente = new Cliente();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Sucesso!", "Usuário deletado: " + selectedCliente.getRazaoSocial()));
-			return "usuarios";
+					"Sucesso!", "Cliente deletado: " + selectedCliente.getRazaoSocial()));
+			return "listaCliente";
 		} catch (Exception e) {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-					"Erro!", "Erro ao deletar usuário: " +e));
-			return "usuario";
+					"Erro!", "Erro ao deletar cliente: " +e));
+			return "cliente";
 		}
 	}
 
@@ -127,8 +142,8 @@ public class ClienteController {
 	
 	public void selectionChanged(){
 		System.out.println("getCidade: " + cliente.getUf());
-		listCidade = getClienteService().getClienteDAO().getCidades(cliente.getUf());
-		RequestContext.getCurrentInstance().update("formUsu:municipio");
+		listCidade = getClienteService().getCidade(cliente.getUf());
+		//RequestContext.getCurrentInstance().update("formCli:municipio");
 	}
 
 	/**

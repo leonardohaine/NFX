@@ -74,7 +74,7 @@ public class UnidadeController {
 
 	public String save() {
 		try {
-			getEmpresaService().getEmpresaDAO().saveEmpresa(empresa);
+			getEmpresaService().salvar(empresa);
 
 			empresa = new Empresa();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -103,10 +103,10 @@ public class UnidadeController {
 	public String delete() {
 
 		try {
-			getEmpresaService().getEmpresaDAO().deleteEmpresa(empresa);
+			getEmpresaService().deletar(empresa);
 			empresa = new Empresa();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Sucesso!", "Usuário deletado: " + selectedEmpresa.getEmpresa()));
+					"Sucesso!", "Usuário deletado: " + selectedEmpresa.getIdEmpresa()));
 			return "empresas";
 		} catch (Exception e) {
 
@@ -122,14 +122,14 @@ public class UnidadeController {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Car Selected", "Id:" + emp.getCnpj());
         FacesContext.getCurrentInstance().addMessage(null, message);
         
-        setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getEmpresa()));
-        setSelectedEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getEmpresa()));
+        setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getIdEmpresa()));
+        setSelectedEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getIdEmpresa()));
     }
 	
 	public void selectEmpFromDialog(Empresa emp) {
 		System.out.println("selectEmpFromDialog: " + emp);
-		setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getEmpresa()));
-        setSelectedEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getEmpresa()));
+		setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getIdEmpresa()));
+        setSelectedEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getIdEmpresa()));
         
         HttpSession session = Util.getSession();
 		FacesContext.getCurrentInstance().getExternalContext().setResponseContentType("multipart/form-data");
@@ -141,7 +141,7 @@ public class UnidadeController {
 		System.out.println(event.toString());
 		if (event.getObject() != null) {
 			Empresa empresa = (Empresa) event.getObject();
-			setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(empresa.getEmpresa()));
+			setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(empresa.getIdEmpresa()));
 
 		}
 	}

@@ -1,133 +1,178 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">>
 
-<h:head>
-	<link rel="stylesheet" type="text/css" href="./css.css" />  
-</h:head>
-  
-  <ui:composition template="layout.xhtml">
-   <ui:define name="conteudo">
-  
-    <div align="center">
-        
-        <h:form id="formUsu" enctype="multipart/form-data">
-        <p:panelGrid  id="panelCliente" style="margin-top:5px; background-color: #cccccc;" >
-            
-        <f:facet name="header">  
-            <p:row>
-		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
-		            <p:spacer height="0" >CADASTRO DE CLIENTE</p:spacer>
-		        </p:column>
-		    </p:row>  
-        </f:facet>
-        
-        <p:row>
-            <p:column colspan="4">Nome/Razão Social:<br/><p:inputText size="45" value="#{usuario.usuario.login}" /></p:column>
-        
-        	<p:column colspan="2">Tipo documento:<br/>
-	            <p:selectOneMenu id="cnpjcpf" value="#{cliente.cliente.cnpj}" style="width:35px">
-		            <f:selectItem itemLabel="CPF" itemValue="1" />
-		            <f:selectItem itemLabel="CNPJ" itemValue="2" />
-	            </p:selectOneMenu>
-            </p:column>
-            
-            <p:column colspan="2">CPF/CNPJ:<br/><p:inputText size="15" maxlength="14" value="#{usuario.usuario.nome}" /></p:column>  
-        </p:row>
-        <p:row>
-            <p:column colspan="2">Inscrição Estadual:<br/><p:inputText id="ie" size="15" value="#{cliente.cliente.inscricaoEstadual}" /></p:column>
-        
-            <p:column colspan="2">SUFRAMA:<br/><p:inputText id="suframa" size="15" value="#{cliente.cliente.suframa}"  /></p:column>
-            
-            <p:column colspan="4">Isento: <p:selectBooleanButton value="#{cliente.cliente.isento}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
-        </p:row>
-        <p:row> 
-            <p:column colspan="4">E-mail:<br/><p:inputText size="45" value="#{cliente.cliente.email}" /></p:column>
-            
-            <p:column colspan="2">CEP:<br/><p:inputText size="15" maxlength="8" value="#{cliente.cliente.cep}" /></p:column>
-              
-            <p:column colspan="2">Logradouro:<br/><p:inputText size="20" value="#{cliente.cliente.logradouro}" /></p:column>
-        </p:row>
-        <p:row>
-        	<p:column colspan="2">Número:<br/><p:inputText size="20" value="#{cliente.cliente.numero}" /></p:column>
-        	
-            <p:column colspan="2">Complemento:<br/><p:inputText size="15" value="#{cliente.cliente.complemento}" /></p:column>
-            
-            <p:column colspan="2">Bairro:<br/><p:inputText size="15" value="#{cliente.cliente.bairro}" /></p:column>
-              
-            <p:column colspan="2">Pais:<br/><p:inputText size="20" value="#{cliente.cliente.pais}" /></p:column>
-        </p:row>
-        <p:row>     
-            <p:column colspan="2">UF:<br/>
-				<p:selectOneMenu id="uf" filter="true" value="#{cliente.cliente.uf}" style="width: 20px">  
-                    <p:ajax listener="#{cliente.selectionChanged}" />
-                    <f:selectItem itemLabel="" itemValue="" />  
-                    <f:selectItem itemLabel="AC" itemValue="AC" />  
-                    <f:selectItem itemLabel="AL" itemValue="AL" />  
-                    <f:selectItem itemLabel="AP" itemValue="AP" />
-                    <f:selectItem itemLabel="AM" itemValue="AM" />  
-                    <f:selectItem itemLabel="BA" itemValue="BA" />  
-                    <f:selectItem itemLabel="CE" itemValue="CE" />  
-                    <f:selectItem itemLabel="DF" itemValue="DF" />
-                    <f:selectItem itemLabel="ES" itemValue="ES" />  
-                    <f:selectItem itemLabel="GO" itemValue="GO" />  
-                    <f:selectItem itemLabel="MA" itemValue="MA" />  
-                    <f:selectItem itemLabel="MT" itemValue="MT" />
-                    <f:selectItem itemLabel="MS" itemValue="MS" />  
-                    <f:selectItem itemLabel="MG" itemValue="MG" />  
-                    <f:selectItem itemLabel="PA" itemValue="PA" />  
-                    <f:selectItem itemLabel="PB" itemValue="PB" />
-                    <f:selectItem itemLabel="PR" itemValue="PR" />  
-                    <f:selectItem itemLabel="PE" itemValue="PE" />  
-                    <f:selectItem itemLabel="PI" itemValue="PI" />  
-                    <f:selectItem itemLabel="RJ" itemValue="RJ" />
-                    <f:selectItem itemLabel="RN" itemValue="RN" />  
-                    <f:selectItem itemLabel="RS" itemValue="RS" />  
-                    <f:selectItem itemLabel="RO" itemValue="RO" />  
-                    <f:selectItem itemLabel="RR" itemValue="RR" />
-                    <f:selectItem itemLabel="SC" itemValue="SC" />  
-                    <f:selectItem itemLabel="SP" itemValue="SP" />  
-                    <f:selectItem itemLabel="SE" itemValue="SE" />  
-                    <f:selectItem itemLabel="TO" itemValue="TO" />
-                </p:selectOneMenu>
-			</p:column>
-           
-            <p:column colspan="2">Município:<br/>
-            	<p:selectOneMenu id="municipio" filter="true" value="#{cliente.cliente.municipio}" style="width: 20px">
-            		<f:selectItems value="#{cliente.listCidade}" />
-            	</p:selectOneMenu>
-            </p:column>
-            
-            <p:column colspan="4">Telefone:<br/><p:inputText size="20" value="#{usuario.usuario.nome}" /></p:column>
-        </p:row>
-        <p:row>
-            <p:column style="text-align: center;" colspan="8">
-                <p:commandButton icon="icone-add" id="novoBtn" update="panelCliente" process="@this" value="Novo" />
-              
-                <p:commandButton icon="icone-cancel" async="right" id="deleteBtn" action="#{cliente.delete}" value="Deletar" ajax="false" />
-                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelCliente">
-                    <p:resetInput target="panelCliente" />
-                </p:commandButton>
-                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{cliente.save}" update="panelCliente" global="true" />
-                
-                <p:focus context="panelCliente"/>  
-                <p:messages /> 
-            </p:column> 
-        </p:row>
-        
-        </p:panelGrid>
-        
-        <p:blockUI block="panelCliente" trigger="saveBtn, deleteBtn, clearBtn" /> 
-    </h:form>
-    
-    </div> 
-    
-    </ui:define>   
-    </ui:composition>
-    
+<ui:composition template="layout.xhtml">
+
+	<ui:define name="conteudo">
+	
+		<f:metadata>
+    		<o:viewParam name="cliente" value="${clienteBean.cliente}" />
+    		<f:event listener="${clienteBean.editar}" type="preRenderView" />
+    	</f:metadata>
+	
+		<h:form id="formCli">
+			<div class="ui-fluid">
+
+				<p:panel header="Cadastro">
+					
+					<h:inputHidden id="clienteId" value="${clienteBean.cliente.clienteId}" />
+					
+					<p:outputLabel for="cadastro" value="Tipo Cadastro:" />
+					<p:selectOneMenu id="cadastro"
+						value="${clienteBean.cliente.tipoCadastro}" style="width:225px">
+						<f:selectItem itemLabel="Selecione o tipo de cadastro" itemValue="#{null}" noSelectionOption="true" />
+						<f:selectItem itemLabel="Cliente" itemValue="C" />
+						<f:selectItem itemLabel="Fornecedor" itemValue="F" />
+						<f:selectItem itemLabel="Transportadora" itemValue="T" />
+					</p:selectOneMenu>
+				</p:panel>
+				
+				<p:panel header="Dados" style="margin-botton:10px">
+					<f:facet name="header" >
+						<p:outputLabel dir="rtl" style="width: 1000px;" value="Dados - Id: #{clienteBean.cliente.clienteId}" rendered="${clienteBean.cliente.ativo}"  />
+					</f:facet>
+					
+					<p:panelGrid columns="4" layout="grid" style="width:100%" columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
+						
+						<p:outputLabel value="Nome/Razão Social" for="razaoSocial" />
+						<p:inputText id="razaoSocial"
+							value="${clienteBean.cliente.razaoSocial}" />
+
+						<p:outputLabel value="RG/CNPJ" for="cnpj" />
+						<p:inputText id="cnpj" value="${clienteBean.cliente.cnpj}" />
+
+						<p:outputLabel value="Inscrição Estadual" for="insEstadual" />
+						<p:inputText id="insEstadual"
+							value="${clienteBean.cliente.inscricaoEstadual}" />
+							
+						<p:outputLabel value="CNAE Fiscal" for="cnaeFiscal" />
+						<p:inputText id="cnaeFiscal"
+							value="${clienteBean.cliente.cnaeFiscal}" />
+
+						<p:outputLabel value="Inscrição Municipal" for="insMunicipal" />
+						<p:inputText id="insMunicipal"
+							value="${clienteBean.cliente.inscricaoMunicipal}" />
+							
+						<p:outputLabel value="Inscrição Estadual ST" for="inscricaoEstadualST" />
+						<p:inputText id="inscricaoEstadualST"
+							value="${clienteBean.cliente.inscricaoEstadualST}" />
+							
+						<p:outputLabel value="Regime Tributário" for="regimeTributario" />
+						<p:selectOneMenu id="regimeTributario" style="width:25px" 
+							value="${clienteBean.cliente.regimeTributario}">
+							<f:selectItem itemLabel="Selecione" noSelectionOption="false" />
+							<f:selectItem itemLabel="Simples Nacional" itemValue="teste" />
+							<f:selectItem itemLabel="Simples Nacional - excesso de sublimite" itemValue="Xbox One" />
+							<f:selectItem itemLabel="Regime Normal" itemValue="PS4" />
+						</p:selectOneMenu>		
+
+						<p:outputLabel value="Inscrição Suframa" for="insSuframa" />
+						<p:inputText id="insSuframa"
+							value="${clienteBean.cliente.suframa}" />
+
+						<p:outputLabel value="Email" for="email" />
+						<p:inputText id="email" value="${clienteBean.cliente.email}" />
+
+						<p:outputLabel value="Telefone" for="telefone" />
+						<p:inputText id="telefone" value="${clienteBean.cliente.telefone}" />
+
+						<p:outputLabel value="Isento ICMS" for="isento" />
+						<p:selectBooleanCheckbox id="isento"
+							value="${clienteBean.cliente.isento}" />
+						
+					</p:panelGrid>
+
+				</p:panel>
+
+				<p:panel header="Endereço">
+					<p:panelGrid  columns="4" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
+
+						<p:outputLabel value="Logradouro" for="logradouro" />
+						<p:inputText id="logradouro"
+							value="${clienteBean.cliente.logradouro}" />
+
+						<p:outputLabel value="numero" for="numero" />
+						<p:inputText id="numero" value="${clienteBean.cliente.numero}" />
+
+						<p:outputLabel value="complemento" for="complemento" />
+						<p:inputText id="complemento"
+							value="${clienteBean.cliente.complemento}" />
+
+						<p:outputLabel value="Bairro" for="bairro" />
+						<p:inputText id="bairro" value="${clienteBean.cliente.bairro}" />
+
+						<p:outputLabel value="cep" for="cep" />
+						<p:inputText id="cep" value="${clienteBean.cliente.cep}" />
+
+						<p:outputLabel value="pais" for="pais" />
+						<p:inputText id="pais" value="${clienteBean.cliente.pais}" />
+
+						<p:outputLabel value="UF" for="uf" />
+						<p:selectOneMenu id="uf" filter="true" value="${clienteBean.cliente.uf}" style="width: 20px">  
+		                    <p:ajax listener="${clienteBean.selectionChanged}" update="formCli:municipio" partialSubmit="true" />
+		                    <f:selectItem itemLabel="Selecione UF" itemValue="" noSelectionOption="true" />  
+		                    <f:selectItem itemLabel="AC" itemValue="AC" />  
+		                    <f:selectItem itemLabel="AL" itemValue="AL" />  
+		                    <f:selectItem itemLabel="AP" itemValue="AP" />
+		                    <f:selectItem itemLabel="AM" itemValue="AM" />  
+		                    <f:selectItem itemLabel="BA" itemValue="BA" />  
+		                    <f:selectItem itemLabel="CE" itemValue="CE" />  
+		                    <f:selectItem itemLabel="DF" itemValue="DF" />
+		                    <f:selectItem itemLabel="ES" itemValue="ES" />  
+		                    <f:selectItem itemLabel="GO" itemValue="GO" />  
+		                    <f:selectItem itemLabel="MA" itemValue="MA" />  
+		                    <f:selectItem itemLabel="MT" itemValue="MT" />
+		                    <f:selectItem itemLabel="MS" itemValue="MS" />  
+		                    <f:selectItem itemLabel="MG" itemValue="MG" />  
+		                    <f:selectItem itemLabel="PA" itemValue="PA" />  
+		                    <f:selectItem itemLabel="PB" itemValue="PB" />
+		                    <f:selectItem itemLabel="PR" itemValue="PR" />  
+		                    <f:selectItem itemLabel="PE" itemValue="PE" />  
+		                    <f:selectItem itemLabel="PI" itemValue="PI" />  
+		                    <f:selectItem itemLabel="RJ" itemValue="RJ" />
+		                    <f:selectItem itemLabel="RN" itemValue="RN" />  
+		                    <f:selectItem itemLabel="RS" itemValue="RS" />  
+		                    <f:selectItem itemLabel="RO" itemValue="RO" />  
+		                    <f:selectItem itemLabel="RR" itemValue="RR" />
+		                    <f:selectItem itemLabel="SC" itemValue="SC" />  
+		                    <f:selectItem itemLabel="SP" itemValue="SP" />  
+		                    <f:selectItem itemLabel="SE" itemValue="SE" />  
+		                    <f:selectItem itemLabel="TO" itemValue="TO" />
+		                </p:selectOneMenu>
+
+						<p:outputLabel value="Municipio" for="municipio" />
+						<p:selectOneMenu id="municipio" filter="true" value="${clienteBean.cliente.municipio}" style="width: 20px">
+							<f:selectItem itemLabel="Selecione a cidade" itemValue="" />
+							<f:selectItem itemLabel="${clienteBean.cliente.municipio}" itemValue="${clienteBean.cliente.municipio}" />
+		            		<f:selectItems value="${clienteBean.listCidade}"  />
+		            	</p:selectOneMenu>
+
+					</p:panelGrid>
+
+			</p:panel>
+		</div>
+				<p:toolbar style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+
+					<f:facet name="right" style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+						<p:button value="Cancelar" outcome="listaCliente" />
+						<p:commandButton value="Salvar"	action="${clienteBean.salvar}" />
+					</f:facet>
+
+					<f:facet name="left" style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+						Ativo: <p:selectBooleanButton value="${clienteBean.cliente.ativo}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" />	
+					</f:facet>
+				</p:toolbar>
+
+			</h:form>
+	</ui:define>
+
+</ui:composition>
+
+
+
 </html>

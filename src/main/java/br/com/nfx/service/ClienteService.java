@@ -17,8 +17,8 @@ public class ClienteService {
 	ClienteDAO clienteDAO;
 
 	@Transactional(readOnly = false)
-	public void saveCliente(Cliente cliente) {
-		getClienteDAO().saveCliente(cliente);
+	public void salvar(Cliente cliente) {
+		getClienteDAO().salvar(cliente);
 	}
 
 	@Transactional(readOnly = false)
@@ -31,7 +31,7 @@ public class ClienteService {
 		getClienteDAO().updateCliente(cliente);
 	}
 
-	public Cliente geClienteById(Long id) {
+	public Cliente getClienteById(Long id) {
 		return getClienteDAO().getClienteById(id);
 	}
 
@@ -55,7 +55,7 @@ public class ClienteService {
 	}
 	
 	public List<String> getCidade(String uf) {
-		return getClienteDAO().getCidades(uf);
+		return getClienteDAO().getCidade(uf);
 	}
 
 }

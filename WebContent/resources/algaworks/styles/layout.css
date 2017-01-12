@@ -34,15 +34,18 @@
 
 .aw-sidebar.is-toggled {
 	margin-left: 0px;
+/* 	margin-left: 210px; */
 }
 
 @media (min-width: 960px) {
 	.aw-sidebar {
-		margin-left: 0px;
+		margin-left: -211px;
+/* 		margin-left: 0px; */
 	}
 	
 	.aw-sidebar.is-toggled {
-		margin-left: -211px;
+		margin-left: 0px;
+/* 		margin-left: -211px; */
 	}
 }
 
@@ -114,4 +117,44 @@ nav.vertical li:hover > ul{
   max-height:500px;
   transition: max-height 0.25s ease-in;
 }
+
+.content {
+  min-height: calc(100vh - 70px);
+  overflow-x:hidden;
+}
+.footer {
+  height: 50px;
+}
+
+
+.page-row {
+  display: table-row;
+  height: 1px;
+}
+
+.page-row-expanded { height: 100%; }
+
+footer
+{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 30px;
+    width: 100%;
+    overflow: auto;
+    color: white;
+    background-color: darkblue;
+}
+
+/*
+footer {
+	
+    position: absolute;
+    overflow:hidden;
+    left: 210px;
+    bottom: 0;
+    height: 50px;
+    width: 100%;
+}
+*/
 

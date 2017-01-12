@@ -24,10 +24,16 @@
 	      
 	        
 	            
-		        <p:dataTable var="usu" value="#{usuario.listUsuario}" style="width: 570px;" reflow="true" rows="9" paginator="true">
+		        <p:dataTable var="usu" value="#{usuarioBean.listUsuario}" reflow="true" rows="9" paginator="true">
 				    <f:facet name="header">
 				        LISTA DE USUÁRIOS
 				    </f:facet>
+				    
+				    <p:column headerText="ATIVO" width="5%">
+				    	<div align="center">
+				        	<p:graphicImage value="#{usu.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
+				        </div>	
+				    </p:column>
 				    
 				    <p:column headerText="ID" width="10%">
 				        <h:outputText value="#{usu.codusuario}" />
@@ -37,37 +43,41 @@
 				        <h:outputText value="#{usu.login}" />
 				    </p:column>
 				 
-				    <p:column headerText="DESCRIÇÃO">
+				    <p:column headerText="NOME">
 				        <h:outputText value="#{usu.nome}" />
 				    </p:column>
 				 
-				    <p:column headerText="ATIVO" width="10%">
+				    <p:column headerText="AÇÃO" width="10%">
 				    	<div align="center">
-				        	<p:graphicImage value="#{usu.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
-				        </div>	
-				    </p:column>
-				    
-				    <p:column headerText="AÇÃO" width="20%">
-				        <p:button outcome="usuario" icon="ui-icon-pencil" title="Editar" >
-                        	<f:param id="usuarioEdit" name="usuarioId" value="#{usu.codusuario}" />
-                        </p:button>
-			            
-			            <p:commandButton icon="ui-icon-close" action="#{usuario.delete}" update=":formUsu">
-					        <p:confirm header="Confirmação" message="Tem certeza que deseja apagar #{usu.login}?" icon="ui-icon-alert" />
-					        <f:setPropertyActionListener value="#{usu}" target="#{usuario.selectedUsuario}" />
-					    </p:commandButton>
-					    <p:confirmDialog global="true" showEffect="slide" hideEffect="fade">
-					        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-					        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-					    </p:confirmDialog>
+					        <p:button outcome="usuario" icon="ui-icon-pencil" title="Editar" >
+	                        	<f:param id="usuarioEdit" name="usuarioId" value="#{usu.codusuario}" />
+	                        </p:button>
+				            
+				            <p:commandButton icon="ui-icon-close" action="#{usuario.deletar}" update=":formUsu">
+						        <p:confirm header="Confirmação" message="Tem certeza que deseja apagar #{usu.login}?" icon="ui-icon-alert" />
+						        <f:setPropertyActionListener value="#{usu}" target="#{usuarioBean.selectedUsuario}" />
+						    </p:commandButton>
+						    <p:confirmDialog global="true" showEffect="slide" hideEffect="fade">
+						        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						    </p:confirmDialog>
+						</div>   
 				    </p:column>
 				    
 				    <f:facet name="footer">
-				        Total: #{fn:length(usuario.listUsuario)}
+				        
 				    </f:facet>
 				 
 				</p:dataTable>
-				<p:commandButton value="Cadastrar" id="ajax"  onclick="location.href='./usuario.jsf';" styleClass="ui-priority-primary" />
+				
+				<p:toolbar>
+					<f:facet name="right">
+						<p:commandButton value="Novo" id="ajax"  onclick="location.href='./usuario.jsf';" styleClass="ui-priority-primary" />
+					</f:facet>
+					<f:facet name="left">
+						Total: #{empresaBean.listEmpresa.size()}
+					</f:facet>
+	        	</p:toolbar>
 	        	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 	        	
 	        <p:blockUI block="" trigger="" /> 

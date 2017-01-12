@@ -30,31 +30,22 @@
 	        </f:facet>
         
         
-            <p:outputLabel value="Login:"/><p:inputText size="5" value="#{usuario.usuario.login}" onkeyup="value=value.toUpperCase()" />
+            <p:outputLabel value="Login:"/><p:inputText size="5" value="#{usuarioBean.usuario.login}" onkeyup="value=value.toUpperCase()" />
             
-            Nome:<p:inputText size="29" value="#{usuario.usuario.nome}" />
+            Nome:<p:inputText size="29" value="#{usuarioBean.usuario.nome}" />
         
-            Senha:<p:password  id="senha" size="25" value="#{usuario.usuario.senha}" match="confirma" validatorMessage="Verifique se a senha está igual nos dois campos" redisplay="true" required="true" />
+            Senha:<p:password  id="senha" size="25" value="#{usuarioBean.usuario.senha}" match="confirma" validatorMessage="Verifique se a senha está igual nos dois campos" redisplay="true" required="true" />
             
-            Confirma senha:<p:password id="confirma" size="29" value="#{usuario.usuario.senha}" redisplay="true" required="true" />
+            Confirma senha:<p:password id="confirma" size="29" value="#{usuarioBean.usuario.senha}" redisplay="true" required="true" />
             
-            <p:toolbar >
-    	<f:facet name="right">
-	    	<p:button value="Cancelar" icon="icone-cancel" outcome="listaUsuario"/>
-	                
-	        <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{usuario.save}" update="panelUsuario" global="true" />
-	        
-	        <p:focus context="panelUsuario"/>  
-	        <p:messages id="messagesMaterial" showDetail="true" autoUpdate="true" closable="true" />
-	        </f:facet>
-    	</p:toolbar>
+        
         <ui:remove>
         <p:row>  
-            <p:column colspan="4">E-mail:<br/><p:inputText size="64" value="#{usuario.usuario.email}" /></p:column>
+            <p:column colspan="4">E-mail:<br/><p:inputText size="64" value="#{usuarioBean.usuario.email}" /></p:column>
             
-            <p:column colspan="2">Ativo: <p:selectBooleanButton value="#{usuario.usuario.ativo}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+            <p:column colspan="2">Ativo: <p:selectBooleanButton value="#{usuarioBean.usuario.ativo}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
             
-            <p:column colspan="2">Administrador: <p:selectBooleanButton value="#{usuario.usuario.isadmin}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+            <p:column colspan="2">Administrador: <p:selectBooleanButton value="#{usuarioBean.usuario.isadmin}"  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
         </p:row>
         <p:row>
             <p:column colspan="2">Cadastros: <p:selectBooleanButton value=""  onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
@@ -63,7 +54,7 @@
            
             <p:column colspan="2">Requisição: <p:selectBooleanButton value="" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
               
-            <p:column colspan="2">Usuários: <p:selectBooleanButton value="#{usuario.usuario.checkusuarios}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
+            <p:column colspan="2">Usuários: <p:selectBooleanButton value="#{usuarioBean.usuario.checkusuarios}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
             
         </p:row>
         <p:row>
@@ -78,8 +69,28 @@
         
         <p:blockUI block="panelUsuario" trigger="saveBtn" /> 
     
-    
     	</div>
+    
+    	<p:toolbar >
+    		<f:facet name="right">
+		    	<p:button value="Cancelar" icon="icone-cancel" outcome="listaUsuario"/>
+		                
+		        <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{usuarioBean.salvar}" update="panelUsuario" global="true" />
+		        
+		        <p:focus context="panelUsuario"/>  
+		        <p:messages id="messagesMaterial" showDetail="true" autoUpdate="true" closable="true" />
+	        </f:facet>
+    	</p:toolbar>
+    	
+    	<p:ajaxStatus style="width:128px;height:5px;" id="ajaxStatusPanel1">  
+	         <f:facet name="start">  
+	             <h:graphicImage library="algaworks" name="images/30.gif"/>
+	         </f:facet>  
+	
+	         <f:facet name="complete">  
+	             <h:outputText value="" />  
+	         </f:facet>  
+        </p:ajaxStatus>
     	
     </h:form>
     </ui:define>   

@@ -23,12 +23,13 @@ import br.com.nfx.service.EmpresaService;
  *
  * @author Leonardo
  */
-@ManagedBean(name = "empresa")
+@ManagedBean(name = "empresaBean")
 @ViewScoped
 public class EmpresaController {
 
 	private Empresa empresa = new Empresa();
 	private List<Empresa> listEmpresa;
+	private List<String> listCidade = new ArrayList<String>();
 	private Empresa selectedEmpresa = new Empresa();
 
 	@ManagedProperty(value = "#{EmpresaService}")
@@ -70,38 +71,36 @@ public class EmpresaController {
 		this.listEmpresa = listEmpresa;
 	}
 
-	public String save() {
+	public String salvar() {
 		try {
-			getEmpresaService().getEmpresaDAO().saveEmpresa(empresa);
+			getEmpresaService().salvar(empresa);
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Sucesso!", "Empresa cadastrado"));
+					"Sucesso!", "Empresa cadastrada"));
 			return "listaEmpresa";
 		} catch (Exception e) {
 			e.printStackTrace();
-			empresa = new Empresa();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao tentar cadastrar empresa: " +e));
 			return null;
 		}
 	}
 	
-	@PostConstruct
 	public void editar(){
-		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("empresaId");
+		String id = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("idEmpresa");
 		if(id != null){
 			System.out.println("ID editar: " + id);
 			empresa = getEmpresaService().getEmpresaById(Long.valueOf(id));
 		}
 	}
 	
-	public String delete() {
+	public String deletar() {
 
 		try {
-			getEmpresaService().getEmpresaDAO().deleteEmpresa(selectedEmpresa);
+			getEmpresaService().deletar(selectedEmpresa);
 			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-					"Sucesso!", "Empresa deletada: " + selectedEmpresa.getEmpresa()));
+					"Sucesso!", "Empresa deletada: " + selectedEmpresa.getIdEmpresa()));
 			return "listaEmpresa";
 		} catch (Exception e) {
 
@@ -111,20 +110,26 @@ public class EmpresaController {
 		}
 	}
 	
+	public void selectionChanged(){
+		System.out.println("getCidade: " + empresa.getUf());
+		listCidade = getEmpresaService().getCidade(empresa.getUf());
+		//RequestContext.getCurrentInstance().update("formCli:municipio");
+	}
+	
 	public void onEmpUnidade(SelectEvent event) {
 		Empresa emp = (Empresa) event.getObject();
         
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Car Selected", "Id:" + emp.getCnpj());
         FacesContext.getCurrentInstance().addMessage(null, message);
         
-        setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getEmpresa()));
-        setSelectedEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getEmpresa()));
+        setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getIdEmpresa()));
+        setSelectedEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getIdEmpresa()));
     }
 	
 	public void selectHospFromDialog(Empresa emp) {
 		System.out.println("selectEmpFromDialog: " + emp);
-		setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getEmpresa()));
-        setSelectedEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getEmpresa()));
+		setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getIdEmpresa()));
+        setSelectedEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(emp.getIdEmpresa()));
     }
 	
 	public void selectEmpresa(SelectEvent event) {
@@ -132,7 +137,7 @@ public class EmpresaController {
 		System.out.println(event.toString());
 		if (event.getObject() != null) {
 			Empresa empresa = (Empresa) event.getObject();
-			setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(empresa.getEmpresa()));
+			setEmpresa(getEmpresaService().getEmpresaDAO().getEmpresaById(empresa.getIdEmpresa()));
 
 		}
 	}
@@ -165,5 +170,13 @@ public class EmpresaController {
 	 */
 	public void setEmpresaService(EmpresaService empresaService) {
 		this.empresaService = empresaService;
+	}
+	
+	public List<String> getListCidade() {
+		return listCidade;
+	}
+
+	public void setListCidade(List<String> listCidade) {
+		this.listCidade = listCidade;
 	}
 }

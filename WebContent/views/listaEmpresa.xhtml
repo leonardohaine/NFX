@@ -5,7 +5,6 @@
 	  xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
@@ -24,50 +23,56 @@
   
     <div align="center">
         
-        <h:form id="formHosp" enctype="multipart/form-data">
-	      
-	        
+        <h:form id="formEmp" enctype="multipart/form-data">
 	            
-		        <p:dataTable var="emp" value="#{empresa.listEmpresa}" style="width: 550px;" reflow="true" rows="10" paginator="true">
-				    <f:facet name="header">
-				        LISTA DE EMPRESAS
-				    </f:facet>
-				    
-				    <p:column headerText="ID" width="10%">
-				        <h:outputText value="#{emp.empresa}" />
-				    </p:column>
-				 
-				 	<p:column headerText="CNPJ">
-				        <h:outputText value="#{emp.cnpj}" />
-				    </p:column>
-				 
-				    <p:column headerText="RAZÃO SOCIAL">
-				        <h:outputText value="#{emp.razaoSocial}" />
-				    </p:column>
-				 
-				    <p:column headerText="ATIVO" width="10%">
-				        <p:graphicImage value="#{emp.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
-				    </p:column>
-				    
-				    <p:column headerText="AÇÃO" width="20%">
-				        <p:column style="width:32px;text-align: center"> 
-                            <p:button outcome="empresa" icon="ui-icon-pencil" title="Editar" >
-                                <f:param id="empresaEdit" name="empresaId" value="#{emp.empresa}" />
-                            </p:button>
-                        </p:column>
-			            
-			            <p:commandButton update=":formHosp" action="#{empresa.delete}" icon="ui-icon-close" title="Deletar">
-			                <f:setPropertyActionListener value="#{emp}" target="#{empresa.selectedEmpresa}" />
+	        <p:dataTable var="emp" value="#{empresaBean.listEmpresa}" reflow="true" rows="10" paginator="true">
+			    <f:facet name="header">
+			        LISTA DE EMPRESAS
+			    </f:facet>
+			 
+			 	<p:column headerText="ATIVO" width="6%">
+			        <p:graphicImage value="#{emp.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
+			    </p:column>
+			    
+			    <p:column headerText="ID" width="10%">
+			        <h:outputText value="#{emp.idEmpresa}" />
+			    </p:column>
+			 
+			 	<p:column headerText="CNPJ" width="10%">
+			        <h:outputText value="#{emp.cnpj}" />
+			    </p:column>
+			 
+			    <p:column headerText="RAZÃO SOCIAL">
+			        <h:outputText value="#{emp.razaoSocial}" />
+			    </p:column>
+			    
+			    <p:column headerText="AÇÃO" width="8%">
+			    	<div align="center">
+	                    <p:button outcome="empresa" icon="ui-icon-pencil" title="Editar" >
+	                        <f:param id="empresaEdit" name="idEmpresa" value="#{emp.idEmpresa}" />
+	                    </p:button>
+	                    
+			            <p:commandButton update=":formEmp" action="#{empresaBean.deletar}" icon="ui-icon-close" title="Deletar">
+			            	<p:confirm header="Confirmação" message="Tem certeza que deseja apagar #{emp.razaoSocial}?" icon="ui-icon-alert" />
+			                <f:setPropertyActionListener value="#{emp}" target="#{empresaBean.selectedEmpresa}" />
 			            </p:commandButton>
-				    </p:column>
-				    
-				    <f:facet name="footer">
-				        Total: #{fn:length(empresa.listEmpresa)}
-				    </f:facet>
-				 
-				</p:dataTable>
-				<p:commandButton value="Cadastrar" id="ajax"  onclick="location.href='./empresa.jsf';" styleClass="ui-priority-primary" />
-	        	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+			            <p:confirmDialog global="true" showEffect="slide" hideEffect="fade">
+					        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+					        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					    </p:confirmDialog>
+		            </div>
+			    </p:column>
+			    
+			</p:dataTable>
+			<p:toolbar>
+				<f:facet name="right">
+					<p:commandButton value="Novo" id="ajax"  onclick="location.href='./empresa.jsf';" styleClass="ui-priority-primary" />
+				</f:facet>
+				<f:facet name="left">
+					Total: #{empresaBean.listEmpresa.size()}
+				</f:facet>
+        	</p:toolbar>
+        	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 	        	
 	        <p:blockUI block="" trigger="" /> 
 	    </h:form>

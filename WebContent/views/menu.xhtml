@@ -1,6 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html">
 	<ui:remove>
 	<h:form>
@@ -55,6 +56,8 @@
 	</nav>
 	</ui:remove>
 	
+	Usuário: #{auth.user}
+	
 	<nav class="vertical">
 	  <ul>
 	    <li><a href="./layout.jsf">Home</a></li>
@@ -86,7 +89,5 @@
 	    <li><a href="">Configuração</a></li>
 	  </ul>
 	</nav>
-	
-	
 	
 </ui:composition>

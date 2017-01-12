@@ -34,16 +34,16 @@ public class EmpresaDAO {
 		this.sessionFactory = sessionFactory;
 	}
 
-	public void saveEmpresa(Empresa empresa) {
+	public void salvar(Empresa empresa) {
 		
 		getSessionFactory().getCurrentSession().merge(empresa);
 	}
 
-	public void deleteEmpresa(Empresa empresa) {
+	public void deletar(Empresa empresa) {
 		getSessionFactory().getCurrentSession().delete(empresa);
 	}
 
-	public void updateEmpresa(Empresa empresa) {
+	public void atualizar(Empresa empresa) {
 		getSessionFactory().getCurrentSession().update(empresa);
 	}
 
@@ -56,6 +56,11 @@ public class EmpresaDAO {
 
 	public List<Empresa> getEmpresa() {
 		List list = getSessionFactory().getCurrentSession().createQuery("from Empresa").list();
+		return list;
+	}
+	
+	public List<String> getCidade(String uf){
+		List list = getSessionFactory().getCurrentSession().createSQLQuery("select descricao_municipio from cidade where sigla_uf = '" + uf + "'").list();
 		return list;
 	}
 

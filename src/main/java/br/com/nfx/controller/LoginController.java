@@ -91,6 +91,7 @@ public class LoginController implements Serializable {
 	}
 
 	public String validateUsernamePassword() {
+		RequestContext context = RequestContext.getCurrentInstance();
 		Usuario usu = null;
 		try {
 			usu = getUsuarioService().getUsuarioDAO().getUsuario(user, Util.cript(senha));
@@ -102,7 +103,10 @@ public class LoginController implements Serializable {
 		if (usu != null) {
 			HttpSession session = SessionUtils.getSession();
 			session.setAttribute("username", user);
-			return "/views/layout";
+			context.addCallbackParam("loggedIn", true);
+			System.out.println("Direcionando para pagina inicial!!!");
+			return "";
+			//return "/views/layout";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
