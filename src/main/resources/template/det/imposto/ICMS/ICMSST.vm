@@ -1,0 +1,10 @@
+#if( $i.getnIcmsstCst() )
+    <ICMSST>
+        <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+        <CST>$!{format.number($i.getnIcmsstCst().doubleValue(),2)}</CST>
+        <vBCSTRet>$!{format.number($i.getnIcmsstVbcstret().doubleValue(),15,2)}</vBCSTRet>
+        <vICMSSTRet>$!{format.number($i.getnIcmsstVicmsstret().doubleValue(),15,2)}</vICMSSTRet>
+        <vBCSTDest>$!{format.number($i.getnIcmsstVbcstdest().doubleValue(),15,2)}</vBCSTDest>
+        <vICMSSTDest>$!{format.number($i.getnIcmsstVicmsstdest().doubleValue(),15,2)}</vICMSSTDest>
+    </ICMSST>
+#end

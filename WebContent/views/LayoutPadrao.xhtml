@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>Sistema de NF-e / NFS-e</title>
+
+	<h:outputStylesheet library="algaworks" name="styles/custom.css" />
+	<h:outputStylesheet library="algaworks" name="styles/layout.css" />
+	<h:outputStylesheet library="algaworks" name="styles/components.css" />
+	
+	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
+	<h:outputScript target="body" library="algaworks" name="javascripts/app.js" />
+</h:head>
+
+<h:body>
+	
+	<header class="aw-topbar">
+		<div>
+			<div align="left">
+				<a href="#" class="aw-toggle  js-toggle" style="color: white;font-size: 30px;"><i class="fa  fa-bars"> </i></a>
+			</div>
+			
+			<div align="right">
+				<h:form id="formLink">
+				<i onclick="PF('empresa').show(); return false;" />
+					<p:link onclick="PF('empresa').show(); return false;" value="Selecione a empresa #{unidade.empresa.cnpj} - #{unidade.empresa.razaoSocial}" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;">
+						
+						<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.empresa.cnpj}"></p:inputText>
+						
+					</p:link>
+				</h:form>
+			</div>
+			
+		</div>
+	</header>	
+
+  <aside class="aw-sidebar  js-sidebar">
+	<br/><br/>
+		<ui:include src="/views/menu.xhtml" />
+	</aside>
+	
+	<section class="aw-content  page-row page-row-expanded  js-content">
+		<ui:insert name="conteudo" />
+	</section>
+  
+  <footer>
+//Footer content
+<div align="center">
+			<p:ajaxStatus id="ajaxStatusPanel">  
+		         <f:facet name="default">
+			        <h:outputText value="Status: StandBy" />
+			    </f:facet>
+		         
+		         <f:facet name="start">  
+		             <h:graphicImage library="algaworks" name="images/30.gif"/>
+		         </f:facet>  
+		
+		         <f:facet name="complete">  
+		             <h:outputText value="" />  
+		         </f:facet>  
+	        </p:ajaxStatus>
+	   </div>     
+</footer>
+</h:body>
+	
+</html>

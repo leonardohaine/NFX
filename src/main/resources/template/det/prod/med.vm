@@ -1,0 +1,11 @@
+#foreach($med in $medicamento )
+	#if ( $i.getNfeItemPk().getnNitem() == $med.getNfeItemMedPk().getnNitem() )
+                <med>
+                <nLote>$!{med.getNfeItemMedPk().getsNlote()}</nLote>
+                <qLote>$!{format.number($med.getnQlote().doubleValue(),3)}</qLote>
+                <dFab>$!{format.date($med.getnDfab())}</dFab>
+                <dVal>$!{format.date($med.getnDval())}</dVal>
+                <vPMC>$!{format.number($med.getnVpmc().doubleValue(),15,2)}</vPMC>
+                </med>
+        #end
+#end

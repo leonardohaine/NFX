@@ -114,7 +114,7 @@ public class ClienteController {
 		}
 	}*/
 	
-	public String delatar() {
+	public String deletar() {
 
 		try {
 			getClienteService().deleteCliente(selectedCliente);
@@ -123,10 +123,10 @@ public class ClienteController {
 					"Sucesso!", "Cliente deletado: " + selectedCliente.getRazaoSocial()));
 			return "listaCliente";
 		} catch (Exception e) {
-
+			e.printStackTrace();
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 					"Erro!", "Erro ao deletar cliente: " +e));
-			return "cliente";
+			return "listaCliente";
 		}
 	}
 

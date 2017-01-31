@@ -6,16 +6,14 @@
 package br.com.nfx.model;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.math.BigInteger;
-import javax.persistence.Basic;
+
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,8 +25,7 @@ import org.hibernate.annotations.Type;
  */
 @Entity
 @Table(name = "cliente")
-@NamedQueries({
-    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c")})
+@Named
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,9 +40,9 @@ public class Cliente implements Serializable {
     @Column(name = "razao_social")
     private String razaoSocial;
     @Column(name = "cnpj")
-    private Long cnpj;
+    private String cnpj;
     @Column(name = "cpf")
-    private Long cpf;
+    private String cpf;
     @Column(name = "inscricao_estadual")
     private Long inscricaoEstadual;
     @Column(name = "inscricao_estadual_st")
@@ -60,6 +57,8 @@ public class Cliente implements Serializable {
     private BigInteger suframa;
     @Column(name = "isento")
     private Boolean isento;
+    @Column(name = "indicador_ie")
+    private String indicadorIE;
     @Column(name = "email")
     private String email;
     @Column(name = "cep")
@@ -119,19 +118,37 @@ public class Cliente implements Serializable {
         this.razaoSocial = razaoSocial;
     }
 
-    public Long getCnpj() {
+    public String getCnpj() {
+    	if(clienteId != null && cnpj != null && cnpj.length() == 14){
+			 cnpj = (cnpj.substring(0, 2) + "." + 
+				 	 cnpj.substring(2, 5) + "." +
+				 	 cnpj.substring(5, 8) + "/" + 
+				 	 cnpj.substring(8, 12) + "-" +
+				 	 cnpj.substring(12, 14));
+		} else if(clienteId != null && cnpj != null && cnpj.length() == 11){
+			cnpj = (cnpj.substring(0, 3) + "." + 
+					cnpj.substring(3, 6) + "." +
+					cnpj.substring(6, 9) + "-" +
+					cnpj.substring(9, 11));
+		}
         return cnpj;
     }
 
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
-    public Long getCpf() {
+    public String getCpf() {
+    	if(clienteId != null && cpf != null && cpf.length() == 11){
+    		cpf = (cpf.substring(0, 3) + "." + 
+					 cpf.substring(3, 6) + "." +
+					 cpf.substring(6, 9) + "-" +
+					 cpf.substring(9, 11));
+		}
         return cpf;
     }
 
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -187,7 +204,15 @@ public class Cliente implements Serializable {
         return isento;
     }
 
-    public void setIsento(Boolean isento) {
+    public String getIndicadorIE() {
+		return indicadorIE;
+	}
+
+	public void setIndicadorIE(String indicadorIE) {
+		this.indicadorIE = indicadorIE;
+	}
+
+	public void setIsento(Boolean isento) {
         this.isento = isento;
     }
 

@@ -1,0 +1,45 @@
+    <emit>
+#if( $header.getsEmitCnpj() != "00000000000000")
+        <CNPJ>$!{header.getsEmitCnpj()}</CNPJ>
+#else
+		<CPF>$!{header.getsEmitCpf()}</CPF>
+#end
+        <xNome>$!esc.xml($!{header.getsEmitXnome()})</xNome>
+#if( $header.getsEmitXfant() )
+        <xFant>$!esc.xml($!{header.getsEmitXfant()})</xFant>
+#end
+        <enderEmit>
+            <xLgr>$!esc.xml($!{header.getsEmitLgr()})</xLgr>
+            <nro>$!esc.xml($!{header.getsEmitNro()})</nro>
+#if( $header.getsEmitXcpl() )
+            <xCpl>$!esc.xml($!{header.getsEmitXcpl()})</xCpl>
+#end
+            <xBairro>$!esc.xml($!{header.getsEmitXbairro()})</xBairro>
+            <cMun>$!{format.number($header.getnEmitCmun().doubleValue(),7)}</cMun>
+            <xMun>$!esc.xml($!{header.getsEmitXmun()})</xMun>
+            <UF>$!esc.xml($!{header.getsEmitUf()})</UF>
+            <CEP>$!{format.numberZeroAEsquerda($header.getnEmitCep(), 8, 0)}</CEP>
+#if( $header.getnEmitCpais() )
+            <cPais>$!{header.getnEmitCpais()}</cPais>
+#end
+#if( $header.getsEmitXpais() )
+            <xPais>$!esc.xml($!{header.getsEmitXpais()})</xPais>
+#end
+#if( $header.getnEmitFone() )
+            <fone>$!{format.number($header.getnEmitFone().doubleValue(),14)}</fone>
+#elseif( $header.getsEmitFone() )
+            <fone>$!{header.getsEmitFone()}</fone>
+#end
+        </enderEmit>
+        <IE>$!esc.xml($!{header.getsEmitIe()})</IE>
+#if( $header.getsEmitIest() )
+        <IEST>$!esc.xml($!{header.getsEmitIest()})</IEST>
+#end
+#if( $header.getsEmitIm() )
+        <IM>$!esc.xml($!{header.getsEmitIm()})</IM>
+#end
+#if( $header.getsEmitCnae() && $header.getsEmitIm())
+        <CNAE>$!{header.getsEmitCnae()}</CNAE>
+#end
+       <CRT>$!{format.number($header.getsEmitCrt().doubleValue(),1)}</CRT>
+    </emit>

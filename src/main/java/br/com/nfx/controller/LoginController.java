@@ -22,7 +22,7 @@ import org.primefaces.context.RequestContext;
 import br.com.nfx.model.Usuario;
 import br.com.nfx.service.UsuarioService;
 import br.com.nfx.util.SessionUtils;
-import br.com.nfx.util.Util;
+import br.com.nfx.util.UtilNfx;
 
 /**
  *
@@ -94,9 +94,9 @@ public class LoginController implements Serializable {
 		RequestContext context = RequestContext.getCurrentInstance();
 		Usuario usu = null;
 		try {
-			usu = getUsuarioService().getUsuarioDAO().getUsuario(user, Util.cript(senha));
+			usu = getUsuarioService().getUsuarioLogin(user, UtilNfx.cript(senha));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			System.out.println("getUsuarioService(): " + getUsuarioService());
 			e.printStackTrace();
 		}
 		
@@ -105,14 +105,16 @@ public class LoginController implements Serializable {
 			session.setAttribute("username", user);
 			context.addCallbackParam("loggedIn", true);
 			System.out.println("Direcionando para pagina inicial!!!");
+			loggedIn = true;
 			return "";
 			//return "/views/layout";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
 					null,
 					new FacesMessage(FacesMessage.SEVERITY_WARN,
-							"Incorrect Username and Passowrd",
-							"Please enter correct username and Password"));
+							"Usuário ou senha incorreto",
+							"Por favor, informe usuário e senha correto."));
+			loggedIn = false;
 			return "index";
 		}
 	}
@@ -124,7 +126,7 @@ public class LoginController implements Serializable {
 
 		Usuario usu = null;
 		try {
-			usu = getUsuarioService().getUsuarioDAO().getUsuario(user, Util.cript(senha));
+			usu = getUsuarioService().getUsuarioLogin(user, UtilNfx.cript(senha));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -144,7 +146,7 @@ public class LoginController implements Serializable {
 
 		if (loggedIn) {
 
-			HttpSession session = Util.getSession();
+			HttpSession session = UtilNfx.getSession();
 			FacesContext.getCurrentInstance().getExternalContext().setResponseContentType("multipart/form-data");
 			session.setAttribute("username", user);
 

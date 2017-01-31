@@ -1,0 +1,32 @@
+#foreach($veic in $veiculo)
+        #if($i.getNfeItemPk().getnNitem() == $veic.getNfeItemVeicPk().getnNitem())
+                #if($veic.getsChassi())
+                <veicProd>
+                        <tpOp>$!{format.number($veic.getnTpop().doubleValue(),1)}</tpOp>
+                        <chassi>$!{veic.getsChassi()}</chassi>
+                        <cCor>$!{veic.getsCcor()}</cCor>
+                        <xCor>$!{veic.getsXcor()}</xCor>
+                        <pot>$!{veic.getsPot()}</pot>
+                        <cilin>$!{veic.getsCilin()}</cilin>
+                        <pesoL>$!{veic.getsPesol()}</pesoL>
+                        <pesoB>$!{veic.getsPesob()}</pesoB>
+                        <nSerie>$!{veic.getsNserie()}</nSerie>
+                        <tpComb>$!{veic.getsTpcomb()}</tpComb>
+                        <nMotor>$!{veic.getsNmotor()}</nMotor>
+                        <CMT>$!{veic.getsCmt()}</CMT>
+                        <dist>$!{veic.getsDist()}</dist>
+                        <anoMod>$!{format.number($veic.getnAnomod().doubleValue(),4)}</anoMod>
+                        <anoFab>$!{format.number($veic.getnAnofab().doubleValue(),4)}</anoFab>
+                        <tpPint>$!{veic.getsTppint()}</tpPint>
+                        <tpVeic>$!{format.number($veic.getnTpveic().doubleValue(),2)}</tpVeic>
+                        <espVeic>$!{format.number($veic.getnEspveic().doubleValue(),1)}</espVeic>
+                        <VIN>$!{veic.getsVin()}</VIN>
+                        <condVeic>$!{format.number($veic.getnCondveic().doubleValue(),1)}</condVeic>
+                        <cMod>$!{format.number($veic.getnCmod().doubleValue(),6)}</cMod>
+                        <cCorDENATRAN>$!{format.number($veic.getnCcordenatran().doubleValue(),2)}</cCorDENATRAN>
+                        <lota>$!{format.number($veic.getnLota().doubleValue(),3)}</lota>
+                        <tpRest>$!{format.number($veic.getnTprest().doubleValue(),1)}</tpRest>
+                </veicProd>
+                #end
+        #end
+#end

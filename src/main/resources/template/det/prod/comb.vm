@@ -1,0 +1,39 @@
+#foreach($comb in $combustivel )
+	#if ( $i.getNfeItemPk().getnNitem() == $comb.getNfeItemCombPk().getnNitem() )
+		<comb>
+		    <cProdANP>$!{format.number($comb.getNfeItemCombPk().getnCprodanp().doubleValue(),9)}</cProdANP>
+		    
+		    #if($header.getnVersao().doubleValue() >= 3.1)
+		    #if( $comb.getnPmixgn() )
+		    <pMixGN>$!{format.number($comb.getnPmixgn().doubleValue(),2,4)}</pMixGN>
+		    #end
+		    #end
+		    
+			#if( $comb.getnCodif() )
+		    <CODIF>$!{comb.getnCodif()}</CODIF>
+			#end
+			#if( $comb.getnQtemp() )
+		    <qTemp>$!{format.number($comb.getnQtemp().doubleValue(),16,4)}</qTemp>
+			#end
+		    <UFCons>$!{comb.getsUfcons()}</UFCons>
+			#if( $comb.getnQbcprod() )
+		    <CIDE>
+		        <qBCProd>$!{format.number($comb.getnQbcprod().doubleValue(),16,4)}</qBCProd>
+		        <vAliqProd>$!{format.number($comb.getnValiqprod().doubleValue(),15,4)}</vAliqProd>
+		        <vCIDE>$!{format.number($comb.getnVcide().doubleValue(),15,2)}</vCIDE>
+		    </CIDE>
+			#end
+			#if( $comb.getnBico() )
+			<encerrante>
+				<nBico>$!{format.number($comb.getnBico().doubleValue(),3)}</nBico>
+				#if( $comb.getnBomba() )
+				<nBomba>$!{format.number($comb.getnBomba().doubleValue(),3)}</nBomba>
+				#end
+				<nTanque>$!{format.number($comb.getnTanque().doubleValue(),3)}</nTanque>
+				<vEncIni>$!{format.number($comb.getnVencini().doubleValue(),15)}</vEncIni>
+				<vEncFin>$!{format.number($comb.getnVencfin().doubleValue(),15)}</vEncFin>
+			</encerrante>
+			#end			
+		</comb>
+	#end
+#end

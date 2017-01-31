@@ -10,9 +10,9 @@
 
 <h:head>
 	<link rel="stylesheet" type="text/css" href="./css.css" />
-	<h:outputStylesheet library="algaworks" name="styles/custom.css" />
-	<h:outputStylesheet library="algaworks" name="styles/layout.css" />
-	<h:outputStylesheet library="algaworks" name="styles/components.css" />
+	<h:outputStylesheet library="nfx" name="styles/custom.css" />
+	<h:outputStylesheet library="nfx" name="styles/layout.css" />
+	<h:outputStylesheet library="nfx" name="styles/components.css" />
 </h:head>
   
   <ui:composition template="layout.xhtml">
@@ -31,7 +31,7 @@
 				    
 				    <p:column headerText="ATIVO" width="5%">
 				    	<div align="center">
-				        	<p:graphicImage value="#{usu.ativo ? '../imagens/ledgreen22.png' : '../imagens/ledred22.png'}" />
+				        	<p:graphicImage library="nfx" name="#{usu.ativo ? 'images/ledgreen22.png' : 'images/ledred22.png'}" />
 				        </div>	
 				    </p:column>
 				    
@@ -80,7 +80,6 @@
 	        	</p:toolbar>
 	        	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
 	        	
-	        <p:blockUI block="" trigger="" /> 
 	    </h:form>
     </div> 
     

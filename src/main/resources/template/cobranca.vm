@@ -1,0 +1,25 @@
+#if( $header.getsCobrFatNfat() || ($duplicata.size() != 0))
+    <cobr>
+#if( $header.getsCobrFatNfat() )
+        <fat>
+            <nFat>$!{header.getsCobrFatNfat()}</nFat>
+#if( $header.getnCobrFatVorig() )
+            <vOrig>$!{format.number($header.getnCobrFatVorig().doubleValue(),15,2)}</vOrig>
+#end
+#if( $header.getnCobrFatVdesc() )
+            <vDesc>$!{format.number($header.getnCobrFatVdesc().doubleValue(),15,2)}</vDesc>
+#end
+#if( $header.getnCobrFatVliq() )
+            <vLiq>$!{format.number($header.getnCobrFatVliq().doubleValue(),15,2)}</vLiq>
+#end
+        </fat>
+#end
+#foreach($dup in $duplicata)
+        <dup>
+            <nDup>$!{dup.getNfeDupPk().getsNdup()}</nDup>
+            <dVenc>$!{format.date($dup.getdDvenc())}</dVenc>
+            <vDup>$!{format.number($dup.getnVdup().doubleValue(),15,2)}</vDup>
+        </dup>    
+#end
+	</cobr>
+#end

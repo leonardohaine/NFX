@@ -1,0 +1,8 @@
+#if( $i.getnTdevpdevol() && $i.getnTdevpdevol().doubleValue() > 0.00)
+        <impostoDevol>
+                <pDevol>$!{format.number($i.getnTdevpdevol().doubleValue(),5,2)}</pDevol>
+                <IPI>
+                        <vIPIDevol>$!{format.number($i.getnTdevvipidevol().doubleValue(),15,2)}</vIPIDevol>
+                </IPI>
+        </impostoDevol>
+#end

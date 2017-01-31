@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Sistema de gerenciamento de NF-e / NFS-e</title>
+        <link rel="stylesheet" type="text/css" href="./css.css" />  
+        <link rel="stylesheet" type="image/ico" href="./favicon.ico" />
+        
+        <script type="text/javascript">  
+			function handleLoginRequest(xhr, status, args) {  
+				if(args.validationFailed || !args.loggedIn) {  
+					PF('dlg').jq.effect("explode", { times:5 }, 100);
+				}
+				else {  
+					PF('dlg').hide();  
+					$('#loginLink').fadeOut();
+					window.location.assign("./views/layout.jsf");
+				}  
+			}  
+		</script> 
+        <style>
+        	html { 
+			  background: url(./imagens/fundo_nfx.jpg) no-repeat center center fixed; 
+			  -webkit-background-size: cover;
+			  -moz-background-size: cover;
+			  -o-background-size: cover;
+			  background-size: cover;
+			}
+        </style>
+    </h:head>
+
+	<h:body style="font-size: 12px; font-color: black;">
+    	<div align="center">
+        
+        <h:form id="formNf" >
+        	 <ui:remove>   	
+			<h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show();" title="Clique para entrar"> 
+            	<p:graphicImage value="./imagens/tubos_ensaio.png" width="450" height="150" />
+           	</h:outputLink>
+        
+        	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+			<p:outputLabel value="JLab" 
+					style="font: bold 100px Goudy Stout; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px white;" />
+        </ui:remove>
+        <ui:remove>   	
+           	<h:panelGrid bgcolor="white" columns="2" cellpadding="5" border="0" cellspacing="0" style="border-radius: 15px; box-shadow: 10px 10px 5px blue;">  
+	             
+	            <f:facet name="header">  
+            		<p:outputLabel value="FAÇA SEU LOGIN" style="text-shadow: 2px 2px 4px darkblue;"/>   
+            		<p:graphicImage value="./imagens/lock.png" width="45" height="35" />
+            	</f:facet>	
+	            
+	            <p:outputLabel for="username1" value="Usuário:" />  
+	            <p:inputText value="#{auth.user}" 
+	                    id="username1" required="true" label="username1" />  
+	              
+	            <p:outputLabel for="password1" value="Senha:" />  
+	            <p:password value="#{auth.senha}"
+	                    id="password1" required="true" label="password1" />  
+	            
+	            <f:facet name="footer">
+	                <div style="text-align: center;">        
+	                <p:commandButton id="loginButton1" value="Login" update="growl" oncomplete="handleLoginRequest(xhr, status, args)"
+	                                 style="border-radius: 15px;" actionListener="#{auth.login}" />  
+	                </div> 
+	            </f:facet>
+	               
+	        </h:panelGrid>
+        </ui:remove>  	
+           	<p:growl id="growl" showDetail="true" life="3000" />
+   
+        <p:dialog id="dialog" header="Login"  widgetVar="dlg" resizable="false" visible="true" closable="false"
+       			style="border-radius: 15px; box-shadow: 7px 7px 5px black;">
+  
+	        <h:panelGrid columns="2" cellpadding="5">  
+	            <f:facet name="header">  
+            		<p:outputLabel value="FAÇA SEU LOGIN" style="text-shadow: 2px 2px 4px darkblue;"/>   
+            		<p:graphicImage value="./imagens/lock.png" width="45" height="35" />
+            	</f:facet>	
+	            
+	            <p:outputLabel for="username1" value="Usuário:" />  
+	            <p:inputText value="#{auth.user}" style="border-radius: 15px;"
+	                    id="username1" required="true" label="username1" />  
+	              
+	            <p:outputLabel for="password1" value="Senha:" />  
+	            <p:password value="#{auth.senha}" style="border-radius: 15px;"
+	                    id="password1" required="true" label="password1" />  
+	            
+	            <div style="text-align: center;">        
+	                <p:commandButton id="loginButton1" value="Entrar" update="growl" oncomplete="handleLoginRequest(xhr, status, args)"
+	                                 style="border-radius: 15px;" actionListener="#{auth.login}" action="#{auth.login}" />
+	            </div>
+	            
+	            <f:facet name="footer">
+	                <div style="text-align: center;">        
+	                <p:commandLink id="esqueci" value="Esqueci a senha"></p:commandLink> 
+	                </div> 
+	            </f:facet>
+	        </h:panelGrid>  
+	          
+	    </p:dialog>
+        	
+	    </h:form>
+	    
+        <p:ajaxStatus style="width:32px;height:32px;" id="ajaxStatusPanel">  
+            <f:facet name="start">  
+                <h:graphicImage value="./imagens/loader2.gif" />  
+            </f:facet>  
+
+            <f:facet name="complete">  
+                <h:outputText value="" />  
+            </f:facet>  
+        </p:ajaxStatus>
+    </div>    
+    
+    
+    
+</h:body>    
+</html>

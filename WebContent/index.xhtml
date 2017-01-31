@@ -45,20 +45,6 @@
         
         <p:growl id="growl" showDetail="true" life="3000" />
         
-       	<ui:remove>   	
-			<h:outputLink id="loginLink" value="javascript:void(0)" onclick="PF('dlg').show();" title="Clique para entrar"> 
-            	<p:graphicImage value="./imagens/tubos_ensaio.png" width="450" height="150" />
-           	</h:outputLink>
-        
-        	<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-			<p:outputLabel value="JLab" 
-					style="font: bold 100px Goudy Stout; color: white; text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px white;" />
-					
-					
-			<h:panelGrid bgcolor="white"  columns="2" style="border-radius: 15px; box-shadow: 10px 10px 5px blue;">
-			</h:panelGrid>		
-        </ui:remove>
-        
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         
         
@@ -134,7 +120,7 @@
 	    
         <p:ajaxStatus style="width:32px;height:32px;" id="ajaxStatusPanel">  
             <f:facet name="start">  
-                <h:graphicImage value="./imagens/loader2.gif" />  
+                <h:graphicImage library="nfx" name="images/30.gif"/>  
             </f:facet>  
 
             <f:facet name="complete">  

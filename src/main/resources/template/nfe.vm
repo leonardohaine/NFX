@@ -1,0 +1,23 @@
+<NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+    <infNFe Id="NFe$!{header.getsId()}" versao="$!{format.number($header.getnVersao().doubleValue(),4,2)}">
+##      #parse("/template/macro.vm")
+        #parse("/template/ide.vm")
+        #parse("/template/emi.vm")
+##      #parse("/template/avulsa.vm")
+        #parse("/template/dest.vm")
+        #parse("/template/retirada.vm")
+        #parse("/template/entrega.vm")
+        #parse("/template/aut.vm")
+#foreach($i in $item )
+        #parse("/template/det/det.vm")
+#end
+        #parse("/template/total.vm")
+        #parse("/template/transp.vm")
+        #parse("/template/cobranca.vm")
+        #parse("/template/pag.vm")
+        #parse("/template/infAdic.vm")
+        #parse("/template/exporta.vm")
+        #parse("/template/compra.vm")
+        #parse("/template/cana.vm")
+    </infNFe>
+</NFe>

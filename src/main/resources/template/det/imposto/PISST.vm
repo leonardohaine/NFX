@@ -1,0 +1,12 @@
+#if( $i.getnPisstVpis() )
+	<PISST>
+#if( $i.getnPisstVbc() )
+	    <vBC>$!{format.number($i.getnPisstVbc().doubleValue(),15,2)}</vBC>
+	    <pPIS>$!{format.number($i.getnPisstPpis().doubleValue(),5,2)}</pPIS>
+#elseif($i.getnPisstQbcprod() )
+	    <qBCProd>$!{format.number($i.getnPisstQbcprod().doubleValue(),16,4)}</qBCProd>
+	    <vAliqProd>$!{format.number($i.getnPisstValiqprod().doubleValue(),15,4)}</vAliqProd>
+#end
+	    <vPIS>$!{format.number($i.getnPisstVpis().doubleValue(),15,2)}</vPIS>
+	</PISST>
+#end

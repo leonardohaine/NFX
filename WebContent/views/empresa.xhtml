@@ -48,8 +48,8 @@
 						<p:inputText id="razaoSocial"
 							value="#{empresaBean.empresa.razaoSocial}" />
 
-						<p:outputLabel value="RG/CNPJ" for="cnpj" />
-						<p:inputText id="cnpj" value="#{empresaBean.empresa.cnpj}" />
+						<p:outputLabel value="CNPJ" for="cnpj" />
+						<p:inputText id="cnpj" maxlength="14" value="#{empresaBean.empresa.cnpj}" />
 
 						<p:outputLabel value="Inscrição Estadual" for="insEstadual" />
 						<p:inputText id="insEstadual"
@@ -71,9 +71,9 @@
 						<p:selectOneMenu id="regimeTributario" style="width:25px" 
 							value="#{empresaBean.empresa.regimeTributario}">
 							<f:selectItem itemLabel="Selecione" noSelectionOption="false" />
-							<f:selectItem itemLabel="Simples Nacional" itemValue="teste" />
-							<f:selectItem itemLabel="Simples Nacional - excesso de sublimite" itemValue="Xbox One" />
-							<f:selectItem itemLabel="Regime Normal" itemValue="PS4" />
+							<f:selectItem itemLabel="Simples Nacional" itemValue="1" />
+							<f:selectItem itemLabel="Simples Nacional - excesso de sublimite" itemValue="2" />
+							<f:selectItem itemLabel="Regime Normal" itemValue="3" />
 						</p:selectOneMenu>		
 
 						<p:outputLabel value="Inscrição Suframa" for="insSuframa" />
@@ -108,7 +108,7 @@
 						<p:inputText id="numero" value="#{empresaBean.empresa.numero}" />
 
 						<p:outputLabel value="Complemento" for="complemento" />
-						<p:inputText id="complemento"
+						<p:inputText id="complemento" autocomplete="on"
 							value="#{empresaBean.empresa.complemento}" />
 
 						<p:outputLabel value="Bairro" for="bairro" />

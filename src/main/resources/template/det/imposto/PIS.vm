@@ -1,0 +1,39 @@
+	<PIS>
+#if( $format.number($i.getnPisaliqCst().doubleValue(),2) == "1" ||
+ 	 $format.number($i.getnPisaliqCst().doubleValue(),2) == "2"  )
+	    <PISAliq>
+	        <CST>0$!{format.number($i.getnPisaliqCst().doubleValue(),2)}</CST>
+	        <vBC>$!{format.number($i.getnPisaliqVbc().doubleValue(),15,2)}</vBC>
+	        <pPIS>$!{format.number($i.getnPisaliqPpis().doubleValue(),5,2)}</pPIS>
+	        <vPIS>$!{format.number($i.getnPisaliqVpis().doubleValue(),15,2)}</vPIS>
+	    </PISAliq>
+#elseif($format.number($i.getnPisqtdeCst().doubleValue(),2) == "3")
+	    <PISQtde>
+	        <CST>0$!{format.number($i.getnPisqtdeCst().doubleValue(),2)}</CST>
+	        <qBCProd>$!{format.number($i.getnPisqtdeQbcprod().doubleValue(),16,4)}</qBCProd>
+	        <vAliqProd>$!{format.number($i.getnPisqtdeValiqprod().doubleValue(),15,4)}</vAliqProd>
+	        <vPIS>$!{format.number($i.getnPisqtdeVpis().doubleValue(),15,2)}</vPIS>
+	    </PISQtde>
+#elseif( $format.number($i.getnPisntCst().doubleValue(),2) == "4" ||
+         $format.number($i.getnPisntCst().doubleValue(),2) == "5" ||
+         $format.number($i.getnPisntCst().doubleValue(),2) == "6" ||
+         $format.number($i.getnPisntCst().doubleValue(),2) == "7" ||
+         $format.number($i.getnPisntCst().doubleValue(),2) == "8" ||
+         $format.number($i.getnPisntCst().doubleValue(),2) == "9" )
+	    <PISNT>
+	        <CST>0$!{format.number($i.getnPisntCst().doubleValue(),2)}</CST>
+	    </PISNT>
+#elseif( $i.getnPisoutrCst().doubleValue() >= 49 )
+	    <PISOutr>
+	        <CST>$!{format.number($i.getnPisoutrCst().doubleValue(),2)}</CST>
+#if( $i.getnPisoutrVbc() )
+	        <vBC>$!{format.number($i.getnPisoutrVbc().doubleValue(),15,2)}</vBC>
+	        <pPIS>$!{format.number($i.getnPisoutrPpis().doubleValue(),5,2)}</pPIS>
+#else
+	        <qBCProd>$!{format.number($i.getnPisoutrQbcprod().doubleValue(),16,4)}</qBCProd>
+	        <vAliqProd>$!{format.number($i.getnPisoutrValiqprod().doubleValue(),15,4)}</vAliqProd>
+#end
+	        <vPIS>$!{format.number($i.getnPisoutrVpis().doubleValue(),15,2)}</vPIS>
+	    </PISOutr>
+#end
+	</PIS>

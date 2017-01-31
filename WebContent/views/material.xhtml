@@ -1,63 +1,234 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
 
-<h:head>
-	<link rel="stylesheet" type="text/css" href="./css.css" />  
-</h:head>
-  
-  <ui:composition template="layout.xhtml">
-   <ui:define name="conteudo">
-  
-    <div align="center">
-        
-        <h:form id="formMat" enctype="multipart/form-data">
-        <p:panelGrid  id="panelMatrial" style="margin-top:20px; background-color: #cccccc;" >
-            
-        <f:facet name="header">  
-            <p:row>
-		        <p:column style="background-color: darkblue; color:white;" colspan="8" styleClass="ui-widget-header">
-		            <p:spacer height="0" >CADASTRO DE MATERIAIS</p:spacer>
-		        </p:column>
-		    </p:row>
+<ui:composition template="layout.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="ui-fluid">
+		
+		<h:form>
+				
+<p:panel id="cadProduto" header="Cadastro de produtos">
+
+
+
+<p:panelGrid columns="6" layout="grid" style="width:100%">
+
+<p:outputLabel for="nome" value="Nome" />
+<p:inputText id="nome"  />
+
+
+<p:outputLabel for="descr" value="Descrição" />
+<p:inputText id="descr"  />
+
+<p:outputLabel for="cod" value="Codigo" />
+<p:inputText id="cod" />
+
+<p:outputLabel for="ean" value="EAN" />
+<p:inputText id="ean" />
+
+<p:outputLabel for="eanTrib" value="EAN Unit. Tributavel" />
+<p:inputText id="eanTrib" />
+
+<p:outputLabel for="extipi" value="EX TIPI" />
+<p:inputText id="extipi" />
+
+<p:outputLabel for="gen" value="Genero" />
+<p:inputText id="gen" />
+
+<p:outputLabel for="ncm" value="NCM" />
+<p:inputText id="ncm" />
+
+<p:outputLabel for="cest" value="CEST" />
+<p:inputText id="cest" />
+
+
+<p:outputLabel for="unitCom" value="UNID. COM." />
+<p:inputText id="unitCom" />
+
+
+<p:outputLabel for="VUnitCom" value="Valor Unid. Com." />
+<p:inputText id="VUnitCom" />
+
+
+<p:outputLabel for="unitTrib" value="Unid Tributavel" />
+<p:inputText id="unitTrib" />
+
+
+<p:outputLabel for="qtdTrib" value="QTD TRIBUT" />
+<p:inputText id="qtdTrib" />
+
+<p:outputLabel for="vUnidTrib" value="VLR UNID TRIBUT" />
+<p:inputText id="vUnidTrib" />
+
+
+
+</p:panelGrid>
+
+</p:panel>
+
+<p:panel header="Cadastrar Imposto">
+<!-- <p:commandButton value="Cadastrar Imposto" type="button" onclick="PF('dlgICMS').show();" style="width:150px" /> -->
+
+<!-- <p:panelGrid columns="4" layout="grid"  > -->
+
+<div class="ui-grid-row">
+
+<div class="ui-grid-col-3">
+
+<p:panelGrid columns="2" layout="grid" >
+
+<p:outputLabel value="IPI CST" />
+<p:selectOneMenu id="cst_ipi" >
+<f:selectItem itemLabel="teste teste"/>
+</p:selectOneMenu> 
+
+<p:outputLabel value="IPI" />
+<p:inputText  />
+
+</p:panelGrid>
+</div>
+<div class="ui-grid-col-3">
+
+<p:panelGrid columns="2" layout="grid">
+<p:outputLabel value="ICSM CST" />
+<p:selectOneMenu id="cst_icms" >
+	<f:selectItem itemLabel="teste teste"/>
+</p:selectOneMenu> 
+
+<p:outputLabel value="ICMS" />
+<p:inputText  />
+
+</p:panelGrid>
+</div>
+<div class="ui-grid-col-3">
+
+<p:panelGrid columns="2" layout="grid">
+<p:outputLabel value="ICSM CST" />
+<p:selectOneMenu id="cst_icm" >
+	<f:selectItem itemLabel="teste teste"/>
+</p:selectOneMenu> 
+
+<p:outputLabel value="ICMS" />
+<p:inputText  />
+
+</p:panelGrid>
+</div>
+<div class="ui-grid-col-3">
+<p:panelGrid columns="2" layout="grid">
+<p:outputLabel value="ICSM CST" />
+<p:selectOneMenu id="cst_icms2" >
+	<f:selectItem itemLabel="teste teste"/>
+</p:selectOneMenu> 
+
+<p:outputLabel value="ICMS" />
+<p:inputText  />
+
+</p:panelGrid>
+</div>
+
+
+
+
+
+<!-- <p:outputLabel value="PIS CST" /> -->
+<!-- <p:selectOneMenu id="pis_icms" > -->
+<!-- <f:selectItem itemLabel="teste teste"/> -->
+<!-- </p:selectOneMenu>  -->
+
+
+
+
+
+<!-- <p:outputLabel value="PIS" /> -->
+<!-- <p:inputText  /> -->
+
+
+
+
+
+</div>
+<!-- </p:panelGrid> -->
+
+
+
+ <p:toolbar>
+ 
+        <f:facet name="right">
+<!--           <p:commandButton value="imposto" onclick="PF('dlgICMS').show();"></p:commandButton> -->
+                    <p:commandButton value="SALVAR"></p:commandButton>
         </f:facet>
-       
-        <p:row>
-            <p:column colspan="2">Material:<br/><p:inputText size="29" value="#{material.material.material}" /></p:column>
-           
-            <p:column colspan="2">Descrição:<br/><p:inputText size="29" value="#{material.material.descricao}" /></p:column>
-              
-            <p:column colspan="2">Ativo:<br/><p:selectBooleanButton value="#{material.material.ativo}" onLabel="Sim" offLabel="Não" onIcon="ui-icon-check" offIcon="ui-icon-close" /></p:column>
-            
-        </p:row>
-        <p:row>
-            <p:column style="text-align: center;" colspan="8">
-            
-            	<p:commandButton icon="icone-cancel"  id="up" value="Update" ajax="true" update="@form" />
-            
-                <p:commandButton icon="icone-clear" process="@this"  id="clearBtn" value="Limpar" update="panelMatrial">
-                    <p:resetInput target="panelMatrial" />
-                </p:commandButton>
-                <p:commandButton icon="icone-check" id="saveBtn" value="Salvar" action="#{material.save}" update="panelMatrial" global="true" />
-                
-                <p:focus context="panelMatrial"/>  
-                <p:messages id="messagesMaterial" showDetail="true" autoUpdate="true" closable="true" />
-            </p:column> 
-        </p:row>
-        
-        </p:panelGrid>
-        
-        <p:blockUI block="panelMatrial" trigger="saveBtn, clearBtn" /> 
-    </h:form>
-    
-    </div> 
-    
-    </ui:define>   
-    </ui:composition>
-    
+ 
+    </p:toolbar>
+
+
+
+
+
+
+</p:panel>
+
+
+
+
+
+
+				<p:dialog header="CADASTRO ICMS" widgetVar="dlgICMS">
+				
+<!-- 				<p:panelGridd columns="4"  style="width:100%"> -->
+<p:panelGrid style="border: none">
+				<p:outputLabel value="Regime" />
+				<p:selectOneMenu>
+					<f:selectItem itemValue="Selecione o Regime" itemLabel="Selecione o Regime" noSelectionOption=""/>				
+					<f:selectItem itemValue="Tributação Normal" itemLabel="Tributação Normal"/>
+					<f:selectItem  itemValue="Simples Nacional" itemLabel="Simples Nacional"/>
+				</p:selectOneMenu>
+				<p:outputLabel value="Situação Tributaria" />
+				<p:selectOneMenu>
+						<f:selectItem itemValue="Selecione a Situação Tributaria" itemLabel="Selecione a Situação Tributaria" noSelectionOption=""/>
+						<f:selectItem itemValue="00" itemLabel="00-Tributada integralmente"/>
+						<f:selectItem itemValue="10" itemLabel="10-Tributada com cobrança do ICMS por ST"/>
+						<f:selectItem itemValue="10" itemLabel="10-Tributada com cobrança do ICMS por ST(com partilha do ICMS entre a UF de origem e a UF de destino ou a UF definida na legislação)"/>
+						<f:selectItem itemValue="20" itemLabel="20-Com redução da base de cálculo"/>				
+    					<f:selectItem itemValue="30" itemLabel="30-Isenta ou não tributada e com cobrança do ICMS por ST"/>
+						<f:selectItem itemValue="40" itemLabel="40-Isenta"/>
+						<f:selectItem itemValue="41" itemLabel="Não tributada"/>
+						<f:selectItem itemValue="41" itemLabel="Não tributada(ICMS devido para a UF de destino, nas operações interestaduais de produtos que tiveram retenção antencipada de ICMS por ST na UF do rementente)"/>
+				</p:selectOneMenu>
+				
+				
+				<p:outputLabel value="Origem" />
+				<p:selectOneMenu >
+					<f:selectItem itemValue="Selecione a Situação Tributaria" itemLabel="Selecione a Situação Tributaria" noSelectionOption=""/>
+				    <f:selectItem itemValue="0" itemLabel="0-Nacional, exceto as indicadas nos codigos"/>
+				    <f:selectItem itemValue="1" itemLabel="1-Estrangeira-Importação direta"/>
+				    
+				</p:selectOneMenu>
+				
+				
+				</p:panelGrid>
+				
+				
+				
+				
+<!-- 					<p:panelGrid> -->
+<!-- 						<p:outputLabel value="Regime: " for="reg" /> -->
+<!-- 						<p:selectOneMenu> -->
+<!-- 							<f:selectItem itemValue="Selecione o regime" itemLabel="Selecione o regime" /> -->
+<!-- 							<f:selectItem itenValue="Tributação Normal" itemLabel="Tributação Normal"/> -->
+<!-- 							<f:selectItem itemValue="Simples Nacional" itemLabel="Simples Nacional" /> -->
+<!-- 						</p:selectOneMenu> -->
+
+<!-- 					</p:panelGrid> -->
+
+				</p:dialog>
+
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
 </html>

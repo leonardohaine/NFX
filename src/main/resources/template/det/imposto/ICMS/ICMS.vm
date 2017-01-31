@@ -1,0 +1,229 @@
+    <ICMS>
+		#if ($format.number($i.getnIcmsCst().doubleValue(),2) == "0")
+	    <ICMS00>
+		    <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+		    <CST>00</CST>
+		    <modBC>$!{format.number($i.getnIcmsModbc().doubleValue(),1)}</modBC>
+		    <vBC>$!{format.number($i.getnIcmsVbc().doubleValue(),15,2)}</vBC>
+		    <pICMS>$!{format.number($i.getnIcmsPicms().doubleValue(),5,2)}</pICMS>
+		    <vICMS>$!{format.number($i.getnIcmsVicms().doubleValue(),15,2)}</vICMS>
+	    </ICMS00>
+		#end
+		#if( $format.number($i.getnIcmsCst().doubleValue(),2) == "10" )
+		<ICMS10>
+		    <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+		    <CST>$!{format.number($i.getnIcmsCst().doubleValue(),2)}</CST>
+		    <modBC>$!{format.number($i.getnIcmsModbc().doubleValue(),1)}</modBC>
+		    <vBC>$!{format.number($i.getnIcmsVbc().doubleValue(),15,2)}</vBC>
+		    #if($header.getnVersao().doubleValue() >= 3.1)
+		    <pICMS>$!{format.number($i.getnIcmsPicms().doubleValue(),7,4)}</pICMS>
+			#else
+		    <pICMS>$!{format.number($i.getnIcmsPicms().doubleValue(),5,2)}</pICMS>
+		    #end
+		    <vICMS>$!{format.number($i.getnIcmsVicms().doubleValue(),15,2)}</vICMS>
+		    <modBCST>$!{format.number($i.getnIcmsModbcst().doubleValue(),1)}</modBCST>
+			#if( $i.getnIcmsPmvast() )
+				<pMVAST>$!{format.number($i.getnIcmsPmvast().doubleValue(),5,2)}</pMVAST>
+			#end
+			#if( $i.getnIcmsPredbcst() )
+				<pRedBCST>$!{format.number($i.getnIcmsPredbcst().doubleValue(),5,2)}</pRedBCST>
+			#end		    
+		    <vBCST>$!{format.number($i.getnIcmsVbcst().doubleValue(),15,2)}</vBCST>
+			<pICMSST>$!{format.number($i.getnIcmsPicmsst().doubleValue(),5,2)}</pICMSST>
+		    <vICMSST>$!{format.number($i.getnIcmsVicmsst().doubleValue(),15,2)}</vICMSST>
+		</ICMS10>
+		#end	
+		#if( $format.number($i.getnIcmsCst().doubleValue(),2) == "20" )
+		<ICMS20>
+		    <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+		    <CST>$!{format.number($i.getnIcmsCst().doubleValue(),2)}</CST>
+		    <modBC>$!{format.number($i.getnIcmsModbc().doubleValue(),1)}</modBC>		    
+			<pRedBC>$!{format.number($i.getnIcmsPredbc().doubleValue(),5,2)}</pRedBC>
+		    <vBC>$!{format.number($i.getnIcmsVbc().doubleValue(),15,2)}</vBC>
+			<pICMS>$!{format.number($i.getnIcmsPicms().doubleValue(),5,2)}</pICMS>
+		    <vICMS>$!{format.number($i.getnIcmsVicms().doubleValue(),15,2)}</vICMS>
+		    #if($header.getnVersao().doubleValue() >= 3.1)
+		    #if($i.getnIcmsVicmsdeson())
+		    <vICMSDeson>$!{format.number($i.getnIcmsVicmsdeson().doubleValue(),15,2)}</vICMSDeson>
+			<motDesICMS>$!esc.xml($!{i.getsIcmsMotdesicms()})</motDesICMS>
+			#end
+			#end		    
+		</ICMS20>
+		#end
+		#if( $format.number($i.getnIcmsCst().doubleValue(),2) == "30" )
+	    <ICMS30>
+		    <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+		    <CST>$!{format.number($i.getnIcmsCst().doubleValue(),2)}</CST>
+		    <modBCST>$!{format.number($i.getnIcmsModbcst().doubleValue(),1)}</modBCST>
+			#if( $i.getnIcmsPmvast() )
+				<pMVAST>$!{format.number($i.getnIcmsPmvast().doubleValue(),5,2)}</pMVAST>
+			#end
+			#if( $i.getnIcmsPredbcst() )
+				#if($header.getnVersao().doubleValue() >= 3.1)
+					<pRedBCST>$!{format.number($i.getnIcmsPredbcst().doubleValue(),7,4)}</pRedBCST>
+				#else
+					<pRedBCST>$!{format.number($i.getnIcmsPredbcst().doubleValue(),5,2)}</pRedBCST>
+			    #end
+			#end
+		    <vBCST>$!{format.number($i.getnIcmsVbcst().doubleValue(),15,2)}</vBCST>
+		    <pICMSST>$!{format.number($i.getnIcmsPicmsst().doubleValue(),5,2)}</pICMSST>
+		    <vICMSST>$!{format.number($i.getnIcmsVicmsst().doubleValue(),15,2)}</vICMSST>
+		    #if($header.getnVersao().doubleValue() >= 3.1)
+		    #if($i.getnIcmsVicmsdeson())
+		    <vICMSDeson>$!{format.number($i.getnIcmsVicmsdeson().doubleValue(),15,2)}</vICMSDeson>
+			<motDesICMS>$!esc.xml($!{i.getsIcmsMotdesicms()})</motDesICMS>
+			#end
+			#end			    
+	    </ICMS30>
+		#end
+		#if( $format.number($i.getnIcmsCst().doubleValue(),2) == "40" ||
+			 $format.number($i.getnIcmsCst().doubleValue(),2) == "41" ||
+			 $format.number($i.getnIcmsCst().doubleValue(),2) == "50")
+		<ICMS40>
+		    <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+		    <CST>$!{format.number($i.getnIcmsCst().doubleValue(),2)}</CST>
+		    #if($header.getnVersao().doubleValue() >= 3.1)
+			    #if($i.getnIcmsVicmsdeson())
+			    <vICMSDeson>$!{format.number($i.getnIcmsVicmsdeson().doubleValue(),15,2)}</vICMSDeson>
+				<motDesICMS>$!esc.xml($!{i.getsIcmsMotdesicms()})</motDesICMS>
+				#end
+			#else
+				#if( $i.getnIcmsVicms() )
+			    	<vICMS>$!{format.number($i.getnIcmsVicms().doubleValue(),15,2)}</vICMS>
+				#end
+				#if( $i.getsIcmsMotdesicms() )
+					<motDesICMS>$!esc.xml($!{i.getsIcmsMotdesicms()})</motDesICMS>
+				#end
+			#end				
+		</ICMS40>
+		#end
+		#if( $format.number($i.getnIcmsCst().doubleValue(),2) == "51" )
+		<ICMS51>
+		    <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+		    <CST>$!{format.number($i.getnIcmsCst().doubleValue(),2)}</CST>
+			#if( $i.getnIcmsModbc() )
+				<modBC>$!{format.number($i.getnIcmsModbc().doubleValue(),1)}</modBC>
+			#end
+			#if( $i.getnIcmsPredbc() )
+				<pRedBC>$!{format.number($i.getnIcmsPredbc().doubleValue(),5,2)}</pRedBC>
+			#end
+			#if( $i.getnIcmsVbc() )
+				<vBC>$!{format.number($i.getnIcmsVbc().doubleValue(),15,2)}</vBC>
+			#end
+			#if( $i.getnIcmsPicms() )
+				<pICMS>$!{format.number($i.getnIcmsPicms().doubleValue(),5,2)}</pICMS>
+			#end
+			
+	    	#if($header.getnVersao().doubleValue() >= 3.1)
+		    	#if( $i.getnIcmsVicmsop() )
+				<vICMSOp>$!{format.number($i.getnIcmsVicmsop().doubleValue(),15,2)}</vICMSOp>
+				#end
+				#if( $i.getnIcmsPdif() )			
+                                        <pDif>$!{format.number($i.getnIcmsPdif().doubleValue(),7,4)}</pDif>
+				#end
+				#if( $i.getnIcmsVicmsdif() )			
+                                        <vICMSDif>$!{format.number($i.getnIcmsVicmsdif().doubleValue(),15,2)}</vICMSDif>
+				#end
+			#end	
+
+			#if( $i.getnIcmsVicms() )
+				<vICMS>$!{format.number($i.getnIcmsVicms().doubleValue(),15,2)}</vICMS>
+			#end
+		</ICMS51>
+		#end
+		#if( $format.number($i.getnIcmsCst().doubleValue(),2) == "60" )
+    	<ICMS60>
+		    <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+		    <CST>$!{format.number($i.getnIcmsCst().doubleValue(),2)}</CST>		    
+		    #if($header.getnVersao().doubleValue() >= 3.1)
+				#if( $i.getnIcmsVbcstret() || $i.getnIcmsVicmsstret())
+				    <vBCSTRet>$!{format.number($i.getnIcmsVbcstret().doubleValue(),15,2)}</vBCSTRet>
+				    <vICMSSTRet>$!{format.number($i.getnIcmsVicmsstret().doubleValue(),15,2)}</vICMSSTRet>
+				#end
+			#else
+				#if( $i.getnIcmsVbcstret() )
+				    <vBCSTRet>$!{format.number($i.getnIcmsVbcstret().doubleValue(),15,2)}</vBCSTRet>
+				#end
+				#if( $i.getnIcmsVicmsstret() )
+				    <vICMSSTRet>$!{format.number($i.getnIcmsVicmsstret().doubleValue(),15,2)}</vICMSSTRet>
+				#end			
+			#end
+	    </ICMS60>
+		#end		
+		#if( $format.number($i.getnIcmsCst().doubleValue(),2) == "70" )
+		<ICMS70>
+		    <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+		    <CST>$!{format.number($i.getnIcmsCst().doubleValue(),2)}</CST>
+		    <modBC>$!{format.number($i.getnIcmsModbc().doubleValue(),1)}</modBC>
+		    <pRedBC>$!{format.number($i.getnIcmsPredbc().doubleValue(),5,2)}</pRedBC>
+		    <vBC>$!{format.number($i.getnIcmsVbc().doubleValue(),15,2)}</vBC>
+		    <pICMS>$!{format.number($i.getnIcmsPicms().doubleValue(),5,2)}</pICMS>
+		    <vICMS>$!{format.number($i.getnIcmsVicms().doubleValue(),15,2)}</vICMS>
+		    <modBCST>$!{format.number($i.getnIcmsModbcst().doubleValue(),1)}</modBCST>		
+			#if( $i.getnIcmsPmvast() )
+				<pMVAST>$!{format.number($i.getnIcmsPmvast().doubleValue(),5,2)}</pMVAST>
+			#end
+			#if( $i.getnIcmsPredbcst() )
+				<pRedBCST>$!{format.number($i.getnIcmsPredbcst().doubleValue(),5,2)}</pRedBCST>
+			#end
+			<vBCST>$!{format.number($i.getnIcmsVbcst().doubleValue(),15,2)}</vBCST>
+			<pICMSST>$!{format.number($i.getnIcmsPicmsst().doubleValue(),5,2)}</pICMSST>
+			<vICMSST>$!{format.number($i.getnIcmsVicmsst().doubleValue(),15,2)}</vICMSST>
+			#if($header.getnVersao().doubleValue() >= 3.1)
+			    #if($i.getnIcmsVicmsdeson())
+			    <vICMSDeson>$!{format.number($i.getnIcmsVicmsdeson().doubleValue(),15,2)}</vICMSDeson>
+				<motDesICMS>$!esc.xml($!{i.getsIcmsMotdesicms()})</motDesICMS>
+				#end
+			#end				
+		</ICMS70>
+		#end
+		#if( $format.number($i.getnIcmsCst().doubleValue(),2) == "90" )
+		<ICMS90>
+		    <orig>$!{format.number($i.getnIcmsOrig().doubleValue(),1)}</orig>
+		    <CST>$!{format.number($i.getnIcmsCst().doubleValue(),2)}</CST>
+		    		    
+		    <modBC>$!{format.number($i.getnIcmsModbc().doubleValue(),1)}</modBC>
+		    <vBC>$!{format.number($i.getnIcmsVbc().doubleValue(),15,2)}</vBC>
+			#if( $i.getnIcmsPredbc() )
+				<pRedBC>$!{format.number($i.getnIcmsPredbc().doubleValue(),5,2)}</pRedBC>
+			#end
+		    <pICMS>$!{format.number($i.getnIcmsPicms().doubleValue(),5,2)}</pICMS>
+		    <vICMS>$!{format.number($i.getnIcmsVicms().doubleValue(),15,2)}</vICMS>
+			
+                        #if( $i.getnIcmsModbcst() )
+			<modBCST>$!{format.number($i.getnIcmsModbcst().doubleValue(),1)}</modBCST>
+                        #end
+			#if( $i.getnIcmsPmvast() )
+				<pMVAST>$!{format.number($i.getnIcmsPmvast().doubleValue(),5,2)}</pMVAST>
+			#end
+			#if( $i.getnIcmsPredbcst() )
+				<pRedBCST>$!{format.number($i.getnIcmsPredbcst().doubleValue(),5,2)}</pRedBCST>
+			#end
+                        #if( $i.getnIcmsVbcst() )
+			<vBCST>$!{format.number($i.getnIcmsVbcst().doubleValue(),15,2)}</vBCST>
+                        #end
+                        #if( $i.getnIcmsPicmsst() )
+			<pICMSST>$!{format.number($i.getnIcmsPicmsst().doubleValue(),5,2)}</pICMSST>
+                        #end
+                        #if( $i.getnIcmsVicmsst() )
+			<vICMSST>$!{format.number($i.getnIcmsVicmsst().doubleValue(),15,2)}</vICMSST>
+			#end
+			#if($header.getnVersao().doubleValue() >= 3.1)
+			    #if($i.getnIcmsVicmsdeson())
+			    <vICMSDeson>$!{format.number($i.getnIcmsVicmsdeson().doubleValue(),15,2)}</vICMSDeson>
+				<motDesICMS>$!esc.xml($!{i.getsIcmsMotdesicms()})</motDesICMS>
+				#end
+			#end	
+			
+		</ICMS90>
+		#end		
+#parse("/template/det/imposto/ICMS/ICMSPart.vm")
+#parse("/template/det/imposto/ICMS/ICMSST.vm")
+##parse("/template/det/imposto/ICMS/ICMSSN/ICMSSN101.vm")
+##parse("/template/det/imposto/ICMS/ICMSSN/ICMSSN102.vm")
+##parse("/template/det/imposto/ICMS/ICMSSN/ICMSSN201.vm")
+##parse("/template/det/imposto/ICMS/ICMSSN/ICMSSN202.vm")
+##parse("/template/det/imposto/ICMS/ICMSSN/ICMSSN500.vm")
+##parse("/template/det/imposto/ICMS/ICMSSN/ICMSSN900.vm")
+##parse("/template/det/imposto/ICMS/ICMSSN/ICMSUFDEST.vm")
+    </ICMS>

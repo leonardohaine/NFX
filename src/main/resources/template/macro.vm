@@ -1,0 +1,45 @@
+#macro(getRecord $key)
+$!esc.xml($!{record.getString($key)})##
+#end
+
+#macro(getHeader $key)
+$!esc.xml($!{header.getString($key)})##
+#end
+
+#macro(getRef $key)
+$!esc.xml($!{referenciada.getString($key)})##
+#end
+
+#macro(getDuplicata $key)
+$!esc.xml($!{duplicata.getString($key)})##
+#end
+
+#macro(getItem $key)
+$!esc.xml($!{item.getString($key)})##
+#end
+
+#macro(getInfAdiconal $key)
+$!textFormat.escapeMultiplosCData($!{header.getsInfadfisco($key)}).trim()##
+#end
+
+#macro(getInfCpl $key)
+$!textFormat.escapeMultiplosCData($!{header.getsInfcpl($key)}).trim()##
+#end
+
+#macro(getImportacao $key)
+$!esc.xml($!{importacao.getString($key)})##
+#end
+
+#macro(getMedicamento $key)
+$!esc.xml($!{medicamento.getString($key)})##
+#end
+
+#macro(getVol $key)
+$!esc.xml($!{vol.getString($key)})##
+#end
+
+#macro(getZXmlOut $key)
+$!esc.xml($!{zXmlOut.getString($key)})##
+#end
+
+

@@ -1,0 +1,105 @@
+    <total>
+        <ICMSTot>
+            <vBC>$!{format.number($header.getnTotIcmsVbc().doubleValue(),15,2)}</vBC>
+            <vICMS>$!{format.number($header.getnTotIcmsVicms().doubleValue(),15,2)}</vICMS>            
+            #if($header.getnVersao().doubleValue() >= 3.1)
+            <vICMSDeson>$!{format.number($header.getnTotIcmsVicmsdeson().doubleValue(),15,2)}</vICMSDeson>
+            #end
+            #if( $header.getnTotIcmsVfcpufdest() && $header.getnTotIcmsVfcpufdest().doubleValue() > 0.00)
+            <vFCPUFDest>$!{format.number($header.getnTotIcmsVfcpufdest().doubleValue(),15,2)}</vFCPUFDest>
+            #end
+            #if( $header.getnTotIcmsVicmsufdest() && $header.getnTotIcmsVicmsufdest().doubleValue() > 0.00)
+            <vICMSUFDest>$!{format.number($header.getnTotIcmsVicmsufdest().doubleValue(),15,2)}</vICMSUFDest>
+            #end
+            #if( $header.getnTotIcmsVicmsufremet() && $header.getnTotIcmsVicmsufremet().doubleValue() > 0.00)
+            <vICMSUFRemet>$!{format.number($header.getnTotIcmsVicmsufremet().doubleValue(),15,2)}</vICMSUFRemet>
+            #end
+            <vBCST>$!{format.number($header.getnTotIcmsVbcst().doubleValue(),15,2)}</vBCST>
+            <vST>$!{format.number($header.getnTotIcmsVst().doubleValue(),15,2)}</vST>
+            <vProd>$!{format.number($header.getnTotIcmsVprod().doubleValue(),15,2)}</vProd>
+            <vFrete>$!{format.number($header.getnTotIcmsVfrete().doubleValue(),15,2)}</vFrete>
+            <vSeg>$!{format.number($header.getnTotIcmsVseg().doubleValue(),15,2)}</vSeg>
+            <vDesc>$!{format.number($header.getnTotIcmsVdesc().doubleValue(),15,2)}</vDesc>
+            <vII>$!{format.number($header.getnTotIcmsVii().doubleValue(),15,2)}</vII>
+            <vIPI>$!{format.number($header.getnTotIcmsVipi().doubleValue(),15,2)}</vIPI>
+            <vPIS>$!{format.number($header.getnTotIcmsVpis().doubleValue(),15,2)}</vPIS>
+            <vCOFINS>$!{format.number($header.getnTotIcmsVcofins().doubleValue(),15,2)}</vCOFINS>
+            <vOutro>$!{format.number($header.getnTotIcmsVoutro().doubleValue(),15,2)}</vOutro>
+            <vNF>$!{format.number($header.getnTotIcmsVnf().doubleValue(),15,2)}</vNF>
+            #if( $header.getnTotTottrib() && $header.getnTotTottrib().doubleValue() > 0.00) 
+			<vTotTrib>$!{format.number($header.getnTotTottrib().doubleValue(),15,2)}</vTotTrib>
+	    #end
+        </ICMSTot>
+#if( $header.getnTotIssqnVserv() && $header.getnTotIssqnVserv().doubleValue() > 0.00)
+        <ISSQNtot>
+#if( $header.getnTotIssqnVserv() && $header.getnTotIssqnVserv().doubleValue() > 0.00)
+            <vServ>$!{format.number($header.getnTotIssqnVserv().doubleValue(),15,2)}</vServ>
+#end
+#if( $header.getnTotIssqnVbc() )
+            <vBC>$!{format.number($header.getnTotIssqnVbc().doubleValue(),15,2)}</vBC>
+#end
+#if( $header.getnTotIssqnViss() )
+            <vISS>$!{format.number($header.getnTotIssqnViss().doubleValue(),15,2)}</vISS>
+#end
+#if( $header.getnTotIssqnVpis() )
+            <vPIS>$!{format.number($header.getnTotIssqnVpis().doubleValue(),15,2)}</vPIS>
+#end
+#if( $header.getnTotIssqnVcofins() )
+            <vCOFINS>$!{format.number($header.getnTotIssqnVcofins().doubleValue(),15,2)}</vCOFINS>
+#end
+#if($header.getnVersao().doubleValue() >= 3.1)
+			<dCompet>$!{format.date($header.getdTotIssqnDcompet())}</dCompet>
+			
+			#if( $header.getnTotIssqnVdeducao() && $header.getnTotIssqnVdeducao().doubleValue() > 0.00) 
+			<vDeducao>$!{format.number($header.getnTotIssqnVdeducao().doubleValue(),15,2)}</vDeducao>
+			#end
+			#if( $header.getnTotIssqnVoutro() && $header.getnTotIssqnVoutro().doubleValue() > 0.00) 
+			<vOutro>$!{format.number($header.getnTotIssqnVoutro().doubleValue(),15,2)}</vOutro>
+			#end
+			#if( $header.getnTotIssqnVdescincond() && $header.getnTotIssqnVdescincond().doubleValue() > 0.00) 
+			<vDescIncond>$!{format.number($header.getnTotIssqnVdescincond().doubleValue(),15,2)}</vDescIncond>
+			#end
+			#if( $header.getnTotIssqnVdesccond() && $header.getnTotIssqnVdesccond().doubleValue() > 0.00) 
+			<vDescCond>$!{format.number($header.getnTotIssqnVdesccond().doubleValue(),15,2)}</vDescCond>
+			#end
+			#if( $header.getnTotIssqnVissret() && $header.getnTotIssqnVissret().doubleValue() > 0.00) 
+			<vISSRet>$!{format.number($header.getnTotIssqnVissret().doubleValue(),15,2)}</vISSRet>
+			#end
+			#if( $header.getnTotIssqnCregtrib() && $header.getnTotIssqnCregtrib().doubleValue() > 0.00) 
+			<cRegTrib>0$!{header.getnTotIssqnCregtrib()}</cRegTrib>
+			#end
+#end
+        </ISSQNtot>
+#end
+#if( $header.getnTotRetVretpis() ||
+	 $header.getnTotRetVretcofins() ||
+	 $header.getnTotRetVretcsll() ||
+	 $header.getnTotRetVbcirrf() ||
+	 $header.getnTotRetVirrf() ||
+	 $header.getnTotRetVbcretprev() ||
+	 $header.getnTotRetVretprev())
+        <retTrib>
+#if( $header.getnTotRetVretpis() )
+            <vRetPIS>$!{format.number($header.getnTotRetVretpis().doubleValue(),15,2)}</vRetPIS>
+#end
+#if( $header.getnTotRetVretcofins() )
+            <vRetCOFINS>$!{format.number($header.getnTotRetVretcofins().doubleValue(),15,2)}</vRetCOFINS>
+#end
+#if( $header.getnTotRetVretcsll() )
+            <vRetCSLL>$!{format.number($header.getnTotRetVretcsll().doubleValue(),15,2)}</vRetCSLL>
+#end
+#if( $header.getnTotRetVbcirrf() )
+            <vBCIRRF>$!{format.number($header.getnTotRetVbcirrf().doubleValue(),15,2)}</vBCIRRF>
+#end
+#if( ($header.getnTotRetVirrf() != "0.00") && ($header.getnTotRetVirrf()))
+            <vIRRF>$!{format.number($header.getnTotRetVirrf().doubleValue(),15,2)}</vIRRF>
+#end
+#if( $header.getnTotRetVbcretprev() )
+            <vBCRetPrev>$!{format.number($header.getnTotRetVbcretprev().doubleValue(),15,2)}</vBCRetPrev>
+#end
+#if( $header.getnTotRetVretprev() )
+            <vRetPrev>$!{format.number($header.getnTotRetVretprev().doubleValue(),15,2)}</vRetPrev>
+#end
+        </retTrib>
+#end
+    </total>

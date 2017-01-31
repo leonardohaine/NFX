@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui">
+
+<ui:composition template="layout.xhtml">
+
+	<ui:define name="conteudo">
+
+		<f:metadata>
+    		<o:viewParam name="cliente" value="#{cliente.cliente}" />
+    		<f:event listener="#{cliente.Edit}" type="preRenderView" />
+    	</f:metadata>
+
+		<h:form>
+			<div class="ui-fluid">
+				<p:panel header="Cadastro">
+
+					<p:outputLabel for="cadastro" value="Tipo Cadastro:" />
+					<p:selectOneMenu id="cadastro"
+						value="#{clienteBean.cliente.tipoCadastro}" style="width:225px">
+						<f:selectItem itemLabel="Selecione o cadastro"
+							noSelectionOption="false" />
+						<f:selectItem itemLabel="Cliente" itemValue="teste" />
+						<f:selectItem itemLabel="Transportadora" itemValue="Xbox One" />
+						<f:selectItem itemLabel="Emitente" itemValue="PS4" />
+						<!--             <f:selectItem itemLabel="Wii U" itemValue="Wii U" /> -->
+					</p:selectOneMenu>
+
+				</p:panel>
+
+				<p:panel header="Dados" style="margin-botton:10px">
+					<p:panelGrid columns="4" layout="grid" style="width:100%" columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
+
+						<p:outputLabel value="Nome/Razão Social" for="razaoSocial" />
+						<p:inputText id="razaoSocial"
+							value="#{cliente.cliente.razaoSocial}" />
+
+						<p:outputLabel value="RG/CNPJ" for="cnpj" />
+						<p:inputText id="cnpj" value="#{clienteBean.cliente.cnpj}" />
+
+						<p:outputLabel value="Inscrição Estadual" for="insEstadual" />
+						<p:inputText id="insEstadual"
+							value="#{clienteBean.cliente.inscricaoEstadual}" />
+
+						<p:outputLabel value="CNAE Fiscal" for="cnaeFiscal" />
+						<p:inputText id="cnaeFiscal"
+							value="#{clienteBean.cliente.cnaeFiscal}" />
+
+						<p:outputLabel value="Inscrição Municipal" for="insMunicipal" />
+						<p:inputText id="insMunicipal"
+							value="#{clienteBean.cliente.inscricaoMunicipal}" />
+
+						<p:outputLabel value="Inscrição Estadual ST" for="insSuframa" />
+						<p:inputText id="ieST"
+							value="#{clienteBean.cliente.suframa}" />
+							
+						<p:outputLabel value="Regime Tributário" for="regimeTributario" />
+						<p:selectOneMenu id="regimeTributario" style="width:25px" 
+							value="#{clienteBean.cliente.regimeTributario}">
+							<f:selectItem itemLabel="Selecione" noSelectionOption="false" />
+							<f:selectItem itemLabel="Simples Nacional" itemValue="teste" />
+							<f:selectItem itemLabel="Simples Nacional - excesso de sublimite" itemValue="Xbox One" />
+							<f:selectItem itemLabel="Regime Normal" itemValue="PS4" />
+						</p:selectOneMenu>	
+
+						<p:outputLabel value="Inscrição Suframa" for="insSuframa" />
+						<p:inputText id="insSuframa"
+							value="#{clienteBean.cliente.suframa}" />
+
+						<p:outputLabel value="E-mail" for="email" />
+						<p:inputText id="email" value="#{clienteBean.cliente.email}" />
+
+						<p:outputLabel value="Telefone" for="telefone" />
+						<p:inputText id="telefone" value="#{clienteBean.cliente.telefone}" />
+
+						<p:outputLabel value="Isento ICMS" for="isento" />
+						<p:selectBooleanCheckbox id="isento"
+							value="#{clienteBean.cliente.isento}" />
+
+					</p:panelGrid>
+
+				</p:panel>
+
+				<p:panel header="Endereço" >
+					<p:panelGrid columns="4" layout="grid" columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
+
+						<p:outputLabel value="Logradouro" for="logradouro" />
+						<p:inputText id="logradouro"
+							value="#{clienteBean.cliente.logradouro}" />
+
+						<p:outputLabel value="Número" for="numero" />
+						<p:inputText id="numero" value="#{clienteBean.cliente.numero}" />
+
+						<p:outputLabel value="Complemento" for="complemento" />
+						<p:inputText id="complemento"
+							value="#{clienteBean.cliente.complemento}" />
+
+						<p:outputLabel value="Bairro" for="bairro" />
+						<p:inputText id="bairro" value="#{clienteBean.cliente.bairro}" />
+
+						<p:outputLabel value="Cep" for="cep" />
+						<p:inputText id="cep" value="#{clienteBean.cliente.cep}" />
+
+						<p:outputLabel value="País" for="pais" />
+						<p:inputText id="pais" value="#{clienteBean.cliente.pais}" />
+
+						<p:outputLabel value="UF" for="uf" />
+						<p:inputText id="uf" value="#{clienteBean.cliente.uf}" />
+
+						<p:outputLabel value="Município" for="municipio" />
+						<p:inputText id="municipio"
+							value="#{clienteBean.cliente.municipio}" />
+
+					</p:panelGrid>
+
+<!-- 					<h:panelGrid columns="3"> -->
+
+<!-- 						<p:commandButton value="Salvar" -->
+<!-- 							actionListener="#{clienteBean.save}" /> -->
+<!-- 						<p:commandButton value="Editar" -->
+<!-- 							actionListener="#{clienteBean.Edit}" /> -->
+<!-- 						<p:commandButton value="Excluir" -->
+<!-- 							actionListener="#{clienteBean.delete}" /> -->
+<!-- 					</h:panelGrid> -->
+
+				</p:panel>
+			</div>
+				<p:toolbar style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+
+					<f:facet name="right" style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+						<p:button value="Cancelar" outcome="listaCliente" />
+						<p:commandButton value="Salvar"	actionListener="#{cliente.save}" />
+					</f:facet>
+
+				</p:toolbar>
+
+			</h:form>
+
+	</ui:define>
+
+</ui:composition>
+
+
+
+</html>

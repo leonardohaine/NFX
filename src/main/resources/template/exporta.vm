@@ -1,0 +1,18 @@
+#if($header.getnVersao().doubleValue() >= 3.1)
+#if( $header.getsUfsaidapais() && $header.getsXlocexporta() )
+    <exporta>
+    	<UFSaidaPais>$!esc.xml($!{header.getsUfsaidapais()})</UFSaidaPais>
+		<xLocExporta>$!esc.xml($!{header.getsXlocexporta()})</xLocExporta>
+		#if ($header.getsXlocdespacho())
+		<xLocDespacho>$!esc.xml($!{header.getsXlocdespacho()})</xLocDespacho>
+		#end    
+    </exporta>
+#end
+#else
+#if( $header.getsUfsaidapais() && $header.getsXlocexporta() )
+    <exporta>
+        <UFEmbarq>$!esc.xml($!{header.getsUfsaidapais()})</UFEmbarq>
+        <xLocEmbarq>$!esc.xml($!{header.getsXlocexporta()})</xLocEmbarq>
+    </exporta>
+#end
+#end

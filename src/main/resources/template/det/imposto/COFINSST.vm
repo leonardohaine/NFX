@@ -1,0 +1,12 @@
+#if( $i.getnCofinsstVcofins() )
+	<COFINSST>
+#if( $i.getnCofinsstVbc() )
+	    <vBC>$!{format.number($i.getnCofinsstVbc().doubleValue(),15,2)}</vBC>
+	    <pCOFINS>$!{format.number($i.getnCofinsstPcofins().doubleValue(),5,2)}</pCOFINS>
+#elseif($i.getnCofinsstQbcprod() )
+	    <qBCProd>$!{format.number($i.getnCofinsstQbcprod().doubleValue(),16,4)}</qBCProd>
+	    <vAliqProd>$!{format.number($i.getnCofinsstValiqprod().doubleValue(),15,4)}</vAliqProd>
+#end
+	    <vCOFINS>$!{format.number($i.getnCofinsstVcofins().doubleValue(),15,2)}</vCOFINS>
+	</COFINSST>
+#end

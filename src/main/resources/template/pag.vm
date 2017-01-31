@@ -1,0 +1,16 @@
+#if($header.getnVersao().doubleValue() >= 3.1)
+#foreach($pag in $pagamento )
+	<pag>
+		<tPag>$!esc.xml($!{pag.getsTpag()})</tPag>
+		<vPag>$!{format.number($pag.getnVpag().doubleValue(),15,2)}</vPag>	
+		#if ($pag.getsTband())
+		<card>	
+		    <tpIntegra>$!{format.number($pag.getnTpintegra().doubleValue(),1)}</tpIntegra>
+			<CNPJ>$!esc.xml($!{pag.getsCnpj()})</CNPJ>
+			<tBand>$!esc.xml($!{pag.getsTband()})</tBand>
+			<cAut>$!esc.xml($!{pag.getsCaut()})</cAut>	
+		</card>
+		#end
+	</pag>
+#end
+#end

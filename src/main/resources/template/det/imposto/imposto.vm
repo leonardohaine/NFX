@@ -1,0 +1,17 @@
+    <imposto>
+    #if( $i.getnVtottrib() )
+    	<vTotTrib>$!{format.number($i.getnVtottrib().doubleValue(),15,2)}</vTotTrib>
+    #end
+    #if( $i.getnIssqnVbc() )
+#parse("/template/det/imposto/ISSQN.vm")
+	#else
+#parse("/template/det/imposto/ICMS/ICMS.vm")
+#parse("/template/det/imposto/IPI.vm")
+#parse("/template/det/imposto/II.vm")
+	#end
+#parse("/template/det/imposto/PIS.vm")
+#parse("/template/det/imposto/PISST.vm")
+#parse("/template/det/imposto/COFINS.vm")
+#parse("/template/det/imposto/COFINSST.vm")
+#parse("/template/det/imposto/ICMS/ICMSSN/ICMSUFDEST.vm")
+    </imposto>

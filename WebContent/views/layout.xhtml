@@ -13,12 +13,12 @@
 
 	<title>Sistema de NF-e / NFS-e</title>
 
-	<h:outputStylesheet library="algaworks" name="styles/custom.css" />
-	<h:outputStylesheet library="algaworks" name="styles/layout.css" />
-	<h:outputStylesheet library="algaworks" name="styles/components.css" />
+	<h:outputStylesheet library="nfx" name="styles/custom.css" />
+	<h:outputStylesheet library="nfx" name="styles/layout.css" />
+	<h:outputStylesheet library="nfx" name="styles/components.css" />
 	
 	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
-	<h:outputScript target="body" library="algaworks" name="javascripts/app.js" />
+	<h:outputScript target="body" library="nfx" name="javascripts/app.js" />
 </h:head>
 
 <h:body>
@@ -33,10 +33,18 @@
 						
 						<div align="right">
 							<h:form id="formLink">
-							<i onclick="PF('empresa').show(); return false;" />
-								<p:link onclick="PF('empresa').show(); return false;" value="#{unidade.empresa.cnpj} - #{unidade.empresa.razaoSocial}" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;">
+<!-- 								<p:selectOneMenu value="#{unidade.empresa.cnpj}" filter="true" id="dadosEmpresa"> -->
+<!-- 									<f:selectItems value="#{unidade.listEmpresa}" var="emp" itemLabel="#{emp.razaoSocial} - #{emp.cnpj}" itemValue="#{emp.cnpj}" > -->
+										
+<!-- 									</f:selectItems> -->
+<!-- 									<p:ajax listener="#{unidade.loadListEmpresa()}" /> -->
+<!-- 								</p:selectOneMenu>	 -->
+								<h:commandLink id="link" value="ESCOLHER EMPRESA" style="text-decoration: none; font: bold 10px helvetica; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;">
+									<p:ajax event="click" oncomplete="PF('empresa').show();" listener="#{unidade.loadListEmpresa()}"></p:ajax>
 									<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.empresa.cnpj}"></p:inputText>
-								</p:link>
+								</h:commandLink>
+								<h:outputText id="dadosEmpresa" style="color:white; font: bold 10px helvetica;" value=": #{unidade.empresa.cnpj} - #{unidade.empresa.razaoSocial}" />
+
 							</h:form>
 						</div>
 						
@@ -61,13 +69,10 @@
 		</p:layoutUnit>
 	</p:layout>		
 	
-	
-	
-	
 	<h:form>
-		<p:dialog header="ESCOLHA EMPRESA" widgetVar="empresa" visible="false" modal="true" closable="false" resizable="false" responsive="true" width="40%">
+		<p:dialog header="ESCOLHA EMPRESA" widgetVar="empresa"  closeOnEscape="true" visible="false" modal="true" closable="true" resizable="false" responsive="true" width="40%">
 		
-			<p:dataTable var="emp" value="#{unidade.listEmpresa}" >
+			<p:dataTable var="emp" value="#{unidade.listEmpresa}" dynamic="true" initMode="immediate" reflow="true" style="width: 100%;">
 	                <f:facet name="header">
 	                	EMPRESAS
 	                </f:facet>
@@ -76,19 +81,44 @@
 	                    <h:outputText value="#{emp.cnpj}" />
 	                </p:column>
 	 
-	                <p:column headerText="Empresa">
+	                <p:column headerText="Razão Social">
 	                    <h:outputText value="#{emp.razaoSocial}" />
 	                </p:column>
 	 
 	                <p:column style="width:32px;text-align: center">
 	                    <p:commandButton icon="ui-icon-check" oncomplete="PF('empresa').hide()" 
-	                    		actionListener="#{unidade.selectEmpFromDialog(emp)}" update=":formLink" />
+	                    		actionListener="#{unidade.selectEmpFromDialog(emp)}" update=":formLink:dadosEmpresa" />
 	                </p:column>
 	            </p:dataTable>
 		
 		</p:dialog>
-	</h:form>
 	
+	
+		<p:idleMonitor timeout="${session.maxInactiveInterval*1000}">
+			  <p:ajax event="idle" listener="#{auth.isSessionValid}"
+			 
+			 oncomplete="PF('idleDialog').show();" />
+	     </p:idleMonitor>
+	     
+	     <p:dialog
+	             header="A sessão expirou."
+	             widgetVar="idleDialog"
+	             modal="true"
+	             fixedCenter="true"
+	             closable="false"
+	             draggable="false"
+	             resizable="false"
+	             appendToBody="true"
+	             style="text-align: center;"
+	             height="100"
+	             width="400"
+	             rendered="#{auth.loggedIn}">
+             <div align="center">
+		         <p:outputLabel escape="false" value="A sessão expirou após 30 minutos de inatividade.&lt;br/&gt; Faça login novamente." /><br/><br/><br/>
+		         <p:commandButton value="OK" oncomplete="Javascript:window.location='${request.contextPath}/'" onclick="PF('idleDialog').hide();"></p:commandButton>
+	         </div>
+	     </p:dialog>
+	</h:form>
 </h:body>
 
 </html>

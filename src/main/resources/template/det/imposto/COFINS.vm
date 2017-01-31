@@ -1,0 +1,39 @@
+	<COFINS>
+#if( $format.number($i.getnCofinsaliqCst().doubleValue(),2) == "1" ||
+     $format.number($i.getnCofinsaliqCst().doubleValue(),2) == "2" )
+	    <COFINSAliq>
+	        <CST>0$!{format.number($i.getnCofinsaliqCst().doubleValue(),2)}</CST>
+	        <vBC>$!{format.number($i.getnCofinsaliqVbc().doubleValue(),15,2)}</vBC>
+	        <pCOFINS>$!{format.number($i.getnCofinsaliqPconfins().doubleValue(),5,2)}</pCOFINS>
+	        <vCOFINS>$!{format.number($i.getnCofinsaliqVconfins().doubleValue(),15,2)}</vCOFINS>
+	    </COFINSAliq>
+#elseif( $format.number($i.getnCofinsqtdeCst().doubleValue(),2) == "3" )
+	    <COFINSQtde>
+	        <CST>0$!{format.number($i.getnCofinsqtdeCst().doubleValue(),2)}</CST>
+	        <qBCProd>$!{format.number($i.getnCofinsqtdeQbcprod().doubleValue(),16,4)}</qBCProd>
+	        <vAliqProd>$!{format.number($i.getnCofinsqtdeValiqprod().doubleValue(),15,4)}</vAliqProd>
+	        <vCOFINS>$!{format.number($i.getnCofinsqtdeVcofins().doubleValue(),15,2)}</vCOFINS>
+	    </COFINSQtde>
+#elseif( $format.number($i.getnCofinsntCst().doubleValue(),2) == "4" ||
+         $format.number($i.getnCofinsntCst().doubleValue(),2) == "5" ||
+         $format.number($i.getnCofinsntCst().doubleValue(),2) == "6" ||
+         $format.number($i.getnCofinsntCst().doubleValue(),2) == "7" ||
+         $format.number($i.getnCofinsntCst().doubleValue(),2) == "8" ||
+         $format.number($i.getnCofinsntCst().doubleValue(),2) == "9" )
+	    <COFINSNT>
+	        <CST>0$!{format.number($i.getnCofinsntCst().doubleValue(),2)}</CST>
+	    </COFINSNT>
+#elseif( $i.getnCofinsoutrCst().doubleValue() >= 49 )
+	    <COFINSOutr>
+	        <CST>$!{format.number($i.getnCofinsoutrCst().doubleValue(),2)}</CST>
+#if( $i.getnCofinsoutrVbc() )
+	        <vBC>$!{format.number($i.getnCofinsoutrVbc().doubleValue(),15,2)}</vBC>
+	        <pCOFINS>$!{format.number($i.getnCofinsoutrPcofins().doubleValue(),5,2)}</pCOFINS>
+#else
+	        <qBCProd>$!{format.number($i.getnCofinsoutrQbcprod().doubleValue(),16,4)}</qBCProd>
+	        <vAliqProd>$!{format.number($i.getnCofinsoutrValiqprod().doubleValue(),15,4)}</vAliqProd>
+#end
+	        <vCOFINS>$!{format.number($i.getnCofinsoutrVcofins().doubleValue(),15,2)}</vCOFINS>
+	    </COFINSOutr>
+#end
+	</COFINS>

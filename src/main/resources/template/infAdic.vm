@@ -1,0 +1,30 @@
+#if( $header.getsInfadfisco() || $header.getsInfcpl() || $camp.getNfeItemCampPk().getsOcxcampo() != "" || $camp.getNfeItemCampPk().getsOfxcampo() != "" )
+    <infAdic>
+		#if( $header.getsInfadfisco() )
+			<infAdFisco>$!textFormat.escapeMultiplosCData($!{header.getsInfadfisco()})</infAdFisco>
+		#end
+		#if( $header.getsInfcpl() )
+			<infCpl>$!textFormat.escapeMultiplosCData($!{header.getsInfcpl()})</infCpl>
+		#end
+		#if( ($camp.getNfeItemCampPk().getsOcxcampo() != "") || ($camp.getNfeItemCampPk().getsOfxcampo() != "") )
+			#foreach($camp in $xcampo)
+				#if( $camp.getNfeItemCampPk().getsOcxcampo() != "0" )	
+					<obsCont xCampo="$!esc.xml($!{camp.getNfeItemCampPk().getsOcxcampo()})">
+						<xTexto>$!esc.xml($!{camp.getsOcxtexto()})</xTexto>
+					</obsCont>
+				#end
+				#if( $camp.getNfeItemCampPk().getsOfxcampo() != "0")				
+					<obsFisco xCampo="$!esc.xml($!{camp.getNfeItemCampPk().getsOfxcampo()})">
+						<xTexto>$!esc.xml($!{camp.getsOfxtexto()})</xTexto>
+					</obsFisco>
+				#end
+			#end
+		#end		
+		#if( $header.getsNproc() )
+        <procRef>
+            <nProc>$!esc.xml($!{header.getsNproc()})</nProc>
+            <indProc>$!{format.number($header.getnIndproc().doubleValue(),1)}</indProc>
+        </procRef>
+        #end	
+    </infAdic>
+#end

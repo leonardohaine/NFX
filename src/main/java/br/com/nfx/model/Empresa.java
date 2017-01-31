@@ -30,7 +30,7 @@ import org.hibernate.annotations.Type;
 public class Empresa implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_empresa")
     @SequenceGenerator(name = "seq_empresa", sequenceName = "seq_empresa",  allocationSize = 0)
@@ -41,9 +41,9 @@ public class Empresa implements Serializable {
     @Column(name = "razao_social")
     private String razaoSocial;
     @Column(name = "cnpj")
-    private Long cnpj;
+    private String cnpj;
     @Column(name = "cpf")
-    private Long cpf;
+    private String cpf;
     @Column(name = "inscricao_estadual")
     private Long inscricaoEstadual;
     @Column(name = "inscricao_estadual_st")
@@ -117,19 +117,38 @@ public class Empresa implements Serializable {
         this.razaoSocial = razaoSocial;
     }
 
-    public Long getCnpj() {
+    public String getCnpj() {
+    	if(idEmpresa != null && cnpj != null && cnpj.length() == 14){
+			 cnpj = (cnpj.substring(0, 2) + "." + 
+				 	 cnpj.substring(2, 5) + "." +
+				 	 cnpj.substring(5, 8) + "/" + 
+				 	 cnpj.substring(8, 12) + "-" +
+				 	 cnpj.substring(12, 14));
+		} else
+    	if(idEmpresa != null && cnpj != null && cnpj.length() == 11){
+    		cnpj = (cnpj.substring(0, 3) + "." + 
+    				cnpj.substring(3, 6) + "." +
+    				cnpj.substring(6, 9) + "-" +
+    				cnpj.substring(9, 11));
+		}
         return cnpj;
     }
 
-    public void setCnpj(Long cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 
-    public Long getCpf() {
+    public String getCpf() {
+    	if(idEmpresa != null && cpf != null && cpf.length() == 11){
+    		cpf = (cpf.substring(0, 3) + "." + 
+					 cpf.substring(3, 6) + "." +
+					 cpf.substring(6, 9) + "-" +
+					 cpf.substring(9, 11));
+		}
         return cpf;
     }
 
-    public void setCpf(Long cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 

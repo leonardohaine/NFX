@@ -1,0 +1,243 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />
+	<h:outputStylesheet library="nfx" name="styles/custom.css" />
+	<h:outputStylesheet library="nfx" name="styles/layout.css" />
+	<h:outputStylesheet library="nfx" name="styles/components.css" />
+	
+	<h:outputScript target="body" library="nfx" name="javascripts/app.js" />
+</h:head>
+  
+  <ui:composition template="layout.xhtml">
+  	<ui:define name="conteudo">
+  
+    <div class="ui-grid">
+        
+        <h:form id="formNfe" enctype="multipart/form-data">
+        	<p:growl id="msgs" showDetail="true" />
+<!-- 	       <p:panel header="Cliente" style="margin-botton:10px"> -->
+			   <p:fieldset legend="Cliente" style="margin-bottom:10px">
+				<f:facet name="header" >
+						
+				</f:facet>
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-6 ui-lg-1">
+						<p:outputLabel for="cliRazaoSocial" value="Cliente: " />
+					</div>	
+					<div class="ui-g-12 ui-md-6 ui-lg-3">	
+						<p:inputText size="15" id="cliRazaoSocial" value="#{emissaoNfeBean.cliente.cnpj}" dir="rtl" /> 
+						<p:commandButton value="Pesquisar" icon="ui-icon-search" style="width: 100px" title="Pesquisa" action="#{selecaoClienteBean.abrirDialogo}"
+							process="@this" update="@none">
+							<p:ajax event="dialogReturn" listener="#{emissaoNfeBean.clienteSelecionado}" immediate="true" update="cliRazaoSocial cliRazaoSocial2" />
+							<p:resetInput target="cliRazaoSocial" />
+						</p:commandButton>
+					</div>
+					<div align="left" class="ui-g-12 ui-md-6 ui-lg-4">
+						<p:inputText size="50" readonly="true" dir="ltr" id="cliRazaoSocial2" value="#{emissaoNfeBean.cliente.razaoSocial}" />
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-1">
+				    	<p:outputLabel for="dataEmissao" value="Data emissão: " />
+				    </div>	
+			    	<div class="ui-g-12 ui-md-6 ui-lg-3">
+       					<p:calendar id="dataEmissao" value="#{emissaoNfeBean.dataEmissao}" locale="pt_BR" navigator="true" showButtonPanel="true" showOn="button" pattern="dd/MM/yyyy HH:mm:ss Z" />
+					</div>
+        		</div>
+<!--     	   </p:panel> -->
+			   </p:fieldset>
+    		<p:panelGrid columns="2" columnClasses="left,right" layout="grid" style="width:100%; ">
+	       		<p:panel header="Identificação NF-e"  >
+	        		<f:facet name="header" >
+						
+					</f:facet>
+		        		<div class="ui-g">
+		        			<div class="ui-g-12 ui-md-6 ui-lg-2">
+		        				<p:outputLabel value="Tipo Operação: " for="tipoOperacao" />
+	        				</div>
+	        				<div class="ui-g-12 ui-md-6 ui-lg-3">
+								<p:selectOneMenu id="tipoOperacao" value="#{emissaoNfeBean.nfe.nTpnf}" style="width: 125px" >
+									<f:selectItem itemLabel="Selecione" itemValue="" />
+									<f:selectItem itemLabel="1 - Saida" itemValue="1" />
+									<f:selectItem itemLabel="0 - Entrada" itemValue="0" />
+								</p:selectOneMenu>	
+							</div>
+							<div class="ui-g-1 ui-md-6 ui-lg-2">
+		        				<p:outputLabel value="Nat. Operação: " for="natop" />
+	        				</div>
+	        				<div class="ui-g-12 ui-md-6 ui-lg-3">
+								<p:inputText id="natop" size="33" value="#{emissaoNfeBean.nfe.sNatop}" />
+							</div>
+	       				</div>
+	       		</p:panel>
+	       		
+	       		<p:panel header="Nota fiscal Referenciada" >
+		        		<f:facet name="header" >
+						
+						</f:facet>
+		        		<div class="ui-g">
+		        			<div class="ui-g-1 ui-md-6 ui-lg-3">
+		        				<p:outputLabel value="Chave de acesso: " for="chaveAcessoRef" />
+	        				</div>
+	        				<div class="ui-g-12 ui-md-6 ui-lg-3">
+								<p:inputText id="chaveAcessoRef" maxlength="44" size="60" value="#{emissaoNfeBean.nfe.sId}" />
+							</div>
+	       				</div>
+	       		</p:panel>
+	       	
+	       		
+       		</p:panelGrid>
+       		
+       		
+			<p:panel style="margin-botton:10px;">
+	        	<p:tabView dir="ltr">
+        			<p:tab title="Produto">
+				
+				
+	        		<div class="ui-g">
+	        			<div class="ui-g-12 ui-md-6 ui-lg-1">
+							<p:outputLabel for="produto" value="Produto: " />
+						</div>	
+						<div class="ui-g-12 ui-md-6 ui-lg-3">	
+							<p:inputText size="15" id="produto" value="#{emissaoNfeBean.cliente.cnpj}" dir="rtl" /> 
+							<p:commandButton value="Pesquisar" icon="ui-icon-search" style="width: 100px" title="Pesquisa" action="#{selecaoClienteBean.abrirDialogo}"
+								process="@this" update="@none">
+								<p:ajax event="dialogReturn" listener="#{emissaoNfeBean.clienteSelecionado}" immediate="true" update="produto produto2" />
+								<p:resetInput target="produto" />
+							</p:commandButton>
+						</div>
+						<div align="left" class="ui-g-12 ui-md-6 ui-lg-4">
+							<p:inputText size="50" readonly="true" dir="ltr" id="produto2" value="#{emissaoNfeBean.cliente.razaoSocial}" />
+						</div>
+					</div>	
+					<div class="ui-g">	
+						<p:dataTable id="eventsDT" var="car" reflow="true" value="#{dtSelectionView.cars3}" selectionMode="single" 
+							emptyMessage="Nenhum item encontrado" selection="#{dtSelectionView.selectedCar}" rowKey="#{car.id}">
+					        <f:facet name="header">
+					            Lista de produtos da Nota Fiscal
+					        </f:facet>
+					        <p:ajax event="rowSelect" listener="#{dtSelectionView.onRowSelect}" update=":formNfe:msgs" />
+					        <p:ajax event="rowUnselect" listener="#{dtSelectionView.onRowUnselect}" update=":formNfe:msgs" />
+					        <p:column headerText="Código" width="8%">
+					            <h:outputText value="#{emissaoNfeBean.nfe.item.sCprod}" />
+					        </p:column>
+					        <p:column headerText="Descrição" >
+					            <h:outputText value="#{car.year}" />
+					        </p:column>
+					        <p:column headerText="Unidade" width="6%">
+					            <h:outputText value="#{car.brand}" />
+					        </p:column>
+					        <p:column headerText="Quantidade" width="10%">
+					            <h:outputText value="#{car.color}" />
+					        </p:column>
+					        <p:column headerText="Valor Unitário" width="15%">
+					            <h:outputText value="#{car.color}" />
+					        </p:column>
+					        <p:column headerText="CST"  width="5%">
+					            <h:outputText value="#{car.color}" />
+					        </p:column>
+					        <p:column headerText="CFOP" width="5%">
+					            <h:outputText value="#{car.color}" />
+					        </p:column>
+					        <p:column headerText="Total" width="15%">
+					            <h:outputText value="#{car.color}" />
+					        </p:column>
+					    </p:dataTable>
+	        		</div>
+				</p:tab>
+				<p:tab title="Duplicata">
+				</p:tab>
+				<p:tab title="Totais">
+				</p:tab>
+				<p:tab title="Transportadora">
+				</p:tab>
+				</p:tabView>
+			</p:panel>
+			
+			<p:fieldset legend="Totais da Nota Fiscal" style="margin-bottom:10px">
+				
+				<p:panelGrid >
+					<div class="ui-g">
+	        			<div class="ui-g-12 ui-md-6 ui-lg-2">
+	        				<p:outputLabel value="Base de cálculo ICMS: " for="baseCalculoICMS" />
+							<p:inputNumber dir="ltr" id="baseCalculoICMS" emptyValue="zero" symbol="R$ " decimalSeparator="," thousandSeparator="." 
+											value="#{emissaoNfeBean.nfe.nTotIcmsVbc}" />
+						</div>
+						<div class="ui-g-1 ui-md-6 ui-lg-2">
+	        				<p:outputLabel value="Valor ICMS: " for="valorIcms" />
+	        				<p:inputNumber dir="ltr" id="valorIcms" emptyValue="zero" symbol="R$ " decimalSeparator="," thousandSeparator="." 
+	        								value="#{emissaoNfeBean.nfe.nTotIcmsVicms}" />
+        				</div>
+        				
+        				<div class="ui-g-1 ui-md-6 ui-lg-2">
+	        				<p:outputLabel value="Valor ICMS Deson: " for="valorICMSDeson" />
+	        				<p:inputNumber dir="ltr" id="valorICMSDeson" emptyValue="zero" symbol="R$ " decimalSeparator="," thousandSeparator="." 
+	        								value="#{emissaoNfeBean.nfe.nTotIcmsVicmsdeson}" />
+        				</div>
+        				
+        				
+						<div class="ui-g-12 ui-md-6 ui-lg-2">
+	        				<p:outputLabel value="Base de cálculo ICMS-ST: " for="baseCalculoICMSST" />
+							<p:inputNumber dir="ltr" id="baseCalculoICMSST" emptyValue="zero" symbol="R$ " decimalSeparator="," thousandSeparator="." 
+											value="#{emissaoNfeBean.nfe.nTotIcmsVbcst}" />
+						</div>
+						<div class="ui-g-1 ui-md-6 ui-lg-2">
+	        				<p:outputLabel value="Valor ICMS-ST: " for="valorIcmsSt" />
+	        				<p:inputNumber dir="ltr" id="valorIcmsSt" emptyValue="zero" symbol="R$ " decimalSeparator="," thousandSeparator="." 
+	        								value="#{emissaoNfeBean.nfe.nTotIcmsVst}" />
+        				</div>
+        				
+        				<div class="ui-g-12 ui-md-6 ui-lg-2">
+	        				<p:outputLabel value="Valor PIS: " for="valorPIS" />
+							<p:inputNumber dir="ltr" id="valorPIS" emptyValue="zero" symbol="R$ " decimalSeparator="," thousandSeparator="." 
+											value="#{emissaoNfeBean.nfe.nTotIcmsVpis}" />
+						</div>
+						
+						<div class="ui-g-1 ui-md-6 ui-lg-2">
+	        				<p:outputLabel value="Valor COFINS: " for="valorCOFINS" />
+	        				<p:inputNumber dir="ltr" id="valorCOFINS" emptyValue="zero" symbol="R$ " decimalSeparator="," thousandSeparator="." 
+	        								value="#{emissaoNfeBean.nfe.nTotIcmsVcofins}" />
+        				</div>
+						
+        				<div class="ui-g-1 ui-md-6 ui-lg-2">
+	        				<p:outputLabel value="Valor IPI: " for="valorIPI" />
+	        				<p:inputNumber dir="ltr" id="valorIPI" emptyValue="zero" symbol="R$ " decimalSeparator="," thousandSeparator="." 
+	        								value="#{emissaoNfeBean.nfe.nTotIcmsVipi}" />
+        				</div>
+						<div class="ui-g-1 ui-md-6 ui-lg-2">
+	        				<p:outputLabel value="Valor Aprox. tributos: " for="valorAproxTrib" />
+	        				<p:inputNumber dir="ltr" id	="valorAproxTrib" emptyValue="zero" symbol="R$ " decimalSeparator="," thousandSeparator="." 
+	        								value="#{emissaoNfeBean.nfe.nTotTottrib}" />
+        				</div>
+        				
+       				</div>
+				</p:panelGrid>
+				
+			</p:fieldset>
+			
+			
+			<p:toolbar style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+
+				<f:facet name="right" style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+					<p:button value="Cancelar" outcome="listaCliente" />
+					<p:commandButton value="Salvar"	action="${clienteBean.salvar}" />
+				</f:facet>
+
+				<f:facet name="left" style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+					<p:commandButton ajax="true" value="update" update="formNfe"></p:commandButton>	
+				</f:facet>
+			</p:toolbar>
+			
+	    </h:form>
+    </div> 
+    
+    </ui:define>   
+    </ui:composition>
+    
+</html>

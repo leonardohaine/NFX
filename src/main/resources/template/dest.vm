@@ -1,0 +1,55 @@
+    <dest>
+#if( $header.getsDestCnpj() && $header.getsDestCnpj() != "00000000000000" )
+        <CNPJ>$!{header.getsDestCnpj()}</CNPJ>
+#else
+        <CPF>$!{header.getsDestCpf()}</CPF>
+#end
+		#if($header.getnVersao().doubleValue() >= 3.1)
+			#if($header.getsDestIdestrangeiro())
+		<idEstrangeiro>$!esc.xml($!{header.getsDestIdestrangeiro()})</idEstrangeiro>
+			#end
+		#end
+		<xNome>$!esc.xml($!{header.getsDestXnome()})</xNome>
+        <enderDest>
+            <xLgr>$!esc.xml($!{header.getsDestXlgr()})</xLgr>
+            <nro>$!{header.getsDestNro()}</nro>
+#if( $header.getsDestXcpl() )
+            <xCpl>$!esc.xml($!{header.getsDestXcpl()})</xCpl>
+#end
+            <xBairro>$!esc.xml($!{header.getsDestXbairro()})</xBairro>
+            <cMun>$!{format.number($header.getsDestCmun().doubleValue(),7)}</cMun>
+            <xMun>$!esc.xml($!{header.getsDestXmun()})</xMun>
+            <UF>$!esc.xml($!{header.getsDestUf()})</UF>
+#if( $header.getsDestCep() )
+            <CEP>$!esc.xml($!{format.numberZeroAEsquerda($!header.getsDestCep(), 8, 0)})</CEP>
+#end
+#if($header.getsDestCpais() )
+            <cPais>$!{format.number($header.getsDestCpais().doubleValue(),4)}</cPais>
+#end
+#if( $header.getsDestXpais() )
+            <xPais>$!esc.xml($!{header.getsDestXpais()})</xPais>
+#end
+#if( $header.getsDestFone() )
+            <fone>$!esc.xml($!{format.number($header.getsDestFone().doubleValue(),14)})</fone>
+#elseif( $header.getnDestFone() )
+            <fone>$!{header.getnDestFone()}</fone>
+#end
+        </enderDest>
+#if($header.getnVersao().doubleValue() >= 3.1)
+		<indIEDest>$!{header.getnDestIndiedest()}</indIEDest>
+#end
+#if( $header.getsDestIe() && $header.getsDestIe() != "" && $header.getsDestIe() != "00000000000000" )
+        <IE>$!{header.getsDestIe()}</IE>
+#end
+#if( $header.getsDestIsuf() )
+        <ISUF>$!{header.getsDestIsuf()}</ISUF>
+#end
+#if($header.getnVersao().doubleValue() >= 3.1)
+#if($header.getsDestIm())
+		<IM>$!{header.getsDestIm()}</IM>
+#end
+#end
+#if ( $header.getsDestEmail() )
+        <email>$!esc.xml($!{header.getsDestEmail()})</email>
+#end
+    </dest>

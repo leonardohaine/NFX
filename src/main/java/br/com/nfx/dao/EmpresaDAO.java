@@ -6,8 +6,11 @@ package br.com.nfx.dao;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,45 +26,47 @@ import br.com.nfx.model.Empresa;
 @Transactional
 public class EmpresaDAO {
 
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	private SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	private void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
+	@PersistenceContext
+	private EntityManager entityManager;
+	
 	public void salvar(Empresa empresa) {
-		
-		getSessionFactory().getCurrentSession().merge(empresa);
+		entityManager.merge(empresa);
 	}
 
 	public void deletar(Empresa empresa) {
-		getSessionFactory().getCurrentSession().delete(empresa);
+		entityManager.remove(entityManager.getReference(Empresa.class, empresa.getIdEmpresa()));
 	}
 
 	public void atualizar(Empresa empresa) {
-		getSessionFactory().getCurrentSession().update(empresa);
+		entityManager.merge(empresa);
 	}
 
 	public Empresa getEmpresaById(Long id) {
-		Empresa empresa = (Empresa) getSessionFactory().getCurrentSession().get(Empresa.class, id);
-
+		Empresa empresa = (Empresa) entityManager.find(Empresa.class, id);
 		return empresa;
-
-	}
-
-	public List<Empresa> getEmpresa() {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Empresa").list();
-		return list;
 	}
 	
+	public Empresa getEmpresaByCnpj(String cnpj) {
+		try{
+			Query query =  entityManager.createNativeQuery("select * from empresa where cnpj = :cnpj", Empresa.class)
+					.setParameter("cnpj", cnpj);
+			Empresa empresa = (Empresa) query.getSingleResult();
+			return (Empresa)empresa;
+		}catch (NoResultException e) {
+			return null;
+		}
+	}
+
+//	public List<Empresa> getEmpresa() {
+//		List list = getSessionFactory().getCurrentSession().createQuery("from Empresa").list();
+//		return list;
+//	}
+	
 	public List<String> getCidade(String uf){
-		List list = getSessionFactory().getCurrentSession().createSQLQuery("select descricao_municipio from cidade where sigla_uf = '" + uf + "'").list();
-		return list;
+		
+		Query query = entityManager.createNativeQuery("select descricao_municipio from cidade where sigla_uf = :sigla_uf");
+		query.setParameter("sigla_uf", uf);
+		return query.getResultList();
 	}
 
 

@@ -1,0 +1,37 @@
+#if( $i.getsIpiCenq() )
+<IPI>
+#if( $i.getsIpiCienq() )
+    <clEnq>$!esc.xml($!{i.getsIpiCienq()})</clEnq>
+#end
+#if( $i.getsIpiCnpjprod() )
+    <CNPJProd>$!esc.xml($!{i.getsIpiCnpjprod()})</CNPJProd>
+#end
+#if( $i.getsIpiCselo() )
+    <cSelo>$!{i.getsIpiCselo()}</cSelo>
+#end
+#if( $i.getnIpiQselo() )
+    <qSelo>$!{format.number($i.getnIpiQselo().doubleValue(),12)}</qSelo>
+#end
+    <cEnq>$!{i.getsIpiCenq()}</cEnq>
+#if( $i.getsIpitribCst() == "00" ||
+     $i.getsIpitribCst() == "49" ||
+     $i.getsIpitribCst() == "50" ||
+     $i.getsIpitribCst() == "99"  )
+    <IPITrib>
+        <CST>$!{i.getsIpitribCst()}</CST>
+#if( $i.getnIpitribVbc() )
+        <vBC>$!{format.number($i.getnIpitribVbc().doubleValue(),15,2)}</vBC>
+        <pIPI>$!{format.number($i.getnIpitribPipi().doubleValue(),5,2)}</pIPI>
+#elseif($i.getnIpitribVunid())
+        <qUnid>$!{format.number($i.getnIpitribQunid().doubleValue(),16,4)}</qUnid>
+        <vUnid>$!{format.number($i.getnIpitribVunid().doubleValue(),15,4)}</vUnid>
+#end
+        <vIPI>$!{format.number($i.getnIpitribVipi().doubleValue(),15,2)}</vIPI>
+    </IPITrib>
+#else
+    <IPINT>
+        <CST>$!{i.getsIpintCst()}</CST>
+    </IPINT>
+#end
+</IPI>
+#end

@@ -1,0 +1,18 @@
+#if( $header.getsLretCnpj() || $header.getsLretCpf() )
+    <retirada>
+#if( $header.getsLretCnpj() )
+        <CNPJ>$!esc.xml($!{header.getsLretCnpj()})</CNPJ>
+#else
+        <CPF>$!esc.xml($!{header.getsLretCpf()})</CPF>
+#end
+        <xLgr>$!esc.xml($!{header.getsLretXlgr()})</xLgr>
+        <nro>$!esc.xml($!{header.getsLretNro()})</nro>
+#if( $header.getsLretXcpl() )
+        <xCpl>$!esc.xml($!{header.getsLretXcpl()})</xCpl>
+#end
+        <xBairro>$!esc.xml($!{header.getsLretXbairro()})</xBairro>
+        <cMun>$!{format.number($header.getsLretCmun().doubleValue(),7)}</cMun>
+        <xMun>$!esc.xml($!{header.getsLretXmun()})</xMun>
+        <UF>$!esc.xml($!{header.getsLretUf()})</UF>
+    </retirada>
+#end

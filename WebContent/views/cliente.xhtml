@@ -20,7 +20,7 @@
 
 				<p:panel header="Cadastro">
 					
-					<h:inputHidden id="clienteId" value="${clienteBean.cliente.clienteId}" />
+<!-- 					<h:inputHidden id="clienteId" value="${clienteBean.cliente.clienteId}" /> -->
 					
 					<p:outputLabel for="cadastro" value="Tipo Cadastro:" />
 					<p:selectOneMenu id="cadastro"
@@ -43,8 +43,8 @@
 						<p:inputText id="razaoSocial"
 							value="${clienteBean.cliente.razaoSocial}" />
 
-						<p:outputLabel value="RG/CNPJ" for="cnpj" />
-						<p:inputText id="cnpj" value="${clienteBean.cliente.cnpj}" />
+						<p:outputLabel value="CNPJ/cpf" for="cnpj" />
+						<p:inputText id="cnpj" value="${clienteBean.cliente.cnpj}" maxlength="14" />
 
 						<p:outputLabel value="Inscrição Estadual" for="insEstadual" />
 						<p:inputText id="insEstadual"
@@ -62,14 +62,14 @@
 						<p:inputText id="inscricaoEstadualST"
 							value="${clienteBean.cliente.inscricaoEstadualST}" />
 							
-						<p:outputLabel value="Regime Tributário" for="regimeTributario" />
-						<p:selectOneMenu id="regimeTributario" style="width:25px" 
-							value="${clienteBean.cliente.regimeTributario}">
+						<p:outputLabel value="Indicador Inscrição Estadual" for="indicadorIE" />
+						<p:selectOneMenu id="indicadorIE" style="width:55px" 
+							value="${clienteBean.cliente.indicadorIE}">
 							<f:selectItem itemLabel="Selecione" noSelectionOption="false" />
-							<f:selectItem itemLabel="Simples Nacional" itemValue="teste" />
-							<f:selectItem itemLabel="Simples Nacional - excesso de sublimite" itemValue="Xbox One" />
-							<f:selectItem itemLabel="Regime Normal" itemValue="PS4" />
-						</p:selectOneMenu>		
+							<f:selectItem itemLabel="1 - Contribuinte" itemValue="1" />
+							<f:selectItem itemLabel="2 - Contribuinte Isento" itemValue="2" />
+							<f:selectItem itemLabel="3 - Não Contribuinte" itemValue="3" />
+						</p:selectOneMenu>
 
 						<p:outputLabel value="Inscrição Suframa" for="insSuframa" />
 						<p:inputText id="insSuframa"
@@ -96,20 +96,20 @@
 						<p:inputText id="logradouro"
 							value="${clienteBean.cliente.logradouro}" />
 
-						<p:outputLabel value="numero" for="numero" />
+						<p:outputLabel value="Número" for="numero" />
 						<p:inputText id="numero" value="${clienteBean.cliente.numero}" />
 
-						<p:outputLabel value="complemento" for="complemento" />
+						<p:outputLabel value="Complemento" for="complemento" />
 						<p:inputText id="complemento"
 							value="${clienteBean.cliente.complemento}" />
 
 						<p:outputLabel value="Bairro" for="bairro" />
 						<p:inputText id="bairro" value="${clienteBean.cliente.bairro}" />
 
-						<p:outputLabel value="cep" for="cep" />
+						<p:outputLabel value="Cep" for="cep" />
 						<p:inputText id="cep" value="${clienteBean.cliente.cep}" />
 
-						<p:outputLabel value="pais" for="pais" />
+						<p:outputLabel value="País" for="pais" />
 						<p:inputText id="pais" value="${clienteBean.cliente.pais}" />
 
 						<p:outputLabel value="UF" for="uf" />
@@ -145,7 +145,7 @@
 		                    <f:selectItem itemLabel="TO" itemValue="TO" />
 		                </p:selectOneMenu>
 
-						<p:outputLabel value="Municipio" for="municipio" />
+						<p:outputLabel value="Município" for="municipio" />
 						<p:selectOneMenu id="municipio" filter="true" value="${clienteBean.cliente.municipio}" style="width: 20px">
 							<f:selectItem itemLabel="Selecione a cidade" itemValue="" />
 							<f:selectItem itemLabel="${clienteBean.cliente.municipio}" itemValue="${clienteBean.cliente.municipio}" />

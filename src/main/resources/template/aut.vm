@@ -1,0 +1,11 @@
+#if($header.getnVersao().doubleValue() >= 3.1)
+#foreach($aut in $autorizacao )
+	<autXML>
+		#if ($aut.getNfeAutPk().getsCnpj() && $aut.getNfeAutPk().getsCnpj() != "00000000000000" )
+		<CNPJ>$!{aut.getNfeAutPk().getsCnpj()}</CNPJ>
+		#else
+		<CPF>$!{aut.getNfeAutPk().getsCpf()}</CPF>
+		#end		
+	</autXML>
+#end
+#end

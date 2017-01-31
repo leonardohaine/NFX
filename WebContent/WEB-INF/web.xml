@@ -21,9 +21,7 @@
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
   <listener>
-    <listener-class>
-            org.springframework.web.context.request.RequestContextListener
-        </listener-class>
+    <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
   </listener>
   
   
@@ -46,7 +44,7 @@
   </context-param>
   <context-param>
     <param-name>primefaces.redirect.javax.faces.application.ViewExpiredException</param-name>
-    <param-value>/jlab</param-value>
+    <param-value>/NFX</param-value>
   </context-param>
   <welcome-file-list>
     <welcome-file>index.xhtml</welcome-file>
@@ -56,6 +54,23 @@
     <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  
+  <servlet>
+      <servlet-name>dispatcher</servlet-name>
+      <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+      <init-param>
+	    <param-name>contextClass</param-name>
+	    <param-value>
+	      org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+	    </param-value>
+	  </init-param>
+      <init-param>
+          <param-name>contextConfigLocation</param-name>
+          <param-value>br.com.nfx.config.ApplicationConfig</param-value>
+      </init-param>
+  </servlet> 
+  
+  
   <servlet-mapping>
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>

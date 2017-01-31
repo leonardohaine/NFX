@@ -6,14 +6,21 @@ package br.com.nfx.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.nfx.model.Empresa;
 import br.com.nfx.model.Usuario;
-import br.com.nfx.util.Util;
+import br.com.nfx.util.UtilNfx;
 
 
 /**
@@ -25,59 +32,57 @@ import br.com.nfx.util.Util;
 @Transactional
 public class UsuarioDAO {
 
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	private SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	private void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
+	@PersistenceContext
+	private EntityManager entityManager;
+	
+	
 	public void saveUsuario(Usuario usuario) {
 		try {
-			usuario.setSenha(Util.cript(usuario.getSenha()));
+			usuario.setSenha(UtilNfx.cript(usuario.getSenha()));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		getSessionFactory().getCurrentSession().merge(usuario);
+		entityManager.merge(usuario);
 	}
 
 	public void deleteUsuario(Usuario usuario) {
 		try{
-			getSessionFactory().getCurrentSession().delete(usuario);
+			entityManager.remove(entityManager.getReference(Usuario.class, usuario.getCodusuario()));
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void updateUsuario(Usuario usuario) {
-		getSessionFactory().getCurrentSession().update(usuario);
+		entityManager.merge(usuario);
 	}
 
 	public Usuario getUsuarioById(Long id) {
-		Usuario usuarios = (Usuario) getSessionFactory().getCurrentSession().get(Usuario.class, id);
+		Usuario usuarios = (Usuario) entityManager.find(Usuario.class, id);
 
 		return usuarios;
 
 	}
 
 	public List<Usuario> getUsuario() {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Usuario").list();
+		List list = entityManager.createQuery("from Usuario").getResultList();
 		return list;
 	}
 
-	public Usuario getUsuario(String user, String senha) {
+	@SuppressWarnings("finally")
+	public Usuario getUsuarioLogin(String user, String senha) {
 
 		Usuario usuarios = null;
-		boolean retorno = false;
 		try {
-			usuarios = (Usuario) getSessionFactory().getCurrentSession().createCriteria(Usuario.class)
-					.add(Restrictions.eq("login", user.toUpperCase())).add(Restrictions.eq("senha", senha))
-					.uniqueResult();
+			
+			Query q = entityManager.createQuery("from Usuario where login = :login and senha = :senha");
+			
+			usuarios = (Usuario) q.setParameter("login", user.toUpperCase()).setParameter("senha", senha).getSingleResult();
+			 
+//			usuarios = (Usuario) getSessionFactory().getCurrentSession().createCriteria(Usuario.class)
+//					.add(Restrictions.eq("login", user.toUpperCase())).add(Restrictions.eq("senha", senha))
+//					.uniqueResult();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("Error in login() --> " + e.getMessage());
@@ -85,5 +90,5 @@ public class UsuarioDAO {
 			return usuarios;
 		}
 	}
-
+	
 }

@@ -1,0 +1,8 @@
+    <det nItem="$!{i.getNfeItemPk().getnNitem()}">
+        #parse("/template/det/prod/prod.vm")
+        #parse("/template/det/imposto/imposto.vm")
+        #parse("/template/det/imposto/impostoDevol.vm")
+#if( $i.getsInfadprod() )
+        <infAdProd>$!esc.xml($!{i.getsInfadprod()})</infAdProd>
+#end
+    </det>

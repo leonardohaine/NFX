@@ -1,0 +1,12 @@
+#if( $i.getnIcmsVbcufdest() )
+    <ICMSUFDest>
+        <vBCUFDest>$!{format.number($i.getnIcmsVbcufdest().doubleValue(),15,2)}</vBCUFDest>
+		<pFCPUFDest>$!{format.number($i.getnIcmsPfcpufdest().doubleValue(),7,4)}</pFCPUFDest>
+        <pICMSUFDest>$!{format.number($i.getnIcmspIcmsufdest().doubleValue(),7,4)}</pICMSUFDest>
+        <pICMSInter>$!{format.number($i.getnIcmcspIcmsinter().doubleValue(),7,2)}</pICMSInter>
+        <pICMSInterPart>$!{format.number($i.getnIcmcspIcmsinterpart().doubleValue(),7,4)}</pICMSInterPart>
+		<vFCPUFDest>$!{format.number($i.getnIcmcspVfcpufdest().doubleValue(),15,2)}</vFCPUFDest>
+        <vICMSUFDest>$!{format.number($i.getnIcmcsVicmsufdest().doubleValue(),15,2)}</vICMSUFDest>
+        <vICMSUFRemet>$!{format.number($i.getnIcmcsVicmsufremet().doubleValue(),15,2)}</vICMSUFRemet>
+    </ICMSUFDest>
+#end

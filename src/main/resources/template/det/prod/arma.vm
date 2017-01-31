@@ -1,0 +1,8 @@
+#if( $item.getString("K_NSERIE") != "000000000" )
+	<arma>
+		<tpArma>#getItem("K_TPARMA")</tpArma>
+		<nSerie>#getItem("K_NSERIE")</nSerie>
+		<nCano>#getItem("K_NCANO")</nCano>
+		<descr>#getItem("K_DESCR")</descr>
+	</arma>
+#end

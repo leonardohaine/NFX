@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<f:facet name="first">
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</f:facet>
+
+	<title>Sistema de NF-e / NFS-e</title>
+
+	<h:outputStylesheet library="algaworks" name="styles/custom.css" />
+	<h:outputStylesheet library="algaworks" name="styles/layout.css" />
+	<h:outputStylesheet library="algaworks" name="styles/components.css" />
+	
+	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
+	<h:outputScript target="body" library="algaworks" name="javascripts/app.js" />
+</h:head>
+
+<h:body>
+
+	<header class="aw-topbar" style="margin:50px;">
+		<div>
+			<div align="left">
+				<a href="#" class="aw-toggle  js-toggle" style="color: white;font-size: 30px;"><i class="fa  fa-bars"> </i></a>
+			</div>
+			
+			<div align="right">
+				<h:form id="formLink">
+				<i onclick="PF('empresa').show(); return false;" />
+					<p:link onclick="PF('empresa').show(); return false;" value="#{unidade.empresa.cnpj} - #{unidade.empresa.razaoSocial}" style="font: bold 10px arial black; color: white; text-shadow: 1px 1px 2px black, 0 0 25px white, 0 0 5px darkblue;">
+						<p:inputText type="hidden" id="cnpjUnidade" value="#{unidade.empresa.cnpj}"></p:inputText>
+					</p:link>
+				</h:form>
+			</div>
+			
+		</div>
+	</header>
+	
+	<aside class="aw-sidebar  js-sidebar">
+	<br/><br/>
+		<ui:include src="/views/menu.xhtml" />
+	</aside>
+	
+	<section class="aw-content  js-content">
+	<h:form><p:commandButton value="Teste" ajax="true"  global="true"></p:commandButton></h:form>
+		<ui:insert name="conteudo" />
+	</section>
+	<footer >
+		<ui:include src="/views/footer.xhtml" />
+	</footer>
+	
+	<h:form>
+		<p:dialog header="ESCOLHA EMPRESA" widgetVar="empresa" visible="false" modal="true" closable="false" resizable="false" responsive="true" width="40%">
+		
+			<p:dataTable var="emp" value="#{unidade.listEmpresa}" >
+	                <f:facet name="header">
+	                	EMPRESAS
+	                </f:facet>
+	 
+	                <p:column headerText="Cnpj">
+	                    <h:outputText value="#{emp.cnpj}" />
+	                </p:column>
+	 
+	                <p:column headerText="Empresa">
+	                    <h:outputText value="#{emp.razaoSocial}" />
+	                </p:column>
+	 
+	                <p:column style="width:32px;text-align: center">
+	                    <p:commandButton icon="ui-icon-check" oncomplete="PF('empresa').hide()" 
+	                    		actionListener="#{unidade.selectEmpFromDialog(emp)}" update=":formLink" />
+	                </p:column>
+	            </p:dataTable>
+		
+		</p:dialog>
+	</h:form>
+	
+</h:body>
+
+</html>

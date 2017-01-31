@@ -1,0 +1,12 @@
+<mastersaf>
+	<parametros>
+		##Nome da impressora que será utilizada para imprimir esta NF-e.
+		<dsImpressora>$!esc.xml($!{header.getsPrinterDsImpressora()})</dsImpressora>
+		##Número da ordem de embarque.
+		<ordemEmbarque>$!esc.xml($!{header.getsPrinterOrdemEmbarque()})</ordemEmbarque>
+		##Total de itens.
+		<nrItens>$!{item.getNumRows()}</nrItens>
+		##Nome do usuário que emitiu a nota no ERP.
+		<usuarioEmitente>$!esc.xml($!{header.getsPrinterUsuarioEmitente()})</usuarioEmitente>
+	</parametros>
+</mastersaf>

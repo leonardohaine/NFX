@@ -1,0 +1,152 @@
+<ide>
+    <cUF>$!{format.number($header.getnCuf().doubleValue(),2)}</cUF>
+    <cNF>$!{util.returnRandonNumberLength8($header.getnCnf().longValue())}</cNF>
+    <natOp>$!esc.xml($!{header.getsNatop()})</natOp>
+    <indPag>$!{format.number($header.getnIndpag().doubleValue(),1)}</indPag>
+    <mod>$!esc.xml($!{header.getsMod()})</mod>
+    <serie>$!{format.number($header.getnSerie().doubleValue(),3)}</serie>
+    <nNF>$!{format.number($header.getnNnf().doubleValue(),9)}</nNF>
+    
+#if($header.getnVersao().doubleValue() == 2)
+	<dEmi>$!{format.date($header.getdDemi())}</dEmi>
+#else
+    <dhEmi>$!{format.dateiso8601dhEmi($header.getdDemi())}</dhEmi>
+#end
+
+#if( $header.getdSaient() )
+	#if($header.getnVersao().doubleValue() == 2)
+		<dSaiEnt>$!{format.date($header.getdSaient())}</dSaiEnt>
+		#if( $header.getdSaient() && $format.hour($header.getdSaient()) != "00:00:00")
+		<hSaiEnt>$format.hour($header.getdSaient())</hSaiEnt>
+		#end
+	#else
+		<dhSaiEnt>$!{format.dateiso8601dhEmi($header.getdSaient())}</dhSaiEnt>
+	#end
+#end
+
+    <tpNF>$!{format.number($header.getnTpnf().doubleValue(),1)}</tpNF>
+#if( $header.getnVersao().doubleValue() >= 3.1 )
+    <idDest>$!{header.getnIddest()}</idDest>
+#end
+    <cMunFG>$!{format.number($header.getnCmunfg().doubleValue(),7)}</cMunFG>
+#if( $header.getnVersao().doubleValue() == 2 )    
+	#if( $referenciada.size() != 0 )
+		#foreach( $ref in $referenciada )
+	    	<NFref>
+			#if ( $ref.getNfeRefPk().getnRefnfe() != "0" )
+   				<refNFe>$!{ref.getNfeRefPk().getnRefnfe()}</refNFe>
+			#end
+			#if( $ref.getNfeRefPk().getnNnf() != "0" )
+	        <refNF>
+	            <cUF>$!{format.number($ref.getnCuf().doubleValue(),2)}</cUF>
+	            <AAMM>$!{format.number($ref.getnAamm().doubleValue(),4)}</AAMM>
+	            <CNPJ>$!esc.xml($!{ref.getsCnpj()})</CNPJ>
+				<mod>$!{ref.getnMod()}</mod>
+	            <serie>$!{format.number($ref.getnSerie().doubleValue(),3)}</serie>
+	            <nNF>$!{format.number($ref.getNfeRefPk().getnNnf().doubleValue(),9)}</nNF>
+	        </refNF>
+			#end
+			#if( $ref.getNfeRefPk().getnPrNnf() != "0" )
+	        <refNFP>
+	            <cUF>$!{format.number($ref.getnPrCuf().doubleValue(),2)}</cUF>
+	            <AAMM>$!{format.number($ref.getnPrAamm().doubleValue(),4)}</AAMM>
+				#if( $ref.getsPrCnpj() && $ref.getsPrCnpj() != "00000000000000" )
+	            <CNPJ>$!esc.xml($!{ref.getsPrCnpj()})</CNPJ>
+				#else
+       			<CPF>$!esc.xml($!{ref.getsPrCpf()})</CPF>
+				#end
+				#if( $ref.getsPrIe() )
+	            <IE>$!esc.xml($!{ref.getsPrIe()})</IE>
+	            #end
+	            <mod>0$!{format.number($ref.getnPrMod().doubleValue(),2)}</mod>
+	            <serie>$!{format.number($ref.getnPrSerie().doubleValue(),3)}</serie>
+	            <nNF>$!{format.number($ref.getNfeRefPk().getnPrNnf().doubleValue(),9)}</nNF>
+	        </refNFP>
+			#end
+			#if( $ref.getnCteRefcte() )
+	        <refCTe>$!{ref.getnCteRefcte()}</refCTe>
+			#end
+			#if( $ref.getNfeRefPk().getnCfNecf() != "0" )
+	        <refECF>
+	            <mod>$!esc.xml($!{ref.getsCfMod()})</mod>
+	            <nECF>$!{format.number($ref.getNfeRefPk().getnCfNecf().doubleValue(),3)}</nECF>
+	            <nCOO>$!{format.number($ref.getnCfNcoo().doubleValue(),6)}</nCOO>
+	        </refECF>
+			#end
+	    </NFref>
+		#end
+	#end
+#end
+    <tpImp>$!{format.number($header.getnTpimp().doubleValue(),1)}</tpImp>
+    <tpEmis>$!{format.number($header.getnTpemis().doubleValue(),1)}</tpEmis>
+    <cDV>$!{format.number($header.getnCdv().doubleValue(),1)}</cDV>
+    <tpAmb>$!{format.number($header.getnTpamb().doubleValue(),1)}</tpAmb>
+    <finNFe>$!{format.number($header.getnFinnfe().doubleValue(),1)}</finNFe>
+    
+#if( $header.getnVersao().doubleValue() >= 3.1 )
+    <indFinal>$!{header.getnIndfinal()}</indFinal>
+	<indPres>$!{header.getnIndpres()}</indPres>
+#end
+
+    <procEmi>$!{format.number($header.getnProcemi().doubleValue(),1)}</procEmi>
+    <verProc>$!esc.xml($!{header.getsVerproc()})</verProc>
+#if( $header.getdDhcont() )
+	#if( $header.getnVersao().doubleValue() == 2 )
+	<dhCont>$!{format.datehourwebservice($header.getdDhcont())}</dhCont>
+	#else
+    <dhCont>$!{format.dateiso8601($header.getdDhcont())}</dhCont>
+    #end
+#end
+#if( $header.getsXjust() )
+    <xJust>$!esc.xml($!{header.getsXjust()})</xJust>
+#end
+#if( $header.getnVersao().doubleValue() >= 3 )
+	#if( $referenciada.size() != 0 )
+	  #foreach( $ref in $referenciada )
+	    <NFref>
+			#if ( $ref.getNfeRefPk().getnRefnfe() != "0" )
+				<refNFe>$!{ref.getNfeRefPk().getnRefnfe()}</refNFe>
+			#end
+            #if( $ref.getNfeRefPk().getnNnf() != "0" )
+				<refNF>
+					<cUF>$!{format.number($ref.getnCuf().doubleValue(),2)}</cUF>
+					<AAMM>$!{format.number($ref.getnAamm().doubleValue(),4)}</AAMM>
+					<CNPJ>$!esc.xml($!{ref.getsCnpj()})</CNPJ>
+					<mod>$!{ref.getnMod()}</mod>
+					<serie>$!{format.number($ref.getnSerie().doubleValue(),3)}</serie>
+					<nNF>$!{format.number($ref.getNfeRefPk().getnNnf().doubleValue(),9)}</nNF>
+				</refNF>
+            #end
+
+			#if( $ref.getNfeRefPk().getnPrNnf() != "0" )
+	        <refNFP>
+	            <cUF>$!{format.number($ref.getnPrCuf().doubleValue(),2)}</cUF>
+	            <AAMM>$!{format.number($ref.getnPrAamm().doubleValue(),4)}</AAMM>
+				#if( $ref.getsPrCnpj() && $ref.getsPrCnpj() != "00000000000000" )
+	            <CNPJ>$!esc.xml($!{ref.getsPrCnpj()})</CNPJ>
+				#else
+       			<CPF>$!esc.xml($!{ref.getsPrCpf()})</CPF>
+				#end
+				#if( $ref.getsPrIe() )
+	            <IE>$!esc.xml($!{ref.getsPrIe()})</IE>
+	            #end
+			    <mod>0$!{format.number($ref.getnPrMod().doubleValue(),2)}</mod>
+	            <serie>$!{format.number($ref.getnPrSerie().doubleValue(),3)}</serie>
+	            <nNF>$!{format.number($ref.getNfeRefPk().getnPrNnf().doubleValue(),9)}</nNF>
+	        </refNFP>
+			#end
+			#if( $ref.getnCteRefcte() )
+	        <refCTe>$!{ref.getnCteRefcte()}</refCTe>
+			#end
+			#if( $ref.getNfeRefPk().getnCfNecf() != "0" )
+	        <refECF>
+	            <mod>$!esc.xml($!{ref.getsCfMod()})</mod>
+	            <nECF>$!{format.number($ref.getNfeRefPk().getnCfNecf().doubleValue(),3)}</nECF>
+	            <nCOO>$!{format.number($ref.getnCfNcoo().doubleValue(),6)}</nCOO>
+	        </refECF>
+			#end
+	    </NFref>
+	  #end
+	#end
+#end
+</ide>

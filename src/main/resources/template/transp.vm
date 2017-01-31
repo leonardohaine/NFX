@@ -1,0 +1,102 @@
+    <transp>
+        <modFrete>$!{format.number($header.getnTranspModfrete().doubleValue(),1)}</modFrete>
+#if( $header.getsTranspCnpj()     || 
+	 $header.getsTranspCpf()      ||
+	 $header.getsTranspXnome()    ||
+	 $header.getsTranspIe()       ||
+	 $header.getsTranspXender()   ||
+	 $header.getsTranspXmun()     || 
+	 $header.getsTranspUf())
+        <transporta>
+	#if( $header.getsTranspCnpj() &&  $header.getsTranspCnpj() != "00000000000000" )
+	        <CNPJ>$!esc.xml($!{header.getsTranspCnpj()})</CNPJ>
+	#end
+	#if( $header.getsTranspCpf() && $header.getsTranspCpf() != "00000000000" )
+            <CPF>$!esc.xml($!{header.getsTranspCpf()})</CPF>
+	#end
+	#if( $header.getsTranspXnome() )
+			<xNome>$!esc.xml($!{header.getsTranspXnome()})</xNome>
+	#end
+	#if( $header.getsTranspIe() )
+            <IE>$!esc.xml($!{header.getsTranspIe()})</IE>
+	#end
+	#if( $header.getsTranspXender() )
+            <xEnder>$!esc.xml($!{header.getsTranspXender()})</xEnder>
+	#end
+	#if( $header.getsTranspXmun() )
+            <xMun>$!esc.xml($!{header.getsTranspXmun()})</xMun>
+	#end
+	#if( $header.getsTranspUf() )
+            <UF>$!esc.xml($!{header.getsTranspUf()})</UF>
+	#end
+        </transporta>
+#end
+#if( $header.getnTranspCmunfg() )
+        <retTransp>
+            <vServ>$!{format.number($header.getnTranspVserv().doubleValue(),15,2)}</vServ>
+            <vBCRet>$!{format.number($header.getnTranspVbcret().doubleValue(),15,2)}</vBCRet>
+            #if($header.getnVersao().doubleValue() >= 3.1)
+            <pICMSRet>$!{format.number($header.getnTranspPicmsret().doubleValue(),7,4)}</pICMSRet>
+            #else
+            <pICMSRet>$!{format.number($header.getnTranspPicmsret().doubleValue(),5,2)}</pICMSRet>
+            #end
+            <vICMSRet>$!{format.number($header.getnTranspVicmsret().doubleValue(),15,2)}</vICMSRet>
+            <CFOP>$!{format.number($header.getnTranspCfop().doubleValue(),4)}</CFOP>
+            <cMunFG>$!{format.number($header.getnTranspCmunfg().doubleValue(),7)}</cMunFG>
+        </retTransp>
+#end
+#if( $header.getsTranspPlaca() )
+        <veicTransp>
+            <placa>$!esc.xml($!{header.getsTranspPlaca()})</placa>
+            <UF>$!esc.xml($!{header.getsTranspPlacaUf()})</UF>
+            #if( $header.getsTranspRntc() )
+               <RNTC>$!esc.xml($!{header.getsTranspRntc()})</RNTC>
+            #end
+        </veicTransp>
+#end
+#foreach($reb in $reboque)
+        <reboque>
+            <placa>$!esc.xml($!{reb.getNfeRebPk().getsPlaca()})</placa>
+            <UF>$!esc.xml($!{reb.getsUf()})</UF>
+            #if( $reb.getsRntc() )
+               <RNTC>$!esc.xml($!{reb.getsRntc()})</RNTC>
+            #end 
+        </reboque>
+#end
+#if( $header.getsTranspVagao() )
+            <vagao>$!esc.xml($!{header.getsTranspVagao()})</vagao>
+#end
+#if( $header.getsTranspBalsa() )
+            <balsa>$!esc.xml($!{header.getsTranspBalsa()})</balsa>
+#end
+
+#foreach($v in $vol)
+        <vol>
+#if( $v.getnQvol() )
+            <qVol>$!{format.number($v.getnQvol().doubleValue(),15)}</qVol>
+#end
+#if( $v.getsEsp() )
+            <esp>$!esc.xml($!{v.getsEsp()})</esp>
+#end
+#if( $v.getsMarca() )
+            <marca>$!esc.xml($!{v.getsMarca()})</marca>
+#end
+#if( $v.getsNvol() )
+            <nVol>$!esc.xml($!{v.getsNvol()})</nVol>
+#end
+#if( $v.getnPesol() )
+            <pesoL>$!{format.number($v.getnPesol().doubleValue(),15,3)}</pesoL>
+#end
+#if( $v.getnPesob() )
+            <pesoB>$!{format.number($v.getnPesob().doubleValue(),15,3)}</pesoB>
+#end
+#foreach($lacre in $volLacres)
+#if ($lacre.getNfeVolLacresPk().getnNumVol() == $v.getNfeVolPk().getnNumVol() )
+<lacres>
+	<nLacre>$!esc.xml($!{lacre.getNfeVolLacresPk().getsNlacre()})</nLacre>
+</lacres>
+#end
+#end
+        </vol>
+#end
+    </transp>

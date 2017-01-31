@@ -1,0 +1,27 @@
+#if( ($format.number($i.getnIcmsCst().doubleValue(),2) == "10"  ||
+      $format.number($i.getnIcmsCst().doubleValue(),2) == "90") &&
+      $i.getsIcmspartUfst() )
+    <ICMSPart>
+	    <orig>$!{format.number($i.getnIcmspartOrig().doubleValue(),1)}</orig>
+	    <CST>$!{format.number($i.getnIcmspartCst().doubleValue(),2)}</CST>
+	    <modBC>$!{format.number($i.getnIcmspartModbc().doubleValue(),1)}</modBC>
+	    <vBC>$!{format.number($i.getnIcmspartVbc().doubleValue(),15,2)}</vBC>
+		#if( $i.getnIcmspartPredbc() )
+		        <pRedBC>$!{format.number($i.getnIcmspartPredbc().doubleValue(),5,2)}</pRedBC>
+		#end
+	    <pICMS>$!{format.number($i.getnIcmspartPicms().doubleValue(),5,2)}</pICMS>
+	    <vICMS>$!{format.number($i.getnIcmspartVicms().doubleValue(),15,2)}</vICMS>	    
+	    <modBCST>$!{format.number($i.getnIcmspartModbcst().doubleValue(),1)}</modBCST>
+		#if( $i.getnIcmspartPmvast() )
+			<pMVAST>$!{format.number($i.getnIcmspartPmvast().doubleValue(),5,2)}</pMVAST>
+		#end
+		#if( $i.getnIcmspartPredbcst() )
+			<pRedBCST>$!{format.number($i.getnIcmspartPredbcst().doubleValue(),5,2)}</pRedBCST>
+		#end
+	    <vBCST>$!{format.number($i.getnIcmspartVbcst().doubleValue(),15,2)}</vBCST>
+	    <pICMSST>$!{format.number($i.getnIcmspartPicmsst().doubleValue(),5,2)}</pICMSST>
+	    <vICMSST>$!{format.number($i.getnIcmspartVicmsst().doubleValue(),15,2)}</vICMSST>
+        <pBCOp>$!{format.number($i.getnIcmspartPbcop().doubleValue(),15,2)}</pBCOp>
+        <UFST>$!esc.xml($!{i.getsIcmspartUfst()})</UFST>
+    </ICMSPart>
+#end

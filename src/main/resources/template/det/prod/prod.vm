@@ -1,0 +1,136 @@
+<prod>
+    <cProd>$!esc.xml($!{i.getsCprod()})</cProd>
+    <cEAN>$!esc.xml($!{i.getsCean()})</cEAN>
+    <xProd>$!esc.xml($!{i.getsXprod()})</xProd>
+    <NCM>$!esc.xml($!{i.getsNcm()})</NCM>
+    
+    #if($header.getnVersao().doubleValue() >= 3.1)
+        #foreach($nve in $nves )
+                #if($i.getNfeItemPk().getnNitem() == $nve.getNfeItemNvePk().getnNitem())        
+                        <NVE>$!{nve.getNfeItemNvePk().getsNve()}</NVE>
+		#end
+	#end
+    #end
+#if( $i.getnCest() )
+   <CEST>$!{format.numberZeroAEsquerda($i.getnCest(), 7, 0)}</CEST>
+#end    
+#if( $i.getsExtipi() )
+    <EXTIPI>$!{i.getsExtipi()}</EXTIPI>
+#end
+    <CFOP>$!{format.number($i.getnCfop().doubleValue(),4)}</CFOP>
+    <uCom>$!{i.getsUcom()}</uCom>
+    <qCom>$!{format.number($i.getnQcom().doubleValue(),15,4)}</qCom>
+    <vUnCom>$!{format.number($i.getnVuncom().doubleValue(),21,10)}</vUnCom>
+    <vProd>$!{format.number($i.getnVprod().doubleValue(),15,2)}</vProd>
+    <cEANTrib>$!{i.getsCeantrib()}</cEANTrib>
+    <uTrib>$!{i.getsUtrib()}</uTrib>
+    <qTrib>$!{format.number($i.getnQtrib().doubleValue(),15,4)}</qTrib>
+    <vUnTrib>$!{format.number($i.getnVuntrib().doubleValue(),21,10)}</vUnTrib>
+#if( $i.getnVfrete() )
+    <vFrete>$!{format.number($i.getnVfrete().doubleValue(),15,2)}</vFrete>
+#end
+#if( $i.getnVseg() )
+    <vSeg>$!{format.number($i.getnVseg().doubleValue(),15,2)}</vSeg>
+#end
+#if( $i.getnVdesc() )
+    <vDesc>$!{format.number($i.getnVdesc().doubleValue(),15,2)}</vDesc>
+#end
+#if( $i.getnVoutro() )
+    <vOutro>$!{format.number($i.getnVoutro().doubleValue(),15,2)}</vOutro>
+#end
+    <indTot>$!{format.number($i.getnIndtot().doubleValue(),1)}</indTot>
+
+#foreach($imp in $importacao )
+	#if ( $i.getNfeItemPk().getnNitem() == $imp.getNfeItemDIPk().getnNitem() )
+	    <DI>
+	        <nDI>$!{imp.getNfeItemDIPk().getsNdi()}</nDI>
+	        <dDI>$!{format.date($imp.getdDdi())}</dDI>
+	        <xLocDesemb>$!esc.xml($!{imp.getsXlocdesemb()})</xLocDesemb>
+	        <UFDesemb>$!{imp.getsUfdesemb()}</UFDesemb>
+	        <dDesemb>$!{format.date($imp.getdDdesemb())}</dDesemb>
+	        
+	        #if($header.getnVersao().doubleValue() >= 3.1)
+	        
+	        <tpViaTransp>$!{imp.getnTpviatransp()}</tpViaTransp>
+	        
+	        #if ($imp.getnVafrmm())
+			<vAFRMM>$!{format.number($imp.getnVafrmm().doubleValue(),13,2)}</vAFRMM>
+			#end
+			
+			<tpIntermedio>$!{imp.getnTpintermedio()}</tpIntermedio>
+			
+			#if ($imp.getsCnpj())
+			<CNPJ>$!{imp.getsCnpj()}</CNPJ>
+			#end
+			#if ($imp.getsUfterceiro())
+			<UFTerceiro>$!{imp.getsUfterceiro()}</UFTerceiro>
+			#end
+			
+	        #end
+	        
+	        <cExportador>$!{imp.getsCexportador()}</cExportador>
+
+			#foreach($adi in $adicao )
+			#if ( ($imp.getNfeItemDIPk().getnNitem() == $adi.getNfeItemAdiPk().getnNitem()) && ($imp.getNfeItemDIPk().getsNdi() == $adi.getNfeItemAdiPk().getsNdi()) )
+			<adi>
+				<nAdicao>$!{format.number($adi.getNfeItemAdiPk().getnNadicao().doubleValue(),3)}</nAdicao>
+				<nSeqAdic>$!{format.number($adi.getnNseqadic().doubleValue(),3)}</nSeqAdic>
+				<cFabricante>$!esc.xml($!{adi.getsCfabricante()})</cFabricante>
+				#if( $adi.getnVdescdi() )
+				<vDescDI>$!{format.number($adi.getnVdescdi().doubleValue(),15,2)}</vDescDI>
+				#end
+				
+				#if($header.getnVersao().doubleValue() >= 3.1)
+				#if ($adi.getnNdraw())
+				<nDraw>$!{adi.getnNdraw()}</nDraw>
+				#end
+				#end
+				
+			</adi>
+			#end
+			#end
+    	</DI>
+	#end
+#end
+
+#if($header.getnVersao().doubleValue() >= 3.1)
+#foreach($exp in $exportacao )
+        #if($i.getNfeItemPk().getnNitem() == $exp.getNfeItemExpPk().getnNitem())
+	<detExport>        
+		#if ($exp.getnNdraw())
+		<nDraw>$!{exp.getnNdraw()}</nDraw>
+		#end
+		
+		#if ($exp.getnNre())
+		<exportInd>
+			<nRE>$!{exp.getnNre()}</nRE>
+			<chNFe>$!{exp.getsChnfe()}</chNFe>
+			<qExport>$!{format.number($exp.getnQexport().doubleValue(),11,4)}</qExport>
+		</exportInd>		
+		#end	
+	</detExport>
+        #end
+#end
+#end
+
+#if( $i.getsB2bXped() )
+    <xPed>$!{i.getsB2bXped()}</xPed>
+#end
+#if( $i.getnB2bNitemped() )
+    <nItemPed>$!{i.getnB2bNitemped()}</nItemPed>
+#end
+#if ($i.getsNfci() )
+	<nFCI>$!{i.getsNfci()}</nFCI>
+#end
+#parse("/template/det/prod/veicProd.vm")
+#parse("/template/det/prod/med.vm")
+##parse("/template/det/prod/arma.vm")
+#parse("/template/det/prod/comb.vm")
+
+#if($header.getnVersao().doubleValue() >= 3.1)
+#if($i.getnNrecopi())
+	<nRECOPI>$!{i.getnNrecopi()}</nRECOPI>
+#end
+#end
+
+</prod>

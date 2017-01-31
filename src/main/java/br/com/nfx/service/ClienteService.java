@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.nfx.dao.ClienteDAO;
 import br.com.nfx.model.Cliente;
+import br.com.nfx.repository.ClienteRepo;
 
 @Service("ClienteService")
 @Transactional(readOnly = true)
@@ -15,6 +16,9 @@ public class ClienteService {
 
 	@Autowired
 	ClienteDAO clienteDAO;
+	
+	@Autowired
+	private ClienteRepo clienteRepo;
 
 	@Transactional(readOnly = false)
 	public void salvar(Cliente cliente) {
@@ -56,6 +60,14 @@ public class ClienteService {
 	
 	public List<String> getCidade(String uf) {
 		return getClienteDAO().getCidade(uf);
+	}
+	
+	public Cliente getClienteByRazaoSocial(String razaoSocial) {
+		return getClienteDAO().getClienteByRazaoSocial(razaoSocial);
+	}
+	
+	public Cliente getClienteByCnpj(String nome) {
+		return getClienteDAO().getClienteByCnpj(nome);
 	}
 
 }

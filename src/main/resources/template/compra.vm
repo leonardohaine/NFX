@@ -1,0 +1,13 @@
+#if( $header.getsXnemp() || $header.getsXped() || $header.getsXcont() )
+    <compra>
+#if( $header.getsXnemp() )
+        <xNEmp>$!esc.xml($!{header.getsXnemp()})</xNEmp>
+#end
+#if( $header.getsXped() )
+        <xPed>$!esc.xml($!{header.getsXped()})</xPed>
+#end
+#if( $header.getsXcont() )
+        <xCont>$!esc.xml($!{header.getsXcont()})</xCont>
+#end
+    </compra>
+#end

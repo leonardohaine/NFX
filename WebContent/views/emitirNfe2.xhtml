@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />
+	<h:outputStylesheet library="nfx" name="styles/custom.css" />
+	<h:outputStylesheet library="nfx" name="styles/layout.css" />
+	<h:outputStylesheet library="nfx" name="styles/components.css" />
+	
+	<h:outputScript target="body" library="nfx" name="javascripts/app.js" />
+</h:head>
+  
+  <ui:composition template="layout.xhtml">
+  	<ui:define name="conteudo">
+  
+    <div class="ui-grid">
+        
+        <h:form id="formNfe" enctype="multipart/form-data">
+	       <p:panel header="Cliente" style="margin-botton:10px">
+				<f:facet name="header" >
+						
+				</f:facet>
+				<div class="ui-g">
+					<div class="ui-g-12 ui-md-6 ui-lg-1">
+						Cliente
+					</div>	
+					<div class="ui-g-12 ui-md-6 ui-lg-3">	
+						<p:inputText size="15" id="cliRazaoSocial2" value="#{emissaoNfeBean.cliente.cnpj}" dir="rtl" /> 
+						<p:commandButton value="Pesquisar" icon="ui-icon-search" style="width: 100px" title="Pesquisa" action="#{selecaoClienteBean.abrirDialogo}"
+							process="@this" update="@none">
+							<p:ajax event="dialogReturn" listener="#{emissaoNfeBean.clienteSelecionado}" immediate="true" update="cliRazaoSocial cliRazaoSocial2" />
+							<p:resetInput target="cliRazaoSocial" />
+						</p:commandButton>
+					</div>
+					<div align="left" class="ui-g-12 ui-md-6 ui-lg-4">
+						<p:inputText size="50" readonly="true" dir="ltr" id="cliRazaoSocial" value="#{emissaoNfeBean.cliente.razaoSocial}" />
+					</div>
+					<div class="ui-g-12 ui-md-6 ui-lg-1">
+				    	<p:outputLabel for="button" value="Data emissão: " />
+				    </div>	
+			    	<div class="ui-g-12 ui-md-6 ui-lg-3">
+       					<p:calendar id="dataEmissao" value="#{emissaoNfeBean.dataEmissao}" locale="pt_BR" navigator="true" showButtonPanel="true" showOn="button" maxdate="#{now}" pattern="dd/MM/yyyy HH:mm:ss Z" />
+					</div>
+        		</div>
+    	   </p:panel>
+    		<p:panelGrid columns="2" layout="grid" style="width:100%; ">
+	       		<p:panel header="Dados da NF"  >
+	        		<f:facet name="header" >
+						
+					</f:facet>
+		        		<div class="ui-g">
+		        			<div class="ui-g-1 ui-md-6 ui-lg-2">
+		        				<p:outputLabel value="Chave de acesso: " for="chaveAcessoRef" />
+	        				</div>
+	        				<div class="ui-g-12 ui-md-6 ui-lg-3">
+								<p:inputText id="chaveAcessoRef" value="#{empresaBean.empresa.cnpj}" />
+							</div>
+	       				</div>
+	       		</p:panel>
+	       		
+	       		<p:panel header="Nota fiscal Referenciada" >
+		        		<f:facet name="header" >
+						
+						</f:facet>
+		        		<div class="ui-g">
+		        			<div class="ui-g-12 ui-md-6 ui-lg-3">
+		        				<p:outputLabel value="Tipo Documento: " for="tipoDocumento" />
+	        				</div>
+	        				<div class="ui-g-12 ui-md-6 ui-lg-3">
+								<p:selectOneMenu id="tipoDocumento" style="width: 125px" >
+									<f:selectItem itemLabel="Select One" itemValue="" />
+						            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+						            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+						            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+									
+								</p:selectOneMenu>	
+							</div>
+	       				</div>
+	       		</p:panel>
+	       	
+	       		
+       		</p:panelGrid>
+			<p:panel header="Nota Fiscal" style="margin-botton:10px;">
+	        	<f:facet name="header" >
+						
+				</f:facet>	
+	        		<div class="ui-g">
+	        			<div class="ui-g-1 ui-md-6 ui-lg-1">
+	        				<p:outputLabel value="Nat. Operação: " for="natop" />
+        				</div>
+        				<div class="ui-g-12 ui-md-6 ui-lg-3">
+							<p:inputText id="natop" value="#{empresaBean.empresa.cnpj}" />
+						</div>
+					    
+					    
+					    <div class="ui-g-12 ui-md-6 ui-lg-1">
+					    	<p:outputLabel for="button" value="Data emissão: " />
+					    </div>	
+				    	<div class="ui-g-12 ui-md-6 ui-lg-3">
+        					<p:calendar id="button" immediate="true" value="#{emissaoNfeBean.dataEmissao}" maxdate="#{now}" pattern="dd/MM/yyyy | HH:mm:ss | Z" />
+						</div>
+						
+						
+					    <div class="ui-g-12 ui-md-6 ui-lg-1">
+							<p:outputLabel value="CNAE Fiscal" for="cnaeFiscal" />
+						</div>	
+				    	<div class="ui-g-12 ui-md-6 ui-lg-3">
+							<p:inputText id="cnaeFiscal"
+								value="#{empresaBean.empresa.cnaeFiscal}" />
+						</div>
+						
+					</div>	
+					<div class="ui-g">	
+						
+					    <div class="ui-g-12 ui-md-6 ui-lg-1">
+							<p:outputLabel value="IM" for="insMunicipal" />
+						</div>
+						<div class="ui-g-12 ui-md-6 ui-lg-3">
+							<p:inputText id="insMunicipal"
+								value="#{empresaBean.empresa.inscricaoMunicipal}" />
+						</div>
+						 <div class="ui-g-12 ui-md-6 ui-lg-1">
+							<p:outputLabel value="IE ST" for="inscricaoEstadualST" />
+						</div>
+						 <div class="ui-g-12 ui-md-6 ui-lg-3">
+							<p:inputText id="inscricaoEstadualST" value="#{empresaBean.empresa.inscricaoEstadualST}" />
+						</div>
+						 <div class="ui-g-12 ui-md-6 ui-lg-1">
+							<p:outputLabel value="Regime Tributário"  />
+						</div>
+						<div class="ui-g-12 ui-md-6 ui-lg-3">
+							<p:selectOneMenu id="console" value="#{selectOneMenuView.console}" style="width:125px">
+					            <f:selectItem itemLabel="Select One" itemValue="" />
+					            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+					            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+					            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+					        </p:selectOneMenu>
+						</div>
+	        		</div>
+				
+			</p:panel>
+			
+			<p:toolbar style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+
+				<f:facet name="right" style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+					<p:button value="Cancelar" outcome="listaCliente" />
+					<p:commandButton value="Salvar"	action="${clienteBean.salvar}" />
+				</f:facet>
+
+				<f:facet name="left" style="background-color: darkblue; color:white;" colspan="6" styleClass="ui-widget-header">
+					<p:commandButton ajax="true" value="update" update="formNfe"></p:commandButton>	
+				</f:facet>
+			</p:toolbar>
+			
+	    </h:form>
+    </div> 
+    
+    </ui:define>   
+    </ui:composition>
+    
+</html>

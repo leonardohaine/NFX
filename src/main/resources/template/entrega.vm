@@ -1,0 +1,18 @@
+#if( $header.getsLentCnpj() || $header.getsLentCpf() )
+    <entrega>
+#if( $header.getsLentCnpj() )
+        <CNPJ>$!esc.xml($!{header.getsLentCnpj()})</CNPJ>
+#else
+        <CPF>$!esc.xml($!{header.getsLentCpf()})</CPF>
+#end
+        <xLgr>$!esc.xml($!{header.getsLentXlgr()})</xLgr>
+        <nro>$!esc.xml($!{header.getsLentNro()})</nro>
+#if( $header.getsLentXcpl() )
+        <xCpl>$!esc.xml($!{header.getsLentXcpl()})</xCpl>
+#end
+        <xBairro>$!esc.xml($!{header.getsLentXbairro()})</xBairro>
+        <cMun>$!{format.number($header.getsLentCmun().doubleValue(),7)}</cMun>
+        <xMun>$!esc.xml($!{header.getsLentXmun()})</xMun>
+        <UF>$!esc.xml($!{header.getsLentUf()})</UF>
+    </entrega>
+#end

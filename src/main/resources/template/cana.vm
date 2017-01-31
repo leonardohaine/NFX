@@ -1,0 +1,46 @@
+#if( $header.getsCanaSafra() || $header.getsCanaRef() )
+<cana>
+	<safra>$!esc.xml($!{header.getsCanaSafra()})</safra>
+	<ref>$!esc.xml($!{header.getsCanaRef()})</ref>
+#foreach($canadiarioitem in $canadiario )
+	<forDia #* comentarios jogodavelhaestrela quebram as linhas permitindo condições em multiplas linhas
+*##if ($canadiarioitem.getnCanaDia() ) #*
+     *#dia="$!{canadiarioitem.getnCanaDia()}"#*
+*##end#*
+*#>
+#if ($canadiarioitem.getnCanaQtde() )
+		<qtde>$!{canadiarioitem.getnCanaQtde()}</qtde>
+#end
+	</forDia>
+#end
+#if( $header.getnCanaQtotmes() )
+		<qTotMes>$!{header.getnCanaQtotmes()}</qTotMes>
+#end
+#if( $header.getnCanaQtotant() )
+		<qTotAnt>$!{header.getnCanaQtotant()}</qTotAnt>
+#end
+#if( $header.getnCanaQtotger() )
+		<qTotGer>$!{header.getnCanaQtotger()}</qTotGer>
+#end
+#foreach($canadeducaoitem in $canadeducao )
+	<deduc>
+#if ($canadeducaoitem.getsCanaXded() )
+		<xDed>$!esc.xml($!{canadeducaoitem.getsCanaXded()})</xDed>
+#end
+#if ($canadeducaoitem.getnCanaVded() )
+		<vDed>$!{format.number($canadeducaoitem.getnCanaVded().doubleValue(),15,2)}</vDed>
+#end
+	</deduc>
+#end
+#if( $header.getnCanaVfor() )
+		<vFor>$!{format.number($header.getnCanaVfor().doubleValue(),15,2)}</vFor>
+#end
+#if( $header.getnCanaVtotded() )
+		<vTotDed>$!{format.number($header.getnCanaVtotded().doubleValue(),15,2)}</vTotDed>
+#end
+#if( $header.getnCanaVliqfor() )
+		<vLiqFor>$!{format.number($header.getnCanaVliqfor().doubleValue(),15,2)}</vLiqFor>
+#end
+</cana>
+#end
+	

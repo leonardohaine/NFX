@@ -15,8 +15,11 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.event.SelectEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import br.com.nfx.model.Empresa;
+import br.com.nfx.repository.EmpresaRepo;
 import br.com.nfx.service.EmpresaService;
 
 /**
@@ -74,7 +77,7 @@ public class EmpresaController {
 	public String salvar() {
 		try {
 			getEmpresaService().salvar(empresa);
-
+			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 					"Sucesso!", "Empresa cadastrada"));
 			return "listaEmpresa";
@@ -179,4 +182,5 @@ public class EmpresaController {
 	public void setListCidade(List<String> listCidade) {
 		this.listCidade = listCidade;
 	}
+
 }

@@ -1,0 +1,8 @@
+#if( $importacao.size() != 0 )
+<II>
+	<vBC>$!{format.number($i.getnIiVbc().doubleValue(),15,2)}</vBC>
+	<vDespAdu>$!{format.number($i.getnIiVdespadu().doubleValue(),15,2)}</vDespAdu>
+	<vII>$!{format.number($i.getnIiVii().doubleValue(),15,2)}</vII>
+	<vIOF>$!{format.number($i.getnIiViof().doubleValue(),15,2)}</vIOF>
+</II>
+#end

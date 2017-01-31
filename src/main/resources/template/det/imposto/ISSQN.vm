@@ -1,0 +1,43 @@
+#if( $i.getnIssqnVbc() )
+	<ISSQN>
+		<vBC>$!{format.number($i.getnIssqnVbc().doubleValue(),15,2)}</vBC>
+		<vAliq>$!{format.number($i.getnIssqnValiq().doubleValue(),5,2)}</vAliq>
+		<vISSQN>$!{format.number($i.getnIssqnVissqn().doubleValue(),15,2)}</vISSQN>
+		<cMunFG>$!{format.number($i.getnIssqnCmunfg().doubleValue(),7)}</cMunFG>
+                #if($header.getnVersao().doubleValue() >= 3.1)
+                        <cListServ>$!{i.getsIssqnClistserv()}</cListServ>
+                        #if( $i.getnIssqnVDeducao() && $i.getnIssqnVDeducao().doubleValue() > 0.00) 
+                                <vDeducao>$!{format.number($i.getnIssqnVDeducao().doubleValue(),15,2)}</vDeducao>
+                        #end
+                        #if( $i.getnIssqnVOutro() && $i.getnIssqnVOutro().doubleValue() > 0.00) 
+                                <vOutro>$!{format.number($i.getnIssqnVOutro().doubleValue(),15,2)}</vOutro>
+                        #end
+                        #if( $i.getnIssqnVDescIncond() && $i.getnIssqnVDescIncond().doubleValue() > 0.00) 
+                                <vDescIncond>$!{format.number($i.getnIssqnVDescIncond().doubleValue(),15,2)}</vDescIncond>
+                        #end
+                        #if( $i.getnIssqnVDescCond() && $i.getnIssqnVDescCond().doubleValue() > 0.00)
+                                <vDescCond>$!{format.number($i.getnIssqnVDescCond().doubleValue(),15,2)}</vDescCond>
+			#end
+                        #if( $i.getnIssqnVIssRet() && $i.getnIssqnVIssRet().doubleValue() > 0.00)
+                                <vISSRet>$!{format.number($i.getnIssqnVIssRet().doubleValue(),15,2)}</vISSRet>
+                        #end
+                        <indISS>$!{format.number($i.getnIssqnIndIss().doubleValue(),2)}</indISS>
+                        #if( $i.getsIssqnCServico())
+                                <cServico>$!{i.getsIssqnCServico()}</cServico>
+                        #end
+                        #if( $i.getnIssqnCMun() && $i.getnIssqnCMun().doubleValue() != 0)
+                                <cMun>$!{format.number($i.getnIssqnCMun().doubleValue(),7)}</cMun>
+                        #end
+                        #if( $i.getnIssqnCPais() && $i.getnIssqnCPais().doubleValue() != 0)
+                                <cPais>$!{format.number($i.getnIssqnCPais().doubleValue(),4)}</cPais>
+                        #end
+                        #if( $i.getsIssqnNProcesso())
+                                <nProcesso>$!{i.getsIssqnNProcesso()}</nProcesso>
+                        #end
+                        <indIncentivo>$!{format.number($i.getnIssqnIndIncentivo().doubleValue(),1)}</indIncentivo>                        
+		#else                
+                        <cListServ>$!{format.number($i.getnIssqnClistserv().doubleValue(),4)}</cListServ>
+                        <cSitTrib>$!{i.getsIssqnCsittrib()}</cSitTrib>
+                #end
+	</ISSQN>
+#end
