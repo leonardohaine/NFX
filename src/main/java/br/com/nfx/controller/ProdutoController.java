@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -49,7 +50,7 @@ private ProdutoService produtoService = new ProdutoService();
 
 			
 			produto = new Produto();
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sucesso!"," Cliente cadastrado"));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Sucesso!"," produto cadastrado"));
 			
 			return "listaProduto";
 			
@@ -79,26 +80,39 @@ private ProdutoService produtoService = new ProdutoService();
 		
 		
 		
-		public String deletar(){
+		public String deletar(ActionEvent evento){
 			
-			try {
-				
-				getProdutoService().deleteProduto(produto);
-				produto = new Produto();
-				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
-						"Sucesso!", "Cliente deletado: " ));
-				return "listaProduto";
-				
-				
-				
-			} catch (Exception e) {
-				// TODO: handle exception
+ produto =  (Produto) evento.getComponent().getAttributes().get("prodSelec");
+ 
+ 
+ FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+			"Sucesso!", "Produto deletado: " ));
+ 
+	return "listaProduto" ;
+			
+			
+			//			try {
+//				
+//				getProdutoService().deleteProduto(produto);
+//				produto = new Produto();
+//				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+//						"Sucesso!", "Produto deletado: " ));
+//				return "listaProduto";
+//				
+//				
+//				
+//			} catch (Exception e) {
+//
+//				FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+//						"Erro!", "Erro ao deletar produto: " +e));
+//				return "produto";
+			
 			}
 			
 			
 			
-			return null;
-		}
+			
+		
 
 		
 		
