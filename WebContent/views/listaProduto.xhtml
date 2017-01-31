@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<link rel="stylesheet" type="text/css" href="./css.css" />  
+</h:head>
+  
+  <ui:composition template="layout.xhtml">
+   <ui:define name="conteudo">
+  
+    <div align="center">
+        
+        <h:form id="formproduto" enctype="multipart/form-data">
+	      
+	        
+	            
+		        <p:dataTable var="prod" value="#{produtoBean.listaProduto}" reflow="true" rows="10" paginator="true">
+				    <f:facet name="header">
+				        LISTA DE PRODUTOS
+				    </f:facet>
+				    
+				    <p:column headerText="Id" width="5%">
+				        <h:outputText value="#{prod.id}" />
+				    </p:column>
+				 
+				    <p:column headerText="nome" width="7%">
+				        <h:outputText value="#{prod.nome}" />
+				    </p:column>
+
+				    <p:column headerText="Descrição" width="15%">
+				    	    <h:outputText value="#{prod.codigo}" />
+				    </p:column>
+
+
+				 
+				    <p:column headerText="Codigo" width="3%">
+				    	    <h:outputText value="#{prod.codigo}" />
+				    </p:column>
+				    
+
+
+
+				    <p:column headerText="CFOP" width="3%">
+				    	    <h:outputText value="#{prod.CFOP}" />
+				    </p:column>
+
+				    <p:column headerText="ALIQ ICMS" width="5%">
+				    	    <h:outputText value="#{prod.aliqICMS}" />
+				    </p:column>
+
+				    <p:column headerText="ALIQ IPI" width="5%">
+				    	    <h:outputText value="#{prod.aliqIPI}" />
+				    </p:column>
+
+				    <p:column headerText="ALIQ PIS" width="5%">
+				    	    <h:outputText value="#{prod.aliqPis}" />
+				    </p:column>
+				    
+				    				    <p:column headerText="ALIQ Coffins" width="6%">
+				    	    <h:outputText value="#{prod.aliqCoffins}" />
+				    </p:column>
+
+
+				    <p:column headerText="Cest" width="6%">
+				    	    <h:outputText value="#{prod.cest}" />
+				    </p:column>
+
+				    <p:column headerText="UN COM" width="5%">
+				    	    <h:outputText value="#{prod.unidCom}" />
+				    </p:column>				    
+				     <p:column headerText="AÇÃO" width="8%">
+				    	<div align="center">
+					        <p:button outcome="cliente" icon="ui-icon-pencil" title="Editar" >
+					        
+<!-- 	                        	<f:param id="clienteEdit" name="clienteId" value="#{cli.clienteId}" /> -->
+	                        </p:button>
+	                        
+				            <p:commandButton icon="ui-icon-close" actionListener="#{produtoBean.deletar}" update=":formproduto">
+<!-- 						        <p:confirm header="Confirmação" message="Tem certeza que deseja apagar #{cli.razaoSocial}?" icon="ui-icon-alert" /> -->
+<!-- 						        <f:setPropertyActionListener value="#{cli}" target="#{clienteBean.selectedCliente}" /> -->
+<!-- 						    	<f:attribute name="prodSelec" value="#{prod}"/> -->
+						    </p:commandButton>
+						    <p:confirmDialog global="true" showEffect="slide" hideEffect="fade">
+						        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+						    </p:confirmDialog>
+					    </div>
+				    </p:column>
+
+				    
+				    <f:facet name="footer">
+				        Total: #{fn:length(produtoBean.listaProduto)}
+				    </f:facet>
+				 
+				</p:dataTable>	
+	        	<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+	        	<p:commandButton value="Cadastrar" id="ajax"  onclick="location.href='./produto.jsf';" styleClass="ui-priority-primary" />
+	        <p:blockUI block="" trigger="" /> 
+	    </h:form>
+    </div> 
+    
+    </ui:define>   
+    </ui:composition>
+    
+</html>
