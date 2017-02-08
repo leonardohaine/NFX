@@ -2,6 +2,9 @@ package br.com.nfx.dao;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -14,40 +17,33 @@ import br.com.nfx.model.Produto;
 @Transactional
 public class ProdutoDAO {
 	
-	@Autowired
-	private SessionFactory sessionFactory;
-
-	public SessionFactory getSessionFactory() {
-		return sessionFactory;
-	}
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-	
+	@PersistenceContext
+	private EntityManager entityManager;	
 	
 	public void salvar(Produto produto) {
 		
-		getSessionFactory().getCurrentSession().merge(produto);
+		entityManager.merge(produto);
 	}
 
 	public void deletar(Produto produto) {
-		getSessionFactory().getCurrentSession().delete(produto);
+		entityManager.remove(produto);
 	}
 
 	public void atualizar(Produto produto) {
-		getSessionFactory().getCurrentSession().update(produto);
+		entityManager.merge(produto);
 	}
 
 	public Produto getProdutoById(Long id) {
-		Produto produto = (Produto ) getSessionFactory().getCurrentSession().get(Produto.class, id);
+		Produto produto = (Produto) entityManager.find(Produto.class,  id);
+		
 
 		return produto;
 
 	}
 
 	public List<Produto> getProduto() {
-		List list = getSessionFactory().getCurrentSession().createQuery("from Produto").list();
+		List list = entityManager.createQuery("from Produto order by id").getResultList();
+		
 		return list;
 	}
 	
